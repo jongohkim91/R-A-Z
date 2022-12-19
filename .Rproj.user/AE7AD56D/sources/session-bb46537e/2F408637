@@ -3,7 +3,7 @@
     "path": "C:/Users/seacr/Dropbox/LISER RA/LISER/training/R A-Z/index.qmd",
     "project_path": "index.qmd",
     "type": "quarto_markdown",
-    "hash": "2335020569",
+    "hash": "1135193517",
     "contents": "",
     "dirty": false,
     "created": 1671453367186.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "1816,118",
-        "scrollLine": "1846",
+        "cursorPosition": "1824,96",
+        "scrollLine": "1807",
         "docOutlineVisible": "1",
         "rmdVisualMode": "false",
         "rmdVisualCollapsedChunks": "",
@@ -21,11 +21,11 @@
         "rmdVisualModeLocation": "20792:21937.271484375"
     },
     "folds": "",
-    "lastKnownWriteTime": 1671471227,
+    "lastKnownWriteTime": 1671472661,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1671471231111,
+    "last_content_update": 1671472661791,
     "read_only": false,
     "read_only_alternatives": []
 }
