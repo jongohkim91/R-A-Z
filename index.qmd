@@ -33,10 +33,8 @@ execute:
 <br>
 
 ::: {.callout-important icon="false" appearance="simple"}
-This training aims to teach you A-Z in terms of data analysis.
+This training aims to teach you data analysis in R from A-Z.
 :::
-
-<br>
 
 Data analysis includes
 
@@ -180,6 +178,7 @@ lapply(packages, require, character.only=T)
 
 #basic way
 ?read.csv
+#let's assume gapminder.csv file is stored in the data folder
 ## decimal points = "."
 data <- read.csv("data/gapminder.csv")
 ## decimal points = ","
@@ -194,7 +193,7 @@ It is fast!([link](https://jozef.io/r917-fread-comparisons/))
 
 <br>
 
-![](img/fread_fast.png){width="60%"}
+![](img/fread_fast.PNG){width="100%"}
 
 ## CSV - data.table
 
@@ -210,9 +209,9 @@ data <- fread("data/gapminder.csv")
 
 #advantages of fread
 data <- data.table::fread("data/gapminder.csv",
-                          encoding = "UTF-8",
-                          nrows = 10,
-                          select = c("country", "continent"))
+                          encoding = "UTF-8", #choose encoding 
+                          nrows = 10, #choose how many rows
+                          select = c("country", "continent")) #choose which columns
 ```
 
 ## STATA, SAS, and SPSS
@@ -340,6 +339,8 @@ Maybe you simply want to check unique values of a column
 ```{r}
 #checking unique values of the continent column
 unique(data$continent)
+"[1] Asia     Europe   Africa   Americas Oceania 
+ Levels: Africa Americas Asia Europe Oceania"
 ```
 
 ## Checking variable type
@@ -352,12 +353,29 @@ typeof(data$continent)
 class(data$continent)
 '[1] "factor"' #ordered categorical variable
 
-#different from character!
+#comparing factor with character
 print(c("a", "b", "c"))
+"a" "b" "c"
+print(as.factor(c("a", "b", "c")))
+"[1] a b c
+ Levels: a b c"
+```
 
-print(data$continent[1])
-print(as.integer(data$continent[1]))
-# as.character()
+## Changing variable types
+
+<br>
+
+```{r}
+#changing variable types
+data$continent[1]
+"[1] Asia
+ Levels: Africa Americas Asia Europe Oceania"
+#character
+as.character(data$continent[1])
+"Asia"
+#integer
+as.integer(data$continent[1])
+"3"
 # as.numeric()
 # as.factor()
 # as.data.frame()
@@ -370,26 +388,40 @@ print(as.integer(data$continent[1]))
 ```{r}
 #vector can only have one data type!
 c(1,2,3)
+"[1] 1 2 3"
 c(1,"a")
+'[1] "1" "a"'
 
 #list can have different data types and name them!
 temp <- list("a", 1)
+temp
+'[[1]]
+[1] "a"
+
+[[2]]
+[1] 1'
+```
+
+## list and vectors
+
+```{r}
 # to change the list into a vector again
 temp <- unlist(temp)
 temp
+'[1] "a" "1"'
 
 #list can have sub-structures
 temp <- list(country = c("France", "Germany"),
              capital = c("Paris", "Berlin"),
              population = c(67500000, 83130000))
+'$country
+[1] "France"  "Germany"
 
-temp[1]
-class(temp[1])
+$capital
+[1] "Paris"  "Berlin"
 
-temp[[1]]
-class(temp[[1]])
-
-temp[1][1]
+$population
+[1] 67500000 83130000'
 ```
 
 ## list and vectors
@@ -398,19 +430,26 @@ temp[1][1]
 
 You should be careful when you want to extract a value from a list
 
-<br>
-
 ```{r}
 #list
 temp[1]
+'$country
+[1] "France"  "Germany"'
 class(temp[1])
+'[1] "list"'
 
 #vector
 temp[[1]]
+'[1] "France"  "Germany"'
 class(temp[[1]])
+'[1] "character"'
 
-temp[1][1]
-temp[[1]][1]
+#trying to access a value of a sub-list(country)
+temp[1][1] #wrong
+'$country
+[1] "France"  "Germany"' #retrieved the whole sub-list(country) instead
+temp[[1]][1] #right
+'[1] "France"'
 ```
 
 ## Cleaning missing values
@@ -432,18 +471,44 @@ df
 
 <br>
 
-Piping! **%\>%**
+Piping!
 
-<br>
+**%\>%**
+
+<br> A special operator in the dplyr packages!
 
 Think it as "then" in English.
 
 <br>
 
 ```{r}
-df %>% 
-  filter(!is.na(capital)) # ! means NOT e.g. 1==1 1!=2
+df %>% # call df
+  filter(!is.na(capital))
+#then filter observations that do not have a missing value(NA) in the capital column
+# ! means NOT e.g. 1==1 1!=2
+
+#the equivalent is
 filter(df, !is.na(capital))
+```
+
+## Cleaning missing values
+
+The advantage of piping is that it allows you to write concise codes. For instance, <br>
+
+```{r}
+#basic way
+lux <- filter(df, country=="Luxembourg") #getting Luxembourg observation
+lux <- mutate(lux, capital = "Luxembourg City") #changing the capital value for Luxembourg
+lux
+"    country         capital population
+1 Luxembourg Luxembourg City     639000"
+#piping!
+lux <- df %>%
+  filter(country=="Luxembourg") %>%
+  mutate(capital = "Luxembourg City")
+lux
+"    country         capital population
+1 Luxembourg Luxembourg City     639000"
 ```
 
 ## Cleaning missing values
@@ -458,9 +523,11 @@ Let's say you have odd values for missing values e.g. -999
 df <- data.frame(country = c("France", "Germany", "Luxembourg"),
              capital = c("Paris", "Berlin", -999),
              population = c(67500000, 83130000, "Non_existent"))
+#retrieving luxembourg in two different ways
+##1
 df %>% 
-  filter(capital==999)
-print(df$capital)
+  filter(capital==-999)
+##2
 df %>% 
   filter(population=="Non_existent")
 ```
@@ -470,18 +537,19 @@ df %>%
 <br>
 
 ```{r}
+#retrieve an observation that has the value "-999" in the capital columns
 df %>% 
   filter(capital=="-999")
-
+#change the capital value 
 df %>% 
   filter(capital=="-999") %>%
   mutate(capital="Luxembourg City")
-
+#change the population value 
 df %>% 
   filter(capital=="-999") %>%
   mutate(capital="Luxembourg City") %>%
   mutate(population = 639000)
-
+#different version
 df %>% 
   filter(capital=="-999") %>%
   mutate(capital="Luxembourg City",
@@ -502,6 +570,10 @@ df <- df %>%
   mutate(capital="Luxembourg City",
          population = 639000)
 df
+"     country         capital population
+1  Luxembourg Luxembourg City     639000"
+#I WANTED TO CHANGE THE VALUES AND STORE THEM!
+#I DON'T WANT TO ONLY GET CLEAN LUX ROW!
 ```
 
 ## Cleaning missing values
@@ -521,7 +593,11 @@ df <- data.frame(country = c("France", "Germany", "Luxembourg"),
 df %>% 
   mutate(capital=ifelse(capital=="-999", #condition!
                         "Lux City", #if TRUE
-                        "")) #if FALSE
+                        "FALSE")) #if FALSE
+"    country  capital   population
+1     France    FALSE     67500000
+2    Germany    FALSE     83130000
+3 Luxembourg Lux City Non_existent"
 ```
 
 ## Cleaning missing values
@@ -537,7 +613,8 @@ Actually you need to use ifelse() function to get all observations
 df <- df %>% 
   mutate(capital=ifelse(capital=="-999",
                         "Luxembourg City",
-                        capital))
+                        capital)) #keeping the rest values
+#changing the population as well
 df <- df %>% 
   mutate(population=ifelse(population=="Non_existent",
                         639000,
@@ -545,7 +622,10 @@ df <- df %>%
   mutate(population = as.integer(population))
 
 df
-#print(df$population)
+"    country         capital population
+1     France           Paris   67500000
+2    Germany          Berlin   83130000
+3 Luxembourg Luxembourg City     639000"
 ```
 
 ## Custom function
@@ -560,12 +640,12 @@ For instance,
 
 ```{r}
 check_miss <- function(column, bool=F){
-  if(bool==F){
+  if(bool==F){#if one don't want T/F values for the result
     fin_value <- is.na(column) | stringi::stri_isempty(column)
-    fin_value <- grep(T, fin_value)
+    fin_value <- grep(T, fin_value) #returning the location where T is located
     return(fin_value)
   }else{
-    fin_value <- is.na(column) | stringi::stri_isempty(column)
+    fin_value <- is.na(column) | stringi::stri_isempty(column) #returning a boolean vector
     return(fin_value)
   }
 }
@@ -601,19 +681,19 @@ It is simple! Just use mutate() function to create a new column
 df <- df %>%
   mutate(total_pop = sum(population))
 df
+"     country         capital population total_pop
+1     France           Paris   67500000 151269000
+2    Germany          Berlin   83130000 151269000
+3 Luxembourg Luxembourg City     639000 151269000"
 ```
 
 ## Creating columns based on condition
 
 <br>
 
-There are two ways
+There are two ways!
 
-<br>
-
-The intuitive way
-
-<br>
+1.The intuitive way
 
 ```{r}
 #saving the value
@@ -622,41 +702,50 @@ temp_pop <- df %>%
   summarize(french_pop = sum(population)) %>%
   unlist()
 temp_pop
-
+"french_pop 
+  68139000"
 #and then creating the column
 df <- df %>%
   mutate(french_pop = temp_pop)
 df
+"     country         capital population total_pop french_pop
+1     France           Paris   67500000 151269000   68139000
+2    Germany          Berlin   83130000 151269000   68139000
+3 Luxembourg Luxembourg City     639000 151269000   68139000"
 ```
 
 ## Creating columns based on condition
 
 <br>
 
-The complex way
-
-<br>
+2.The complex way
 
 ```{r}
 df <- df %>%
+  #creating a column that indicates whether a country speaks french
   mutate(french = ifelse(country %in% c("France", "Luxembourg"),
                              T,
                              F)) %>%
+  #grouping by french column
   group_by(french) %>%
+  #creating a new column
   mutate(french_pop = ifelse(french==T,
                              sum(population),
                              NA)) %>%
   ungroup() #important!
 df
+" country    capital         population total_pop french_pop french
+  <chr>      <chr>                <int>     <int>      <int> <lgl> 
+1 France     Paris             67500000 151269000   68139000 TRUE  
+2 Germany    Berlin            83130000 151269000         NA FALSE 
+3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE "
 ```
 
 ## Creating columns based on condition
 
 <br>
 
-The complex way
-
-<br>
+If you forget to ungroup...
 
 ```{r}
 df <- df %>%
@@ -670,6 +759,11 @@ df <- df %>%
 #results in grouped sum by french still!
 df %>%
   mutate(temp = sum(population))
+"country    capital         population total_pop french_pop french     temp
+  <chr>      <chr>                <int>     <int>      <int> <lgl>     <int>
+1 France     Paris             67500000 151269000   68139000 TRUE   68139000
+2 Germany    Berlin            83130000 151269000         NA FALSE  83130000
+3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE   68139000"
 #check it
 is.grouped_df(df)
 "[1] TRUE"
@@ -691,7 +785,7 @@ df %>%
 #declare the columns of interest first!
 cols <- c("country", "capital", "population", "total_pop")
 df %>%
-  select(all_of(cols))
+  select(all_of(cols)) #there is also any_of()
 ```
 
 ## Deleting columns {auto-animate="true"}
@@ -769,7 +863,7 @@ del_cols
 
 Remove the columns from the data frame!
 
-``` {.r code-line-numbers="20-24"}
+``` {.r code-line-numbers="20-26"}
 #advanced
 df <- data.frame(country = "France",
                  capital = "Pairs",
@@ -794,6 +888,8 @@ del_cols
 df <- df %>%
   select(-all_of(del_cols))
 df
+"  country capital population
+1  France   Pairs   67500000"
 ```
 
 ## Deleting columns
@@ -827,11 +923,15 @@ We would like the merge the two. <br> Think the **colored area** as **observatio
 
 ## inner join
 
+[Animation](https://github.com/gadenbuie/tidyexplain#inner-join)
+
 <br>
 
 ![](img/inner_join.png){width="60%"}
 
 ## left join
+
+[Animation](https://github.com/gadenbuie/tidyexplain#left-join)
 
 <br>
 
@@ -839,15 +939,21 @@ We would like the merge the two. <br> Think the **colored area** as **observatio
 
 ## right join
 
+[Animation](https://github.com/gadenbuie/tidyexplain#right-join)
+
 <br>
 
 ![](img/right_join.png){width="60%"}
 
 ## full join
 
+[Animation](https://github.com/gadenbuie/tidyexplain#full-join)
+
 <br>
 
 ![](img/full_join.png){width="60%"}
+
+## etc.
 
 Help page is accessible by typing
 
@@ -856,6 +962,10 @@ Help page is accessible by typing
 ```
 
 it shows simple explanation of each join.
+
+<br>
+
+For different joins and animation visit [this github page](https://github.com/gadenbuie/tidyexplain)
 
 ## Example
 
@@ -879,6 +989,9 @@ merged.df <- left_join(x = x.df,
                        y = y.df,
                        by = "id") #by which column will you merge
 merged.df
+" id country.x capital.x population country.y capital.y language
+1  1    France     Paris   67500000      <NA>      <NA>     <NA>
+2  2   Germany    Berlin   83130000   Germany    Berlin       DE"
 ```
 
 ## right_join example
@@ -888,6 +1001,9 @@ merged.df <- right_join(x = x.df,
                         y = y.df,
                         by = "id") #by which column will you merge
 merged.df
+" id country.x capital.x population  country.y       capital.y language
+1  2   Germany    Berlin   83130000    Germany          Berlin       DE
+2  3      <NA>      <NA>         NA Luxembourg Luxembourg City       FR"
 ```
 
 ## inner_join example
@@ -897,6 +1013,8 @@ merged.df <- inner_join(x = x.df,
                         y = y.df,
                         by = "id") #by which column will you merge
 merged.df
+" id country.x capital.x population country.y capital.y language
+1  2   Germany    Berlin   83130000   Germany    Berlin       DE"
 ```
 
 ## full_join example
@@ -906,6 +1024,10 @@ merged.df <- full_join(x = x.df,
                        y = y.df,
                        by = "id") #by which column will you merge
 merged.df
+"id country.x capital.x population  country.y       capital.y language
+1  1    France     Paris   67500000       <NA>            <NA>     <NA>
+2  2   Germany    Berlin   83130000    Germany          Berlin       DE
+3  3      <NA>      <NA>         NA Luxembourg Luxembourg City       FR"
 ```
 
 ## advanced merge {auto-animate="true"}
@@ -922,6 +1044,9 @@ merged.df <- left_join(x = x.df,
                        by = "id", #by which column will you merge
                        suffix = c(".population", ".language"))
 merged.df
+"id country.population capital.population population country.language capital.language language
+1  1             France              Paris   67500000             <NA>             <NA>     <NA>
+2  2            Germany             Berlin   83130000          Germany           Berlin       DE"
 ```
 
 ## advanced merge {auto-animate="true"}
@@ -932,7 +1057,7 @@ Let's remove redundant columns
 
 <br>
 
-``` {.r code-line-numbers="6-13"}
+``` {.r code-line-numbers="6-17"}
 merged.df <- left_join(x = x.df, 
                        y = y.df,
                        by = "id", #by which column will you merge
@@ -947,6 +1072,9 @@ del_cols <- colnames(merged.df)[grepl(".language", colnames(merged.df))]
 merged.df <- merged.df %>%
   select(-all_of(del_cols))
 merged.df
+"id country.population capital.population population language
+1  1             France              Paris   67500000     <NA>
+2  2            Germany             Berlin   83130000       DE"
 ```
 
 ## advanced merge {auto-animate="true"}
@@ -957,7 +1085,7 @@ Let's rename the columns and fill in the blank language cell!
 
 <br>
 
-``` {.r code-line-numbers="14-25"}
+``` {.r code-line-numbers="18-32"}
 merged.df <- left_join(x = x.df, 
                        y = y.df,
                        by = "id", #by which column will you merge
@@ -972,6 +1100,9 @@ del_cols <- colnames(merged.df)[grepl(".language", colnames(merged.df))]
 merged.df <- merged.df %>%
   select(-all_of(del_cols))
 merged.df
+"id country.population capital.population population language
+1  1             France              Paris   67500000     <NA>
+2  2            Germany             Berlin   83130000       DE"
 
 #rename column names
 ##declaring the column names you want to have
@@ -984,6 +1115,9 @@ merged.df <- merged.df %>%
                            "FR",
                            language))
 merged.df
+"  id country capital population language
+1  1  France   Paris   67500000       FR
+2  2 Germany  Berlin   83130000       DE"
 ```
 
 # Simple statistical analysis
@@ -1033,6 +1167,9 @@ Calculating the average of Europe
 data %>%
   filter(continent=="Europe") %>%
   summarise(life_avg_eu = mean(lifeExp))
+" life_avg_eu
+        <dbl>
+1        71.9"
 ```
 
 ## Checking average of a variable
@@ -1048,6 +1185,14 @@ data %>%
   group_by(continent) %>%
   summarise(life_avg = mean(lifeExp),
             life_sd = sd(lifeExp))
+"# A tibble: 5 × 3
+  continent life_avg life_sd
+  <fct>        <dbl>   <dbl>
+1 Africa        48.9    9.15
+2 Americas      64.7    9.35
+3 Asia          60.1   11.9 
+4 Europe        71.9    5.43
+5 Oceania       74.3    3.80"
 ```
 
 ## Checking average of a variable
@@ -1064,9 +1209,17 @@ life_sum.df <- data %>%
   summarise(life_avg = mean(lifeExp),
             life_sd = sd(lifeExp))
 life_sum.df
+"# A tibble: 5 × 3
+  continent life_avg life_sd
+  <fct>        <dbl>   <dbl>
+1 Africa        48.9    9.15
+2 Americas      64.7    9.35
+3 Asia          60.1   11.9 
+4 Europe        71.9    5.43
+5 Oceania       74.3    3.80"
 ```
 
-## Linear regression
+## Linear regression {auto-animate="true"}
 
 <br>
 
@@ -1079,7 +1232,41 @@ Simple linear regression
 ols <- lm(formula = lifeExp ~ gdpPercap + continent,
           data = data)
 ols
+```
+
+## Linear regression {auto-animate="true"}
+
+<br>
+
+Checking the result
+
+```{.r code-line-numbers="5-26"}
+#simple linear regression
+ols <- lm(formula = lifeExp ~ gdpPercap + continent,
+          data = data)
+ols
 summary(ols)
+"Call:
+lm(formula = lifeExp ~ gdpPercap + continent, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-49.241  -4.479   0.347   5.105  25.138 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)    
+(Intercept)       4.789e+01  3.398e-01  140.93   <2e-16 ***
+gdpPercap         4.453e-04  2.350e-05   18.95   <2e-16 ***
+continentAmericas 1.359e+01  6.008e-01   22.62   <2e-16 ***
+continentAsia     8.658e+00  5.555e-01   15.59   <2e-16 ***
+continentEurope   1.757e+01  6.257e-01   28.08   <2e-16 ***
+continentOceania  1.815e+01  1.787e+00   10.15   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.39 on 1698 degrees of freedom
+Multiple R-squared:  0.5793,	Adjusted R-squared:  0.5781 
+F-statistic: 467.7 on 5 and 1698 DF,  p-value: < 2.2e-16"
 ```
 
 ## Linear regression
@@ -1088,26 +1275,67 @@ summary(ols)
 
 Checking the regression result in detail
 
-<br>
-
 ```{r}
 #ols result!
 ols_result <- summary(ols)
 
 #checking the coefficients
 ols_result$coefficients
+"                      Estimate   Std. Error   t value      Pr(>|t|)
+(Intercept)       4.788852e+01 3.398053e-01 140.92927  0.000000e+00
+gdpPercap         4.452704e-04 2.349795e-05  18.94933  8.552893e-73
+continentAmericas 1.359272e+01 6.007856e-01  22.62491  2.822476e-99
+continentAsia     8.657793e+00 5.554859e-01  15.58598  2.719424e-51
+continentEurope   1.757234e+01 6.257430e-01  28.08236 7.595526e-143
+continentOceania  1.814604e+01 1.787426e+00  10.15205  1.502557e-23"
 class(ols_result$coefficients)
-
-#scientific notation
-ols_result$coefficients[,1]
-format(ols_result$coefficients[,1], scientific = F)
+'"matrix" "array"'
 ```
-
 ## Linear regression
 
 <br>
 
-For more details of running different regressions, please check this webiste: [*Intorduction to Econometrics with R*](https://www.econometrics-with-r.org/index.html).
+Dealing with scientific notations(e)
+```{r}
+#scientific notation
+ols_result$coefficients[,1]
+"     (Intercept)         gdpPercap continentAmericas     continentAsia 
+     4.788852e+01      4.452704e-04      1.359272e+01      8.657793e+00 
+  continentEurope  continentOceania 
+     1.757234e+01      1.814604e+01"
+format(ols_result$coefficients[,1], scientific = F)
+'     (Intercept)         gdpPercap continentAmericas     continentAsia 
+  "47.8885161789"   " 0.0004452704"   "13.5927218705"   " 8.6577934769" 
+  continentEurope  continentOceania 
+  "17.5723409668"   "18.1460410154" '
+#NOTE THAT the numbers are characters now!
+```
+
+## Linear regression {auto-animate="true"}
+
+```{.r code-line-numbers="13-17"}
+#scientific notation
+ols_result$coefficients[,1]
+"(Intercept)         gdpPercap continentAmericas     continentAsia 
+     4.788852e+01      4.452704e-04      1.359272e+01      8.657793e+00 
+  continentEurope  continentOceania 
+     1.757234e+01      1.814604e+01"
+format(ols_result$coefficients[,1], scientific = F)
+' (Intercept)         gdpPercap continentAmericas     continentAsia 
+  "47.8885161789"   " 0.0004452704"   "13.5927218705"   " 8.6577934769" 
+  continentEurope  continentOceania 
+  "17.5723409668"   "18.1460410154" '
+#NOTE THAT the numbers are characters now!
+
+#try round() function
+round(ols_result$coefficients[,1],4) #rounding up at the fourth decimal point
+'      (Intercept)         gdpPercap continentAmericas     continentAsia   continentEurope  continentOceania 
+          47.8885            0.0004           13.5927            8.6578           17.5723           18.1460'
+```
+## Linear regression 
+<br>
+
+For more details of running different regressions, please check this website: [*Intorduction to Econometrics with R*](https://www.econometrics-with-r.org/index.html).
 
 # Plotting graphs
 
@@ -1119,7 +1347,7 @@ Now, it is time to plot pretty graphs!
 
 <br>
 
-We will use ggplot package for plotting graphs.
+We will use ggplot2 package for plotting graphs.
 
 <br>
 
@@ -1131,13 +1359,8 @@ Please check out this [link](https://ggplot2.tidyverse.org/#learning-ggplot2) fo
 
 ## Our goal
 
-<br>
-
-Our goal is to draw graph like this
-
-<br>
-
-![](img/goal_plot.jpg){width="60%"}
+Our goal is to draw a graph like this
+![](img/goal_plot.jpg){width="75%"}
 
 ## basic dot plot
 
@@ -1149,7 +1372,7 @@ Let's start with a basic plot
 #reading in data again
 data <- gapminder::gapminder
 
-#simple line graph for Italy
+#simple dot graph for Italy
 data %>%
   filter(country=="Italy") %>%
   ggplot() + 
@@ -1184,7 +1407,7 @@ Multiple countries!
 #reading in data again
 data <- gapminder::gapminder
 
-#simple line graph for some European countries
+#simple dot graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
   ggplot() + 
@@ -1198,7 +1421,7 @@ data %>%
 Let's add some colors according to a country!
 
 ```{r}
-#simple line graph for some European countries
+#simple dot graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
   ggplot() + 
@@ -1234,7 +1457,7 @@ data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
   ggplot() + 
   geom_line(aes(x = year, y = gdpPercap, color = country)) +
-  labs(x="Year", y="Real GDP per capita in USD")
+  labs(x="Year", y="Real GDP per capita in USD") #changing the axis label
 ```
 
 ## Setting the plot title
@@ -1426,7 +1649,8 @@ gdp_text.df <- data %>%
 #adding the text layer
 mid_plot <- base_plot + 
   geom_text(data = gdp_text.df,
-            aes(x = year, y = gdpPercap, label = round(gdpPercap)), #rounding up the GDP!
+            aes(x = year, y = gdpPercap, 
+                label = round(gdpPercap)), #rounding up the GDP!
             size = 7, #size adjustment
             vjust = 0.7) #position adjustment
 mid_plot
@@ -1446,7 +1670,8 @@ gdp_text.df <- data %>%
 #adding the text layer
 mid_plot <- base_plot + 
   geom_text(data = gdp_text.df,
-            aes(x = year, y = gdpPercap, label = format(round(gdpPercap), big.mark = ",", big.interval = 3L)), #rounding up the GDP!
+            aes(x = year, y = gdpPercap, 
+                label = format(round(gdpPercap), big.mark = ",", big.interval = 3L)), #rounding up the GDP and adding a comma!!
             size = 7, #size adjustment
             vjust = 0.7) #position adjustment
 mid_plot
@@ -1502,7 +1727,8 @@ Let's save the final_plot
 ```{r}
 #saving the final plot
 ggsave(plot = final_plot,
-       filename = "img/output.jpg",
+       filename = "img/output.jpg", 
+       #make sure you have created an 'img' folder in your project directory
        width = 40,
        height = 30,
        units = "cm")
@@ -1587,6 +1813,8 @@ urlcolor: blue #setting the hyperlink color to blue
 ```
 
 ## Jumping right into the R markdwon
+
+Check out the 'markdown.Rmd' file from [the github page](https://github.com/jongohkim91/R-A-Z/blob/master/markdown.Rmd)
 
 # Thanks!
 
