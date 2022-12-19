@@ -33,10 +33,8 @@ execute:
 <br>
 
 ::: {.callout-important icon="false" appearance="simple"}
-This training aims to teach you A-Z in terms of data analysis.
+This training aims to teach you data analysis in R from A-Z.
 :::
-
-<br>
 
 Data analysis includes
 
@@ -1133,11 +1131,11 @@ Please check out this [link](https://ggplot2.tidyverse.org/#learning-ggplot2) fo
 
 <br>
 
-Our goal is to draw graph like this
+Our goal is to draw a graph like this
 
 <br>
 
-![](img/goal_plot.jpg){width="60%"}
+![](img/goal_plot.jpg){width="100%"}
 
 ## basic dot plot
 
