@@ -1814,7 +1814,7 @@ urlcolor: blue #setting the hyperlink color to blue
 
 ## Jumping right into the R markdown
 
-Check out the 'markdown.Rmd' file from [the github page](https://github.com/jongohkim91/R-A-Z/blob/master/markdown.Rmd)
+Check out the 'markdown.Rmd' file from [the github page](https://github.com/jongohkim91/R-A-Z/blob/master/markdown)
 
 # Thanks!
 
