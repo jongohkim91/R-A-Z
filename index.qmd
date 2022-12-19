@@ -1359,11 +1359,8 @@ Please check out this [link](https://ggplot2.tidyverse.org/#learning-ggplot2) fo
 
 ## Our goal
 
-<br>
-
 Our goal is to draw a graph like this
-
-![](img/goal_plot.jpg){width="150%", height="130%"}
+![](img/goal_plot.jpg){width="75%"}
 
 ## basic dot plot
 
@@ -1816,6 +1813,8 @@ urlcolor: blue #setting the hyperlink color to blue
 ```
 
 ## Jumping right into the R markdwon
+
+Check out the 'markdown.Rmd' file from [the github page](https://github.com/jongohkim91/R-A-Z/blob/master/markdown.Rmd)
 
 # Thanks!
 
