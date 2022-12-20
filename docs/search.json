@@ -151,7 +151,7 @@
     "href": "index.html#list-and-vectors-2",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "list and vectors",
-    "text": "list and vectors\n\nYou should be careful when you want to extract a value from a list\n\n#list\ntemp[1]\n'$country\n[1] \"France\"  \"Germany\"'\nclass(temp[1])\n'[1] \"list\"'\n\n#vector\ntemp[[1]]\n'[1] \"France\"  \"Germany\"'\nclass(temp[[1]])\n'[1] \"character\"'\n\n#trying to access a value of a sub-list(country)\ntemp[1][1] #wrong\n'$country\n[1] \"France\"  \"Germany\"' #retrieved the whole sub-list(country) instead\ntemp[[1]][1] #right\n'[1] \"France\"'"
+    "text": "list and vectors\n\nYou should be careful when you want to extract a value from a list\n\n#list\ntemp[1]\n'$country\n[1] \"France\"  \"Germany\"'\nclass(temp[1])\n'[1] \"list\"'\n\n#vector\ntemp[[1]]\n#or\ntemp$country #think $ a sign to use to access a sub-structure(sub-list)\n'[1] \"France\"  \"Germany\"'\nclass(temp[[1]])\n'[1] \"character\"'"
   },
   {
     "objectID": "index.html#cleaning-missing-values",
@@ -165,14 +165,14 @@
     "href": "index.html#cleaning-missing-values-1",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Cleaning missing values",
-    "text": "Cleaning missing values\n\nPiping!\n%>%\n A special operator in the dplyr packages!\nThink it as “then” in English.\n\n\ndf %>% # call df\n  filter(!is.na(capital))\n#then filter observations that do not have a missing value(NA) in the capital column\n# ! means NOT e.g. 1==1 1!=2\n\n#the equivalent is\nfilter(df, !is.na(capital))"
+    "text": "Cleaning missing values\n\nPiping!\n%>%\n A special operator from the dplyr package!\nThink it as “then” in English.\n\n\ndf %>% # call df\n  filter(!is.na(capital))\n#then filter observations that do not have a missing value(NA) in the capital column\n# ! means NOT e.g. 1==1 1!=2\n\n#the equivalent is\nfilter(df, !is.na(capital))"
   },
   {
     "objectID": "index.html#cleaning-missing-values-2",
     "href": "index.html#cleaning-missing-values-2",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Cleaning missing values",
-    "text": "Cleaning missing values\nThe advantage of piping is that it allows you to write concise codes. For instance, \n\n#basic way\nlux <- filter(df, country==\"Luxembourg\") #getting Luxembourg observation\nlux <- mutate(lux, capital = \"Luxembourg City\") #changing the capital value for Luxembourg\nlux\n\"    country         capital population\n1 Luxembourg Luxembourg City     639000\"\n#piping!\nlux <- df %>%\n  filter(country==\"Luxembourg\") %>%\n  mutate(capital = \"Luxembourg City\")\nlux\n\"    country         capital population\n1 Luxembourg Luxembourg City     639000\""
+    "text": "Cleaning missing values\nThe advantage of piping is that it allows you to write concise codes. For instance,\n\n\n#basic way\nlux <- filter(df, country==\"Luxembourg\") #getting Luxembourg observation\nlux <- mutate(lux, capital = \"Luxembourg City\") #changing the capital value for Luxembourg\nlux\n\"    country         capital population\n1 Luxembourg Luxembourg City     639000\"\n#piping!\nlux <- df %>%\n  filter(country==\"Luxembourg\") %>%\n  mutate(capital = \"Luxembourg City\")\nlux\n\"    country         capital population\n1 Luxembourg Luxembourg City     639000\""
   },
   {
     "objectID": "index.html#cleaning-missing-values-3",
@@ -249,49 +249,49 @@
     "href": "index.html#creating-columns-based-on-condition-2",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Creating columns based on condition",
-    "text": "Creating columns based on condition\n\nIf you forget to ungroup…\n\ndf <- df %>%\n  mutate(french = ifelse(country %in% c(\"France\", \"Luxembourg\"),\n                             T,\n                             F)) %>%\n  group_by(french) %>%\n  mutate(french_pop = ifelse(french==T,\n                             sum(population),\n                             NA))\n#results in grouped sum by french still!\ndf %>%\n  mutate(temp = sum(population))\n\"country    capital         population total_pop french_pop french     temp\n  <chr>      <chr>                <int>     <int>      <int> <lgl>     <int>\n1 France     Paris             67500000 151269000   68139000 TRUE   68139000\n2 Germany    Berlin            83130000 151269000         NA FALSE  83130000\n3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE   68139000\"\n#check it\nis.grouped_df(df)\n\"[1] TRUE\""
+    "text": "Creating columns based on condition\n\nIf you forget to ungroup…\n\ndf <- df %>%\n  mutate(french = ifelse(country %in% c(\"France\", \"Luxembourg\"),\n                             T,\n                             F)) %>%\n  group_by(french) %>%\n  mutate(french_pop = ifelse(french==T,\n                             sum(population),\n                             NA))\n#results in grouped sum by french still!\ndf %>%\n  mutate(temp = sum(population))\n\"country    capital         population total_pop french_pop french     temp\n  <chr>      <chr>                <int>     <int>      <int> <lgl>     <int>\n1 France     Paris             67500000 151269000   68139000 TRUE   68139000\n2 Germany    Berlin            83130000 151269000         NA FALSE  83130000\n3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE   68139000\""
   },
   {
     "objectID": "index.html#deleting-columns",
     "href": "index.html#deleting-columns",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Deleting columns",
-    "text": "Deleting columns\n\n\n#choose the columns you want to exclude\ndf %>%\n  select(-french_pop, -french)\n\n#choose the columns you only need\ndf %>%\n  select(country, capital, population, total_pop)\n\n#declare the columns of interest first!\ncols <- c(\"country\", \"capital\", \"population\", \"total_pop\")\ndf %>%\n  select(all_of(cols)) #there is also any_of()"
+    "text": "Deleting columns\n\n\n#choose the columns you want to exclude\ndf %>%\n  select(-french_pop, -french)\n\"# A tibble: 3 × 3\n  country    capital         population\n  <chr>      <chr>                <int>\n1 France     Paris             67500000\n2 Germany    Berlin            83130000\n3 Luxembourg Luxembourg City     639000\"\n#choose the columns you only need\ndf %>%\n  select(country, capital, population, total_pop)\n\"# A tibble: 3 × 4\n  country    capital         population total_pop\n  <chr>      <chr>                <int>     <int>\n1 France     Paris             67500000 151269000\n2 Germany    Berlin            83130000 151269000\n3 Luxembourg Luxembourg City     639000 151269000\""
   },
   {
     "objectID": "index.html#deleting-columns-1",
     "href": "index.html#deleting-columns-1",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Deleting columns",
-    "text": "Deleting columns\n\nLet’s try an advanced example!\n\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf"
+    "text": "Deleting columns\n#choose the columns you want to exclude\ndf %>%\n  select(-french_pop, -french)\n\"# A tibble: 3 × 3\n  country    capital         population\n  <chr>      <chr>                <int>\n1 France     Paris             67500000\n2 Germany    Berlin            83130000\n3 Luxembourg Luxembourg City     639000\"\n#choose the columns you only need\ndf %>%\n  select(country, capital, population, total_pop)\n\"# A tibble: 3 × 4\n  country    capital         population total_pop\n  <chr>      <chr>                <int>     <int>\n1 France     Paris             67500000 151269000\n2 Germany    Berlin            83130000 151269000\n3 Luxembourg Luxembourg City     639000 151269000\"\n#declare the columns of interest first!\ncols <- c(\"country\", \"capital\", \"population\", \"total_pop\")\ndf %>%\n  select(all_of(cols)) #there is also any_of()\n\"# A tibble: 3 × 4\n  country    capital         population total_pop\n  <chr>      <chr>                <int>     <int>\n1 France     Paris             67500000 151269000\n2 Germany    Berlin            83130000 151269000\n3 Luxembourg Luxembourg City     639000 151269000\""
   },
   {
     "objectID": "index.html#deleting-columns-2",
     "href": "index.html#deleting-columns-2",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Deleting columns",
-    "text": "Deleting columns\n\nFind columns that you want to erase!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\ngrepl(\"^Y\", colnames(df))"
+    "text": "Deleting columns\n\nLet’s try an advanced example!\n\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf"
   },
   {
     "objectID": "index.html#deleting-columns-3",
     "href": "index.html#deleting-columns-3",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Deleting columns",
-    "text": "Deleting columns\n\nDeclare the columns you want to erase!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\ngrepl(\"^Y\", colnames(df))\n\n#declare the columns you want to erase!\ndel_cols <- colnames(df)[grep(\"^Y\", colnames(df))]\ndel_cols"
+    "text": "Deleting columns\n\nFind columns that you want to erase!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\ngrepl(\"^Y\", colnames(df))"
   },
   {
     "objectID": "index.html#deleting-columns-4",
     "href": "index.html#deleting-columns-4",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Deleting columns",
-    "text": "Deleting columns\n\nRemove the columns from the data frame!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\ngrepl(\"^Y\", colnames(df))\n\n#declare the columns you want to erase!\ndel_cols <- colnames(df)[grep(\"^Y\", colnames(df))]\ndel_cols\n\n#exclude the columns!\ndf <- df %>%\n  select(-all_of(del_cols))\ndf\n\"  country capital population\n1  France   Pairs   67500000\""
+    "text": "Deleting columns\n\nDeclare the columns you want to erase!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\ngrepl(\"^Y\", colnames(df))\n\n#declare the columns you want to erase!\ndel_cols <- colnames(df)[grep(\"^Y\", colnames(df))]\ndel_cols\n'Y1950_population\" \"Y1960_population\" \"Y1970_population\"'"
   },
   {
     "objectID": "index.html#deleting-columns-5",
     "href": "index.html#deleting-columns-5",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Deleting columns",
-    "text": "Deleting columns\n\n\nFor more information on string matching based on regular expression, please check this website."
+    "text": "Deleting columns\n\nRemove the columns from the data frame!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\ngrepl(\"^Y\", colnames(df))\n\n#declare the columns you want to erase!\ndel_cols <- colnames(df)[grep(\"^Y\", colnames(df))]\ndel_cols\n'\"Y1950_population\" \"Y1960_population\" \"Y1970_population\"'\n\n#exclude the columns!\ndf <- df %>%\n  select(-all_of(del_cols))\ndf\n\"  country capital population\n1  France   Pairs   67500000\""
   },
   {
     "objectID": "index.html#different-joins",
@@ -599,7 +599,7 @@
     "href": "index.html#adjusting-the-text-sizeposition",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Adjusting the text size/position",
-    "text": "Adjusting the text size/position\n\n#print(sort(unique(data$year)))\n\"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007\"\n\n#creating the GDP text data frame\ngdp_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Italy\")) %>%\n  filter(year==1952 | year==2007)\n\n#adding the text layer\nmid_plot <- base_plot + \n  geom_text(data = gdp_text.df,\n            aes(x = year, y = gdpPercap, label = gdpPercap),\n            size = 7, #size adjustment\n            vjust = 0.7) #position adjustment\nmid_plot"
+    "text": "Adjusting the text size/position\n\n#print(sort(unique(data$year)))\n\"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007\"\n\n#creating the GDP text data frame\ngdp_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Italy\")) %>%\n  filter(year==1952 | year==2007)\n\n#adding the text layer\nmid_plot <- base_plot + \n  geom_text(data = gdp_text.df,\n            aes(x = year, y = gdpPercap, label = gdpPercap),\n            size = 7, #size adjustment\n            vjust = 0.7) #vertical position adjustment\nmid_plot"
   },
   {
     "objectID": "index.html#formatting-the-gdp-neatly",
@@ -684,5 +684,26 @@
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Jumping right into the R markdown",
     "text": "Jumping right into the R markdown\nCheck out the ‘markdown.Rmd’ file from the github page"
+  },
+  {
+    "objectID": "index.html#list-and-vectors-3",
+    "href": "index.html#list-and-vectors-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "list and vectors",
+    "text": "list and vectors\n\nYou should be careful when you want to extract a value from a list\n#list\ntemp[1]\n'$country\n[1] \"France\"  \"Germany\"'\nclass(temp[1])\n'[1] \"list\"'\n\n#vector\ntemp[[1]]\n#or\ntemp$country #think $ a sign to use to access a sub-structure(sub-list)\n'[1] \"France\"  \"Germany\"'\nclass(temp[[1]])\n'[1] \"character\"'\n\n#trying to access a value of a sub-list(country)\ntemp[1][1] #wrong\n'$country\n[1] \"France\"  \"Germany\"' #retrieved the whole sub-list(country) instead\ntemp[[1]][1] #right\n#or\ntemp$country[1]\n'[1] \"France\"'"
+  },
+  {
+    "objectID": "index.html#creating-columns-based-on-condition-3",
+    "href": "index.html#creating-columns-based-on-condition-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Creating columns based on condition",
+    "text": "Creating columns based on condition\n\nIf you forget to ungroup…\ndf <- df %>%\n  mutate(french = ifelse(country %in% c(\"France\", \"Luxembourg\"),\n                             T,\n                             F)) %>%\n  group_by(french) %>%\n  mutate(french_pop = ifelse(french==T,\n                             sum(population),\n                             NA))\n#results in grouped sum by french still!\ndf %>%\n  mutate(temp = sum(population))\n\"country    capital         population total_pop french_pop french     temp\n  <chr>      <chr>                <int>     <int>      <int> <lgl>     <int>\n1 France     Paris             67500000 151269000   68139000 TRUE   68139000\n2 Germany    Berlin            83130000 151269000         NA FALSE  83130000\n3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE   68139000\"\n#check it\nis.grouped_df(df)\n\"[1] TRUE\""
+  },
+  {
+    "objectID": "index.html#deleting-columns-6",
+    "href": "index.html#deleting-columns-6",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Deleting columns",
+    "text": "Deleting columns\n\n\nFor more information on string matching based on regular expression, please check this website."
   }
 ]
