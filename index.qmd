@@ -159,6 +159,10 @@ Project allows you:
 
 Let's create a "training" project at our desktop.
 
+<br>
+
+Follow the section 6 of this [webpage.](https://bookdown.org/daniel_dauber_io/r4np_book/starting-your-r-projects.html)
+
 # Reading in Data
 
 ## CSV - basic
