@@ -5,9 +5,9 @@ author: "Jongoh Kim"
 date: "`r Sys.Date()`"
 date-format: long
 institute: "LISER"
-
 format: 
  revealjs:
+   
    incremental: false  
    theme: [moon, custom.scss]
    pdf-separate-fragments: true
@@ -16,10 +16,12 @@ format:
    auto-animate-duration: 0.8
    code-copy: true
    slide-number: true
-   
 execute:
   eval: false
   echo: true
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 <!-- Print to PDF -->
@@ -56,13 +58,43 @@ Data analysis includes
 
 <!-- https://talks.andrewheiss.com/2022-seacen/presentation/#/general-principles -->
 
+## Prerequisite
+
+<br>
+
+::: {.callout-important icon="false" appearance="simple"}
+This training is for people who have basic knowledge of programming!
+
+The basic knowledge includes:
+
+-   data type
+
+-   if,else statement
+
+-   for, while loop
+
+-   basic concept of a user-defined function
+:::
+
+## Prerequisite
+
+<br>
+
+This training assumes you are using R Studio for coding your R script so
+
+if you have not installed the program, please do by clicking this
+[link](https://posit.co/download/rstudio-desktop/).
+
 ## Let's clean up the R environment!
 
 <br>
 
 Let's set the environment for our R-coding.
 
-<br>
+I strongly suggest you put these lines of code at the start of your code
+file
+
+You will use them a lot.
 
 ```{r}
 # Clear plots
@@ -72,9 +104,92 @@ cat("\014")
 # Clean workspace
 rm(list=ls())
 
-"OR the best way for R studio users"
+"OR the best way for R studio users
+to really initialize the R environment"
 #restart R
 rstudioapi::restartSession()
+```
+
+## Packages
+
+<br>
+
+Packages are a toolbox that you can get(install)
+
+and use to make your life(coding) easier!
+
+## Tidyverse
+
+<br>
+
+The most famous package bundle in the R world!
+
+![](img/tidyverse.png){fig.align="center"} \## My personal choice for R
+packages
+
+<br>
+
+String Manipulation
+
+-   stringr, stringi
+
+Data Analysis
+
+-   dplyr and/or data.table
+
+## My personal choice for R packages
+
+<br>
+
+Graph
+
+-   ggplot2
+
+Report
+
+-   rmarkdown, markdown, knitr
+
+## My personal choice for R packages
+
+<br>
+
+Pipeline tools
+
+-   targets(snakemake for Python users)
+
+## What is a Pipeline tool?
+
+## My personal decision tree for R packages
+
+![]()
+
+## Installing packages
+
+<br>
+
+Let's install a package called 'gapminder'
+
+<br>
+
+```{r}
+install.packages("gapminder")
+```
+
+## Installing packages
+
+<br>
+
+Let's install the 'dplyr' package, 'stringr' package, and 'ggplot2'
+package
+
+<br>
+
+```{r}
+#installing multiple packages at one-go
+install.packages(c("dplyr", "stringr", "ggplot2"))
+
+#you can also install the whole packages from the tidyverse bundle by
+install.packages('tidyverse')
 ```
 
 ## Calling packages
@@ -96,7 +211,7 @@ library(stringi)
 
 <br>
 
-Easy way
+Elegant way
 
 <br>
 
@@ -121,7 +236,8 @@ lapply(packages, require, character.only=T)
 
 <br>
 
-3.  or manual type the function name in the search bar of the Help panel, that is located on the bottom right.
+3.  or manual type the function name in the search bar of the Help
+    panel, that is located on the bottom right.
 
 ## Setting working directory
 
@@ -161,7 +277,67 @@ Let's create a "training" project at our desktop.
 
 <br>
 
-Follow the section 6 of this [webpage.](https://bookdown.org/daniel_dauber_io/r4np_book/starting-your-r-projects.html)
+Follow the section 6 of this
+[webpage.](https://bookdown.org/daniel_dauber_io/r4np_book/starting-your-r-projects.html)
+
+# Writing/exproting Data
+
+## Writing/exproting Data
+
+<br>
+
+Let's initially focus on CSV files only!
+
+First let's read in the gapminder table from the gapminder package
+
+```{r}
+library(gapminder)
+#assigning the gapminder table to data
+data <- gapminder
+
+"OR"
+
+#assigning the gapminder table to data
+data <- gapminder::gapminder
+
+```
+
+## Writing/exproting Data
+
+<br>
+
+Let's export this table to a CSV file
+
+under the data folder in the project directory
+
+*Don't forget to create the data folder before running the code!*
+
+or you will get an error
+
+```{r}
+#writing the CSV file
+## decimal points = "."
+write.csv(data, "data/gapminder.csv")
+
+## decimal points = comma
+write.csv2(data, "data/gapminder.csv")
+```
+
+## Writing/exproting Data
+
+<br>
+
+It is faster to export a data if you use the data.table package
+
+```{r}
+#you should have installed the data.table package first
+## install.packages("data.table")
+
+##write as a CSV file!
+data.table::fwrite(data, "data/gapminder.csv",
+                   dec = ".", #decimal points("." is the default)
+                   sep = ",") #separator(comma is the default)
+```
 
 # Reading in Data
 
@@ -170,16 +346,6 @@ Follow the section 6 of this [webpage.](https://bookdown.org/daniel_dauber_io/r4
 <br>
 
 ```{r}
-# Clear plots
-if(!is.null(dev.list())) dev.off()
-# Clear console
-cat("\014") 
-# Clean workspace
-rm(list=ls())
-#reading in packages
-packages <- c("dplyr", "ggplot2", "stringr", "stringi")
-lapply(packages, require, character.only=T)
-
 #basic way
 ?read.csv
 #let's assume gapminder.csv file is stored in the data folder
@@ -205,7 +371,6 @@ It is fast!([link](https://jozef.io/r917-fread-comparisons/))
 
 ```{r}
 #data table way
-install.packages("data.table")
 library(data.table)
 
 ##install.packages("data.table")
@@ -252,7 +417,7 @@ data <- read.table(file = "data_file_path",
                    sep = "\t", #tab
                    dec = ",") #using a comma for decimal points
 
-#read.csv
+#equivalent to read.csv
 read.table(file = "data/gapminder.csv",
            header = T,
            sep = ",",
@@ -263,9 +428,10 @@ read.table(file = "data/gapminder.csv",
 
 <br>
 
-Many times researchers would like to know how long it takes to read a file.
+Many times, researchers would like to know how long it takes to read a
+file.
 
-Especially if the file is large.
+Especially, if the file is large.
 
 <br>
 
@@ -287,7 +453,8 @@ There are two ways to check/see your data
 <br>
 
 ::: incremental
--   pressing the variable(in our case "data") button on your right-top panel
+-   pressing the variable(in our case "data") button on your right-top
+    panel
 -   or typing the variable name in the console
 -   type *str(data)*
 :::
@@ -303,13 +470,13 @@ For instance,
 ```{r}
 data <- gapminder::gapminder
 str(data)
-"tibble [1,704 × 6] (S3: tbl_df/tbl/data.frame)
+'tibble [1,704 × 6] (S3: tbl_df/tbl/data.frame)
  $ country  : Factor w/ 142 levels "Afghanistan",..: 1 1 1 1 1 1 1 1 1 1 ...
  $ continent: Factor w/ 5 levels "Africa","Americas",..: 3 3 3 3 3 3 3 3 3 3 ...
  $ year     : int [1:1704] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
  $ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...
  $ pop      : int [1:1704] 8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
- $ gdpPercap: num [1:1704] 779 821 853 836 740 ..."
+ $ gdpPercap: num [1:1704] 779 821 853 836 740 ...'
 ```
 
 ## first and the last of the data
@@ -359,7 +526,7 @@ class(data$continent)
 
 #comparing factor with character
 print(c("a", "b", "c"))
-"a" "b" "c"
+'"a" "b" "c"'
 print(as.factor(c("a", "b", "c")))
 "[1] a b c
  Levels: a b c"
@@ -394,7 +561,7 @@ as.integer(data$continent[1])
 c(1,2,3)
 "[1] 1 2 3"
 c(1,"a")
-'[1] "1" "a"'
+'[1] "1" "a"' #notice the quotation marks(")
 
 #list can have different data types and name them!
 temp <- list("a", 1)
@@ -409,12 +576,12 @@ temp
 ## list and vectors
 
 ```{r}
-# to change the list into a vector again
+# changing the list into a vector again
 temp <- unlist(temp)
 temp
 '[1] "a" "1"'
 
-#list can have sub-structures
+# list can have sub-structures
 temp <- list(country = c("France", "Germany"),
              capital = c("Paris", "Berlin"),
              population = c(67500000, 83130000))
@@ -456,7 +623,8 @@ class(temp[[1]])
 <br>
 
 You should be careful when you want to extract a value from a list
-```{.r code-line-numbers="13-21"}
+
+``` {.r code-line-numbers="16-23"}
 #list
 temp[1]
 '$country
@@ -495,6 +663,10 @@ df <- data.frame(country = c("France", "Germany", "Luxembourg"),
              capital = c("Paris", "Berlin", NA),
              population = c(67500000, 83130000, 639000))
 df
+"country capital population
+1     France   Paris   67500000
+2    Germany  Berlin   83130000
+3 Luxembourg    <NA>     639000"
 ```
 
 ## Cleaning missing values
@@ -505,11 +677,11 @@ Piping!
 
 **%\>%**
 
-<br> A special operator from the dplyr package!
+<br>
+
+A special operator from the dplyr package!
 
 Think it as "then" in English.
-
-<br>
 
 ```{r}
 df %>% # call df
@@ -517,14 +689,17 @@ df %>% # call df
 #then filter observations that do not have a missing value(NA) in the capital column
 # ! means NOT e.g. 1==1 1!=2
 
+"NA is a special data type in R that indicates a missing value
+(comparable to NaN value in Python)"
+
 #the equivalent is
 filter(df, !is.na(capital))
 ```
 
 ## Cleaning missing values
 
-The advantage of piping is that it allows you to write concise codes. 
-For instance, 
+The advantage of piping is that it allows you to write concise codes.
+For instance,
 
 <br>
 
@@ -665,7 +840,8 @@ df
 
 <br>
 
-Sometimes, you need to create your custom function to detect missing values.
+Sometimes, you need to create your custom function to detect missing
+values.
 
 For instance,
 
@@ -747,7 +923,7 @@ df
 3 Luxembourg Luxembourg City     639000 151269000   68139000"
 ```
 
-## Creating columns based on condition 
+## Creating columns based on condition
 
 <br>
 
@@ -805,7 +981,7 @@ df %>%
 
 If you forget to ungroup...
 
-```{.r code-line-numbers="17-19"}
+``` {.r code-line-numbers="17-19"}
 df <- df %>%
   mutate(french = ifelse(country %in% c("France", "Luxembourg"),
                              T,
@@ -854,7 +1030,7 @@ df %>%
 
 ## Deleting columns {auto-animate="true"}
 
-```{.r code-line-numbers="19-28"}
+``` {.r code-line-numbers="19-28"}
 #choose the columns you want to exclude
 df %>%
   select(-french_pop, -french)
@@ -900,6 +1076,8 @@ df <- data.frame(country = "France",
                  Y1960_population = "",
                  Y1970_population = -999)
 df
+" country capital population Y1950_population Y1960_population Y1970_population
+1  France   Pairs   67500000               NA                              -999"
 ```
 
 ## Deleting columns {auto-animate="true"}
@@ -908,7 +1086,7 @@ df
 
 Find columns that you want to erase!
 
-``` {.r code-line-numbers="9-15"}
+``` {.r code-line-numbers="10-18"}
 #advanced
 df <- data.frame(country = "France",
                  capital = "Pairs",
@@ -920,10 +1098,13 @@ df
 
 #check the column names of df
 colnames(df)
+'[1] "country"          "capital"          "population"       "Y1950_population" "Y1960_population" "Y1970_population"'
 
 #find the columns you want to delete!
 grep("^Y", colnames(df))
+"[1] 4 5 6"
 grepl("^Y", colnames(df))
+"[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE"
 ```
 
 ## Deleting columns {auto-animate="true"}
@@ -932,7 +1113,7 @@ grepl("^Y", colnames(df))
 
 Declare the columns you want to erase!
 
-``` {.r code-line-numbers="16-20"}
+``` {.r code-line-numbers="20-23"}
 #advanced
 df <- data.frame(country = "France",
                  capital = "Pairs",
@@ -944,10 +1125,13 @@ df
 
 #check the column names of df
 colnames(df)
+'[1] "country"          "capital"          "population"       "Y1950_population" "Y1960_population" "Y1970_population"'
 
 #find the columns you want to delete!
 grep("^Y", colnames(df))
+"[1] 4 5 6"
 grepl("^Y", colnames(df))
+"[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE"
 
 #declare the columns you want to erase!
 del_cols <- colnames(df)[grep("^Y", colnames(df))]
@@ -961,7 +1145,7 @@ del_cols
 
 Remove the columns from the data frame!
 
-``` {.r code-line-numbers="21-27"}
+``` {.r code-line-numbers="25-30"}
 #advanced
 df <- data.frame(country = "France",
                  capital = "Pairs",
@@ -973,15 +1157,18 @@ df
 
 #check the column names of df
 colnames(df)
+'[1] "country"          "capital"          "population"       "Y1950_population" "Y1960_population" "Y1970_population"'
 
 #find the columns you want to delete!
 grep("^Y", colnames(df))
+"[1] 4 5 6"
 grepl("^Y", colnames(df))
+"[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE"
 
 #declare the columns you want to erase!
 del_cols <- colnames(df)[grep("^Y", colnames(df))]
 del_cols
-'"Y1950_population" "Y1960_population" "Y1970_population"'
+'Y1950_population" "Y1960_population" "Y1970_population"'
 
 #exclude the columns!
 df <- df %>%
@@ -995,13 +1182,16 @@ df
 
 <br>
 
--   For more information on string matching based on regular expression, please check this [website.](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions)
+-   For more information on string matching based on regular expression,
+    please check this
+    [website.](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions)
 
 # Merging data
 
 ## Different joins
 
-In R programming, people often use the term 'join' for merging the data, and many different types of join exist.
+In R programming, people often use the term 'join' for merging the data,
+and many different types of join exist.
 
 1.  left join
 2.  right join
@@ -1012,13 +1202,18 @@ In R programming, people often use the term 'join' for merging the data, and man
 
 <br>
 
-Let's say we have two data sets: X and Y. <br> ![](img/join1.png){width="60%"}
+Let's say we have two data sets: X and Y. <br>
+![](img/join1.png){width="60%"}
 
 ## join
 
 <br>
 
-We would like the merge the two. <br> Think the **colored area** as **observations**! ![](img/join2.png){width="60%"}
+We would like the merge the two.
+
+<br>
+
+![](img/join2.png){width="60%"}
 
 ## inner join
 
@@ -1064,9 +1259,12 @@ it shows simple explanation of each join.
 
 <br>
 
-For different joins and animation visit [this github page](https://github.com/gadenbuie/tidyexplain)
+For different joins and animation visit [this github
+page](https://github.com/gadenbuie/tidyexplain)
 
 ## Example
+
+<br>
 
 ```{r}
 #setting the data sets
@@ -1083,6 +1281,8 @@ y.df <- data.frame(id = c(2,3),
 
 ## left_join example
 
+<br>
+
 ```{r}
 merged.df <- left_join(x = x.df, 
                        y = y.df,
@@ -1094,6 +1294,8 @@ merged.df
 ```
 
 ## right_join example
+
+<br>
 
 ```{r}
 merged.df <- right_join(x = x.df, 
@@ -1107,6 +1309,8 @@ merged.df
 
 ## inner_join example
 
+<br>
+
 ```{r}
 merged.df <- inner_join(x = x.df, 
                         y = y.df,
@@ -1117,6 +1321,8 @@ merged.df
 ```
 
 ## full_join example
+
+<br>
 
 ```{r}
 merged.df <- full_join(x = x.df, 
@@ -1133,9 +1339,8 @@ merged.df
 
 <br>
 
-You can change the suffix setting if ".x" & ".y" does not help you have a full picture of the merging process
-
-<br>
+You can change the suffix setting if ".x" & ".y" does not help you have
+a full picture of the merging process
 
 ```{r}
 merged.df <- left_join(x = x.df, 
@@ -1153,8 +1358,6 @@ merged.df
 <br>
 
 Let's remove redundant columns
-
-<br>
 
 ``` {.r code-line-numbers="6-17"}
 merged.df <- left_join(x = x.df, 
@@ -1182,9 +1385,7 @@ merged.df
 
 Let's rename the columns and fill in the blank language cell!
 
-<br>
-
-``` {.r code-line-numbers="18-32"}
+``` {.r code-line-numbers="18-27"}
 merged.df <- left_join(x = x.df, 
                        y = y.df,
                        by = "id", #by which column will you merge
@@ -1205,8 +1406,59 @@ merged.df
 
 #rename column names
 ##declaring the column names you want to have
-col_names <- gsub(".population", "", colnames(merged.df)) #removing all the ".population" part
+##removing all the ".population" part
+col_names <- stringr::str_replace_all(string = colnames(merged.df),
+                                      pattern = ".population",
+                                      replacement =  "") 
 colnames(merged.df) <- col_names
+print(colnames(merged.df))
+'[1] "id"         "country"    "capital"    "population" "language"  '
+
+#filling in the language column for France
+merged.df <- merged.df %>%
+  mutate(language = ifelse(country=="France",
+                           "FR",
+                           language))
+merged.df
+"  id country capital population language
+1  1  France   Paris   67500000       FR
+2  2 Germany  Berlin   83130000       DE"
+```
+
+## advanced merge {auto-animate="true"}
+
+<br>
+
+Let's rename the columns and fill in the blank language cell!
+
+``` {.r code-line-numbers="28-37"}
+merged.df <- left_join(x = x.df, 
+                       y = y.df,
+                       by = "id", #by which column will you merge
+                       suffix = c(".population", ".language"))
+merged.df
+
+#delete redundant columns
+##retrieving column names that has ".language"
+grepl(".language", colnames(merged.df)) 
+del_cols <- colnames(merged.df)[grepl(".language", colnames(merged.df))]
+##remove!
+merged.df <- merged.df %>%
+  select(-all_of(del_cols))
+merged.df
+"id country.population capital.population population language
+1  1             France              Paris   67500000     <NA>
+2  2            Germany             Berlin   83130000       DE"
+
+#rename column names
+##declaring the column names you want to have
+##removing all the ".population" part
+col_names <- stringr::str_replace_all(string = colnames(merged.df),
+                                      pattern = ".population",
+                                      replacement =  "") 
+colnames(merged.df) <- col_names
+print(colnames(merged.df))
+'[1] "id"         "country"    "capital"    "population" "language"  '
 
 #filling in the language column for France
 merged.df <- merged.df %>%
@@ -1229,15 +1481,20 @@ merged.df
 
 Let's read in a gapminder data set
 
-<br>
-
 ```{r}
-#install the package
-install.packages("gapminder")
 library(gapminder)
 #reading in the data
 data <- gapminder
-data
+head(data)
+'# A tibble: 6 × 6
+  country     continent  year lifeExp      pop gdpPercap
+  <fct>       <fct>     <int>   <dbl>    <int>     <dbl>
+1 Afghanistan Asia       1952    28.8  8425333      779.
+2 Afghanistan Asia       1957    30.3  9240934      821.
+3 Afghanistan Asia       1962    32.0 10267083      853.
+4 Afghanistan Asia       1967    34.0 11537966      836.
+5 Afghanistan Asia       1972    36.1 13079460      740.
+6 Afghanistan Asia       1977    38.4 14880372      786.'
 ```
 
 ## Checking average of a variable
@@ -1275,7 +1532,8 @@ data %>%
 
 <br>
 
-Calculating the average & standard deviation of the life Expectancy by continent
+Calculating the average & standard deviation of the life Expectancy by
+continent
 
 <br>
 
@@ -1339,7 +1597,7 @@ ols
 
 Checking the result
 
-```{.r code-line-numbers="5-26"}
+``` {.r code-line-numbers="5-26"}
 #simple linear regression
 ols <- lm(formula = lifeExp ~ gdpPercap + continent,
           data = data)
@@ -1364,7 +1622,7 @@ continentOceania  1.815e+01  1.787e+00   10.15   <2e-16 ***
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 8.39 on 1698 degrees of freedom
-Multiple R-squared:  0.5793,	Adjusted R-squared:  0.5781 
+Multiple R-squared:  0.5793,    Adjusted R-squared:  0.5781 
 F-statistic: 467.7 on 5 and 1698 DF,  p-value: < 2.2e-16"
 ```
 
@@ -1390,11 +1648,13 @@ continentOceania  1.814604e+01 1.787426e+00  10.15205  1.502557e-23"
 class(ols_result$coefficients)
 '"matrix" "array"'
 ```
+
 ## Linear regression
 
 <br>
 
 Dealing with scientific notations(e)
+
 ```{r}
 #scientific notation
 ols_result$coefficients[,1]
@@ -1412,7 +1672,7 @@ format(ols_result$coefficients[,1], scientific = F)
 
 ## Linear regression {auto-animate="true"}
 
-```{.r code-line-numbers="13-17"}
+``` {.r code-line-numbers="13-17"}
 #scientific notation
 ols_result$coefficients[,1]
 "(Intercept)         gdpPercap continentAmericas     continentAsia 
@@ -1431,10 +1691,14 @@ round(ols_result$coefficients[,1],4) #rounding up at the fourth decimal point
 '      (Intercept)         gdpPercap continentAmericas     continentAsia   continentEurope  continentOceania 
           47.8885            0.0004           13.5927            8.6578           17.5723           18.1460'
 ```
-## Linear regression 
+
+## Other econometric methods
+
 <br>
 
-For more details of running different regressions, please check this website: [*Intorduction to Econometrics with R*](https://www.econometrics-with-r.org/index.html).
+For more details of running different regressions, please check this
+website: [*Introduction to Econometrics with
+R*](https://www.econometrics-with-r.org/index.html).
 
 # Plotting graphs
 
@@ -1450,16 +1714,37 @@ We will use ggplot2 package for plotting graphs.
 
 <br>
 
-Please check out this [link](https://ggplot2.tidyverse.org/#learning-ggplot2) for more information.
+Please check out this
+[link](https://ggplot2.tidyverse.org/#learning-ggplot2) for more
+information.
 
 <br>
 
-[Download the ggplot cheat sheet!](https://github.com/rstudio/cheatsheets/raw/main/data-visualization.pdf)
+[Download the ggplot cheat
+sheet!](https://github.com/rstudio/cheatsheets/raw/main/data-visualization.pdf)
 
 ## Our goal
 
 Our goal is to draw a graph like this
 ![](img/goal_plot.jpg){width="75%"}
+
+## Let's clean the R environemnt first!
+
+```{r}
+# Clear plots
+if(!is.null(dev.list())) dev.off()
+# Clear console
+cat("\014") 
+# Clean workspace
+rm(list=ls())
+
+#restart R
+rstudioapi::restartSession()
+
+#calling necessary packages
+packages <- c("dplyr", "ggplot2", "stringr", "stringi")
+lapply(packages, require, character.only=T)
+```
 
 ## basic dot plot
 
@@ -1524,7 +1809,8 @@ Let's add some colors according to a country!
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
   ggplot() + 
-  geom_point(aes(x = year, y = gdpPercap, color = country)) #note that it is important to put color = country inside of aes()
+  #note that it is important to put color = country inside of aes()
+  geom_point(aes(x = year, y = gdpPercap, color = country)) 
 ```
 
 ## Adding colors
@@ -1538,13 +1824,13 @@ Let's add some colors according to a country!
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
   ggplot() + 
-  geom_col(aes(x = year, y = gdpPercap, color = country)) #note that it is important to put color = country inside of aes()
+  geom_col(aes(x = year, y = gdpPercap, color = country)) 
 
 #for bar graphs you should use fill!
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
   ggplot() + 
-  geom_col(aes(x = year, y = gdpPercap, fill = country)) #note that it is important to put color = country inside of aes()
+  geom_col(aes(x = year, y = gdpPercap, fill = country)) 
 
 ```
 
@@ -1604,7 +1890,7 @@ data %>%
         title = element_text(size = 20)) #changing title size
 ```
 
-## Changing legend box size
+## Changing legend box size {auto-animate="true"}
 
 ```{r}
 #simple line graph for some European countries
@@ -1625,9 +1911,9 @@ data %>%
         legend.key.size = unit(1.5, 'cm')) #changing legend color box size
 ```
 
-## Changing legend title
+## Changing legend title {auto-animate="true"}
 
-```{r}
+``` {.r code-line-numbers="17-17"}
 #simple line graph for some European countries
 base_plot <- data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -1648,9 +1934,9 @@ base_plot <- data %>%
 base_plot
 ```
 
-## Formatting axis tick
+## Formatting axis tick {auto-animate="true"}
 
-```{r}
+``` {.r code-line-numbers="18-18"}
 #simple line graph for some European countries
 base_plot <- data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -1708,10 +1994,10 @@ gdp_text.df <- data %>%
   filter(year==1952 | year==2007)
 
 #adding the text layer
-final_plot <- base_plot + 
+mid_plot <- base_plot + 
   geom_text(data = gdp_text.df,
             aes(x = year, y = gdpPercap, label = gdpPercap))
-final_plot
+mid_plot
 ```
 
 ## Adjusting the text size/position
@@ -1770,7 +2056,8 @@ gdp_text.df <- data %>%
 mid_plot <- base_plot + 
   geom_text(data = gdp_text.df,
             aes(x = year, y = gdpPercap, 
-                label = format(round(gdpPercap), big.mark = ",", big.interval = 3L)), #rounding up the GDP and adding a comma!!
+                #rounding up the GDP and adding a comma!!
+                label = format(round(gdpPercap), big.mark = ",", big.interval = 3L)), 
             size = 7, #size adjustment
             vjust = 0.7) #position adjustment
 mid_plot
@@ -1850,24 +2137,38 @@ What is an R Markdown?
 Check these links:
 
 ::: incremental
--   [R Markdown website from Rstudio](https://rmarkdown.rstudio.com/lesson-1.html)
+-   [R Markdown website from
+    Rstudio](https://rmarkdown.rstudio.com/lesson-1.html)
 -   [knitr package website](https://yihui.org/knitr/)
--   [R Markdown cheat sheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf)
+-   [R Markdown cheat
+    sheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf)
 :::
 
-## installing knitr package
+## Let's clean the R environemnt first!
+
+```{r}
+# Clear plots
+if(!is.null(dev.list())) dev.off()
+# Clear console
+cat("\014") 
+# Clean workspace
+rm(list=ls())
+
+#restart R
+rstudioapi::restartSession()
+```
+
+## installing necessary packages
 
 <br>
 
-knitr package is an essential package for any R Markdown file
+rmarkdown, markdown, knitr package are essential packages for 
 
-<br>
-
-It also allows the user to format tables and graphs neatly. <br>
+any R Markdown file
 
 ```{r}
 #type this in the console
-install.packages("knitr")
+install.packages(c("rmarkdown", "markdown", "knitr"))
 ```
 
 ## creating a new R Markdown file
@@ -1882,7 +2183,7 @@ install.packages("knitr")
 
 <br>
 
-This session only focuses on pdf format.
+This session only focuses on the pdf format.
 
 <br>
 
@@ -1897,9 +2198,13 @@ If you are more interested in html format, please check out:
 
 ## Setting the yaml header
 
-```{r}
+yaml header is the first part of an R markdown file.
+
+It decides many important aspects of your output.
+
+```{r, eval=FALSE}
 ---
-title: "R markdwon guide"
+title: "R markdown guide"
 author: "Jongoh Kim"
 date: "`r format(Sys.time(), '%d %B, %Y')`" #setting the date by dd month, yyyy
 output: 
@@ -1913,15 +2218,25 @@ urlcolor: blue #setting the hyperlink color to blue
 
 ## Jumping right into the R markdown
 
-Check out the 'markdown.Rmd' file from [the github page](https://github.com/jongohkim91/R-A-Z/blob/master/markdown)
+Check out the 'markdown_example.Rmd' file and 
+
+its output(markdown_example.pdf) from 
+
+[the github page](https://github.com/jongohkim91/R-A-Z/blob/master/markdown)
 
 # Thanks!
 
 <br>
 
+Special thanks to [Etienne Bacher](https://github.com/etiennebacher) for
+his help and slide codes!
+
+<br>
+
 Source code for slides:
 
-[https://github.com/jongohkim91/R-A-Z](https://github.com/jongohkim91/R-A-Z/tree/master/markdown){.external target="_blank"}
+[https://github.com/jongohkim91/R-A-Z/index.qmd](https://github.com/jongohkim91/R-A-Z/tree/master/markdown){.external
+target="_blank"}
 
 <br>
 
@@ -1929,16 +2244,20 @@ Source code for slides:
 
 R for Data Science from Hadley Wickham and Garrett Grolemund:
 
-[https://r4ds.had.co.nz/](https://r4ds.had.co.nz/){.external target="_blank"}
+[https://r4ds.had.co.nz/](https://r4ds.had.co.nz/){.external
+target="_blank"}
 
 <br>
 
 ggplot2:
 
-[https://ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/){.external target="_blank"}
+[https://ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/){.external
+target="_blank"}
 
 <br>
 
-R Markdown: The Definitive Guide from Yihui Xie, J. J. Allaire, and Garrett Grolemund:
+R Markdown: The Definitive Guide from Yihui Xie, J. J. Allaire, and
+Garrett Grolemund:
 
-[https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/){.external target="_blank"}
+[https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/){.external
+target="_blank"}

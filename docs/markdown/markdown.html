@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jongoh Kim">
+<meta name="dcterms.date" content="2022-12-21">
+
+<title>R markdown guide</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">R markdown guide</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jongoh Kim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 21, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div style="page-break-after: always;"></div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>This short markdown file is written to provide a simple example of an R markdown to LISER researchers. The aim of this document to cover all the essential cases that could be used in R markdown. Again, the gapminder data set from the <em>gapminder</em> package will be used. You can check the gapminder website by clicking this <a href="https://www.gapminder.org/">link</a>.</p>
+</section>
+<section id="code-chunk-in-r-markdown" class="level1">
+<h1>Code chunk in R markdown</h1>
+<section id="creating-a-code-chunk" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-code-chunk">Creating a code chunk</h2>
+<p>To create an R code chunk, type 3 backticks(`), curley brackets({}), and ‘r’ inside those brackets. Backtick is a symbol located next to 1 for a <em>QWERTY</em> keyboard. Then close the code chunk by typing 3 backticks again. For instance,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#declaring libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"gapminder"</span>, <span class="st">"ggplot2"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(packages, require, <span class="at">character.only =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: dplyr</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: gapminder</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] TRUE
+
+[[2]]
+[1] TRUE
+
+[[3]]
+[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Packages are loaded!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Packages are loaded!"</code></pre>
+</div>
+</div>
+<p>I have set the name of the code chunk as “reading-data”. If an error occurs in this code chunk, the console will produce an error message saying that an error occurred in the “reading-data” code chunk.</p>
+</section>
+<section id="not-including-the-code-lines-of-a-code-chunk" class="level2">
+<h2 class="anchored" data-anchor-id="not-including-the-code-lines-of-a-code-chunk">Not including the code lines of a code chunk</h2>
+<p>Actually, there is no reason to show the code lines calling the packages. It is more aesthetically appealing to write which packages were used and not to show the code lines. Let’s try not to include those code lines in our document.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] TRUE
+
+[[2]]
+[1] TRUE
+
+[[3]]
+[1] TRUE</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Packages are loaded!"</code></pre>
+</div>
+</div>
+<p>Now the document does not show any code line.</p>
+</section>
+<section id="not-including-the-output-of-the-codes" class="level2">
+<h2 class="anchored" data-anchor-id="not-including-the-output-of-the-codes">Not including the output of the codes</h2>
+<p>For this case, the output of the code lines, printing packages are loaded or TRUE values from lapply function, does not have to be shown in the document. On the contrary, it is aesthetically better to remove them.</p>
+<p>As you can see, the code chunk &amp; output have disappeared magically.</p>
+</section>
+<section id="not-running-the-code-chunk" class="level2">
+<h2 class="anchored" data-anchor-id="not-running-the-code-chunk">Not running the code chunk</h2>
+<p>On the other hand, sometimes, you simply want to show the code lines but not want them to run. Let’s see how this could be done.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I simply want to show this code chunk</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="st">"for no reason I just feel like it"</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data <span class="sc">==</span> bad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong><em>Voilà!</em></strong></p>
+</section>
+</section>
+<section id="text-format" class="level1">
+<h1>Text format</h1>
+<section id="bold-text" class="level2">
+<h2 class="anchored" data-anchor-id="bold-text">Bold text</h2>
+<p>To make a text bold simply type asterisk(*) two times when you would like to start and another two asterisks at the end. For instance, if you want to make Luxembourg Institute of Socio-Economic Research bold, <strong>Luxembourg Institute of Socio-Economic Research</strong>.</p>
+</section>
+<section id="italic-text" class="level2">
+<h2 class="anchored" data-anchor-id="italic-text">Italic text</h2>
+<p>Italic is almost same as bold text but typing asterisk only one time. Let’s add LISER right next to our bold text in parentheses.</p>
+<p><strong>Luxembourg Institute of Socio-Economic Research</strong>(<em>LISER</em>)</p>
+</section>
+<section id="bullet-points" class="level2">
+<h2 class="anchored" data-anchor-id="bullet-points">Bullet points</h2>
+<p>If you want to make a list of somethings and put a bullet point in front of them, simply use a hyphon(-) in front of them. Don’t forget to give a space between the hyphon and the character for the markdown to recognize that you want to create an un-ordered list with bullet points! Also an empty line should be placed between the last sentence and the first line of the bullet point.</p>
+<p>To list three major research departments of LISER:</p>
+<p><strong>Luxembourg Institute of Socio-Economic Research</strong>(<em>LISER</em>)</p>
+<ul>
+<li>Labor Market(LM)</li>
+<li>Urban Development and Mobility(UDM)</li>
+<li>Living Conditions(LC)</li>
+</ul>
+</section>
+<section id="ordered-list" class="level2">
+<h2 class="anchored" data-anchor-id="ordered-list">Ordered list</h2>
+<p>If you want to put numbers instead of bullet points, simply use the number and a full stop(.). Of course you can combine both types. For instance,</p>
+<p><strong>Luxembourg Institute of Socio-Economic Research</strong>(<em>LISER</em>)</p>
+<ol type="1">
+<li>Labor Market(LM)</li>
+<li>Urban Development and Mobility(UDM)
+<ul>
+<li>ACROSS</li>
+</ul></li>
+<li>Living Conditions(LC)</li>
+</ol>
+</section>
+<section id="mathematical-expressions" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-expressions">Mathematical expressions</h2>
+<p>The way to write mathematical expressions in R Markdown is identical to Latex.</p>
+<p><span class="math inline">\(Y = C + I + G + NX\)</span></p>
+<p>To add an aligning option,</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y = C + I + G + NX
+\end{aligned}
+\]</span></p>
+</section>
+<section id="adding-a-hyperlink" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-hyperlink">adding a hyperlink</h2>
+<p>Sometimes you want to add a hyperlink to certain words. Let’s add a hyperlink to LISER in the next line.</p>
+<p><a href="https://www.liser.lu/">LISER</a></p>
+</section>
+<section id="adding-a-footnote" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-footnote">adding a footnote</h2>
+<p>Adding a footnote is much similar to adding a hyperlink. I will try to add a footnote in the next line.</p>
+<p>Luxembourg has three official languages<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+</section>
+</section>
+<section id="real-example" class="level1">
+<h1>Real Example</h1>
+<section id="setting-the-working-directory" class="level2">
+<h2 class="anchored" data-anchor-id="setting-the-working-directory">Setting the working directory</h2>
+<p>In case your primary data file is not stored in the same path as your project, it easier to set the working directory to where the data is located. For instance,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_knit<span class="sc">$</span><span class="fu">set</span>(<span class="at">root.dir =</span> <span class="st">"C:/Users/jongoh/Dropbox/LISER RA/LISER/training/R A-Z"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After this, you can read data files that are located in “C:\Users\Jongoh\Dropbox\training\R A-Z\data” by simply typing <em>fread(“data\data_file.csv”)</em>.</p>
+</section>
+<section id="calling-packages" class="level2">
+<h2 class="anchored" data-anchor-id="calling-packages">Calling packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#declaring libraries</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"knitr"</span>, <span class="st">"dplyr"</span>, <span class="st">"gapminder"</span>, <span class="st">"ggplot2"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(packages, require, <span class="at">character.only =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: knitr</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] TRUE
+
+[[2]]
+[1] TRUE
+
+[[3]]
+[1] TRUE
+
+[[4]]
+[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="reading-in-data" class="level2">
+<h2 class="anchored" data-anchor-id="reading-in-data">Reading in data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#reading the gapminder data</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> gapminder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="simple-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="simple-summary-statistics">Simple summary statistics</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">str</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [1,704 × 6] (S3: tbl_df/tbl/data.frame)
+ $ country  : Factor w/ 142 levels "Afghanistan",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ continent: Factor w/ 5 levels "Africa","Americas",..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ year     : int [1:1704] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+ $ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...
+ $ pop      : int [1:1704] 8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
+ $ gdpPercap: num [1:1704] 779 821 853 836 740 ...
+NULL</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(data<span class="sc">$</span>continent))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Africa Americas     Asia   Europe  Oceania 
+     624      300      396      360       24 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(data<span class="sc">$</span>lifeExp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  23.60   48.20   60.71   59.47   70.85   82.60 </code></pre>
+</div>
+</div>
+</section>
+<section id="simple-summary-table" class="level2">
+<h2 class="anchored" data-anchor-id="simple-summary-table">Simple summary table</h2>
+<p>Creating a simple summary table for life expectancy by continent!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating a simple summary table for life expectancy by continent!</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>sum.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>( <span class="at">Life_Min =</span> <span class="fu">min</span>(lifeExp),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">Life_Average =</span> <span class="fu">mean</span>(lifeExp),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">Life_Median =</span> <span class="fu">median</span>(lifeExp),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">Life_Max =</span> <span class="fu">max</span>(lifeExp),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">Count =</span><span class="fu">n</span>())</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>sum.df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 6
+  continent Life_Min Life_Average Life_Median Life_Max Count
+  &lt;fct&gt;        &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
+1 Africa        23.6         48.9        47.8     76.4   624
+2 Americas      37.6         64.7        67.0     80.7   300
+3 Asia          28.8         60.1        61.8     82.6   396
+4 Europe        43.6         71.9        72.2     81.8   360
+5 Oceania       69.1         74.3        73.7     81.2    24</code></pre>
+</div>
+</div>
+<p>Let’s put in the document neatly!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#showing the table neatly</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(sum.df, <span class="at">caption =</span> <span class="st">"Simple Summary Table of Life Expectancy by Continent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Simple Summary Table of Life Expectancy by Continent</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">continent</th>
+<th style="text-align: right;">Life_Min</th>
+<th style="text-align: right;">Life_Average</th>
+<th style="text-align: right;">Life_Median</th>
+<th style="text-align: right;">Life_Max</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Africa</td>
+<td style="text-align: right;">23.599</td>
+<td style="text-align: right;">48.86533</td>
+<td style="text-align: right;">47.7920</td>
+<td style="text-align: right;">76.442</td>
+<td style="text-align: right;">624</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Americas</td>
+<td style="text-align: right;">37.579</td>
+<td style="text-align: right;">64.65874</td>
+<td style="text-align: right;">67.0480</td>
+<td style="text-align: right;">80.653</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">28.801</td>
+<td style="text-align: right;">60.06490</td>
+<td style="text-align: right;">61.7915</td>
+<td style="text-align: right;">82.603</td>
+<td style="text-align: right;">396</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Europe</td>
+<td style="text-align: right;">43.585</td>
+<td style="text-align: right;">71.90369</td>
+<td style="text-align: right;">72.2410</td>
+<td style="text-align: right;">81.757</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Oceania</td>
+<td style="text-align: right;">69.120</td>
+<td style="text-align: right;">74.32621</td>
+<td style="text-align: right;">73.6650</td>
+<td style="text-align: right;">81.235</td>
+<td style="text-align: right;">24</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="declare-variables-and-use-them-in-a-document" class="level2">
+<h2 class="anchored" data-anchor-id="declare-variables-and-use-them-in-a-document">Declare variables and use them in a document</h2>
+<p>One of the most annoying thing to do when one is writing a paper or a report is when a number has changed and you have to go through the whole document to change the numbers. This is avoidable in R Markdown and I will show you how.</p>
+<p>Let’s calculate the number of countries by continent.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>count_country.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Count =</span> <span class="fu">n</span>(), </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span> <span class="co">#keeping the grouped variables</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year) <span class="sc">%&gt;%</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>count_country.df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  continent Count
+  &lt;fct&gt;     &lt;int&gt;
+1 Africa       52
+2 Americas     25
+3 Asia         33
+4 Europe       30
+5 Oceania       2</code></pre>
+</div>
+</div>
+<p>Now let’s assign the values to each variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>africa_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Africa"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>america_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Americas"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>asia_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Asia"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>europe_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Europe"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>oceania_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Oceania"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then you can easily use them in the text.</p>
+<p>For instance,</p>
+<p>&nbsp;&nbsp;&nbsp;<strong><em>After counting the number of countries in each continent, Africa has 52 countries, Americas 25, Asia 33, Europe 30, and Oceania 2.</em></strong></p>
+<p>Amazing right? Let’s assume that we obtained additional observation from a beautiful island Fiji. If this was a word document, I should go through the whole document to find where I mentioned the number of Oceaninan countries.</p>
+<p>In R Markdown, if the dataset was updated, you don’t have to change anything. I will show you.</p>
+<p>I will manually update the <em>data</em> variable as a showcase.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first changing the factor variable to character</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.character</span>(data<span class="sc">$</span>country)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#adding a row</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data, <span class="fu">list</span>(<span class="at">country =</span> <span class="fu">rep</span>(<span class="st">"Fiji"</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>year))), </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">continent =</span> <span class="fu">rep</span>(<span class="st">"Oceania"</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>year))), </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">year =</span> <span class="fu">unique</span>(data<span class="sc">$</span>year),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">lifeExp =</span> <span class="fu">rep</span>(<span class="dv">999</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>year))), </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">pop=</span><span class="fu">rep</span>(<span class="dv">999</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>year))), </span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">gdpPercap =</span> <span class="fu">rep</span>(<span class="dv">999</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>year)))</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                   )</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co">#changing to factor again</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data<span class="sc">$</span>country)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent <span class="sc">==</span> <span class="st">"Oceania"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(country) <span class="sc">%&gt;%</span> <span class="fu">unique</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 1
+  country    
+  &lt;fct&gt;      
+1 Australia  
+2 New Zealand
+3 Fiji       </code></pre>
+</div>
+</div>
+<p>Now, let’s write the same line after declaring the numbers again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#the data frame again</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>count_country.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Count =</span> <span class="fu">n</span>(),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year) <span class="sc">%&gt;%</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">#numbers</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>africa_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Africa"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>america_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Americas"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>asia_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Asia"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>europe_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Europe"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>oceania_num <span class="ot">&lt;-</span> count_country.df <span class="sc">%&gt;%</span> </span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"Oceania"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Count) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;&nbsp;&nbsp;<strong><em>After counting the number of countries in each continent, Africa has 52 countries, Americas 25, Asia 33, Europe 30, and Oceania 3.</em></strong></p>
+</section>
+<section id="putting-nice-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="putting-nice-graphs">putting nice graphs</h2>
+<p>Let’s use the graph we produced in the ggplot section.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">"img/output.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/output.jpg" style="width:60.0%;height:60.0%" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Pretty Graph</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="concluding" class="level1">
+<h1>Concluding</h1>
+<p>That’s all for this R Markdown example file. I hope this file was clear for you and if you have any questions, don’t hesitate to contact me. jongoh.kim@liser.lu</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The three languages are Luxembourgish, French, and German.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
