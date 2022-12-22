@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Jongoh Kim">
-  <meta name="dcterms.date" content="2022-12-21">
+  <meta name="dcterms.date" content="2022-12-22">
   <title>Data analysis with Tidyverse(dplyr)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -403,7 +403,7 @@ Jongoh Kim
     </div>
 </div>
 
-  <p class="date">December 21, 2022</p>
+  <p class="date">December 22, 2022</p>
 </section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
@@ -469,8 +469,9 @@ Jongoh Kim
 <span id="cb1-7"><a href="#cb1-7"></a></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="st">"OR the best way for R studio users</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="st">to really initialize the R environment"</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#restart R</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>rstudioapi<span class="sc">::</span><span class="fu">restartSession</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#install.packages("rstudioapi")</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="do">##restart R</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>rstudioapi<span class="sc">::</span><span class="fu">restartSession</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="packages" class="slide level2">
@@ -516,11 +517,52 @@ Jongoh Kim
 </section>
 <section id="what-is-a-pipeline-tool" class="slide level2">
 <h2>What is a Pipeline tool?</h2>
+<p>Check out this <a href="https://books.ropensci.org/targets/">website</a> for more details.</p>
+<p>The website states that:</p>
+<p>With targets, you can maintain a reproducible workflow without repeating yourself.</p>
+<ul>
+<li>targets learns how your pipeline fits together,</li>
+<li>skips costly runtime for tasks that are already up to date,</li>
+<li>runs only the necessary computation,</li>
+<li>supports implicit parallel computing,</li>
+<li>abstracts files as R objects,</li>
+<li>and shows tangible evidence that the results match the underlying code and data.</li>
+</ul>
 </section>
-<section id="my-personal-decision-tree-for-r-packages" class="slide level2">
-<h2>My personal decision tree for R packages</h2>
-
-<img data-src=".png" class="r-stretch"></section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>targets
+<ul>
+<li>optional but much better know if your work involves a lot of coding</li>
+</ul></li>
+<li>ggplot2
+<ul>
+<li>essential!</li>
+<li>personally I believe this package is the best for graphing results(better than matplotlib from Python)</li>
+</ul></li>
+<li>rmarkdown packages
+<ul>
+<li>optional</li>
+<li>you can stick to Latex or word</li>
+</ul></li>
+</ul>
+</section>
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>dplyr
+<ul>
+<li>essential!</li>
+<li>%&gt;%(piping), merging, sampling methods from dplyr are much more intuitive and easier to understand</li>
+</ul></li>
+<li>data.table
+<ul>
+<li>essentail if you are dealing with a data set that is larger than 30GB in CSV file format</li>
+<li>it has a steep learning curve</li>
+</ul></li>
+</ul>
+</section>
 <section id="installing-packages" class="slide level2">
 <h2>Installing packages</h2>
 <p><br></p>
@@ -580,9 +622,14 @@ Jongoh Kim
 </ol>
 <p><br></p>
 <ol start="3" type="1">
-<li>or manual type the function name in the search bar of the Help panel, that is located on the bottom right.</li>
+<li>or manually type the function name in the search bar of the Help panel, that is located on the bottom right.</li>
 </ol>
 </section>
+<section id="checking-the-description-of-the-function-1" class="slide level2">
+<h2>Checking the description of the function</h2>
+<p><br></p>
+
+<img data-src="img/help.png" class="r-stretch"></section>
 <section id="setting-working-directory" class="slide level2">
 <h2>Setting working directory</h2>
 <p><br></p>
@@ -682,7 +729,7 @@ Jongoh Kim
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">#basic way</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>?read.csv</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#let's assume gapminder.csv file is stored in the data folder</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#let's read the gapminder.csv file stored in the data folder</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="do">## decimal points = "."</span></span>
 <span id="cb11-5"><a href="#cb11-5"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/gapminder.csv"</span>)</span>
 <span id="cb11-6"><a href="#cb11-6"></a><span class="do">## decimal points = ","</span></span>
@@ -1560,7 +1607,7 @@ Jongoh Kim
 <section id="advanced-merge" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">advanced merge</h2>
 <p><br></p>
-<p>You can change the suffix setting if “.x” &amp; “.y” does not help you have a full picture of the merging process</p>
+<p>You can change the suffix setting if “.x” &amp; “.y” does not help you to have a full picture of the merging process</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb52-1" class="hljs-ln-code"><a href="#cb52-1"></a>merged.df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="at">x =</span> x.df, </span>
 <span id="cb52-2" class="hljs-ln-code"><a href="#cb52-2"></a>                       <span class="at">y =</span> y.df,</span>
@@ -1769,68 +1816,121 @@ Jongoh Kim
 <span id="cb60-13"><a href="#cb60-13"></a><span class="st">5 Oceania       74.3    3.80"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="checking-average-of-a-variableadvanced" class="slide level2">
+<h2>Checking average of a variable(Advanced)</h2>
+<p><br></p>
+<p>Let’s group the data by multiple variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>sum.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>  <span class="fu">summarise</span>(<span class="at">life_avg =</span> <span class="fu">mean</span>(lifeExp),</span>
+<span id="cb61-4"><a href="#cb61-4"></a>            <span class="at">gdp_avg =</span> <span class="fu">mean</span>(gdpPercap),</span>
+<span id="cb61-5"><a href="#cb61-5"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span> <span class="co">#keeping the group variables</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb61-7"><a href="#cb61-7"></a>sum.df</span>
+<span id="cb61-8"><a href="#cb61-8"></a><span class="st">"# A tibble: 60 × 4</span></span>
+<span id="cb61-9"><a href="#cb61-9"></a><span class="st">   continent  year life_avg gdp_avg</span></span>
+<span id="cb61-10"><a href="#cb61-10"></a><span class="st">   &lt;fct&gt;     &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb61-11"><a href="#cb61-11"></a><span class="st"> 1 Africa     1952     39.1   1253.</span></span>
+<span id="cb61-12"><a href="#cb61-12"></a><span class="st"> 2 Africa     1957     41.3   1385.</span></span>
+<span id="cb61-13"><a href="#cb61-13"></a><span class="st"> 3 Africa     1962     43.3   1598.</span></span>
+<span id="cb61-14"><a href="#cb61-14"></a><span class="st"> 4 Africa     1967     45.3   2050.</span></span>
+<span id="cb61-15"><a href="#cb61-15"></a><span class="st"> 5 Africa     1972     47.5   2340.</span></span>
+<span id="cb61-16"><a href="#cb61-16"></a><span class="st"> 6 Africa     1977     49.6   2586.</span></span>
+<span id="cb61-17"><a href="#cb61-17"></a><span class="st"> 7 Africa     1982     51.6   2482.</span></span>
+<span id="cb61-18"><a href="#cb61-18"></a><span class="st"> 8 Africa     1987     53.3   2283.</span></span>
+<span id="cb61-19"><a href="#cb61-19"></a><span class="st"> 9 Africa     1992     53.6   2282.</span></span>
+<span id="cb61-20"><a href="#cb61-20"></a><span class="st">10 Africa     1997     53.6   2379.</span></span>
+<span id="cb61-21"><a href="#cb61-21"></a><span class="st"># … with 50 more rows</span></span>
+<span id="cb61-22"><a href="#cb61-22"></a><span class="st"># ℹ Use `print(n = ...)` to see more rows"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sorting-the-data-set" class="slide level2">
+<h2>Sorting the data set</h2>
+<p><br></p>
+<p>Let’s check which continent has the highest average life expectancy in each year by descending order</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>sum.df <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>year, <span class="sc">-</span>life_avg)</span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="st">"# A tibble: 60 × 4</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a><span class="st">   continent  year life_avg gdp_avg</span></span>
+<span id="cb62-5"><a href="#cb62-5"></a><span class="st">   &lt;fct&gt;     &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a><span class="st"> 1 Oceania    2007     80.7  29810.</span></span>
+<span id="cb62-7"><a href="#cb62-7"></a><span class="st"> 2 Europe     2007     77.6  25054.</span></span>
+<span id="cb62-8"><a href="#cb62-8"></a><span class="st"> 3 Americas   2007     73.6  11003.</span></span>
+<span id="cb62-9"><a href="#cb62-9"></a><span class="st"> 4 Asia       2007     70.7  12473.</span></span>
+<span id="cb62-10"><a href="#cb62-10"></a><span class="st"> 5 Africa     2007     54.8   3089.</span></span>
+<span id="cb62-11"><a href="#cb62-11"></a><span class="st"> 6 Oceania    2002     79.7  26939.</span></span>
+<span id="cb62-12"><a href="#cb62-12"></a><span class="st"> 7 Europe     2002     76.7  21712.</span></span>
+<span id="cb62-13"><a href="#cb62-13"></a><span class="st"> 8 Americas   2002     72.4   9288.</span></span>
+<span id="cb62-14"><a href="#cb62-14"></a><span class="st"> 9 Asia       2002     69.2  10174.</span></span>
+<span id="cb62-15"><a href="#cb62-15"></a><span class="st">10 Africa     2002     53.3   2599.</span></span>
+<span id="cb62-16"><a href="#cb62-16"></a><span class="st"># … with 50 more rows</span></span>
+<span id="cb62-17"><a href="#cb62-17"></a><span class="st"># ℹ Use `print(n = ...)` to see more rows"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="linear-regression" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Linear regression</h2>
 <p><br></p>
 <p>Simple linear regression</p>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb61-1" class="hljs-ln-code"><a href="#cb61-1"></a><span class="co">#simple linear regression</span></span>
-<span id="cb61-2" class="hljs-ln-code"><a href="#cb61-2"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> lifeExp <span class="sc">~</span> gdpPercap <span class="sc">+</span> continent,</span>
-<span id="cb61-3" class="hljs-ln-code"><a href="#cb61-3"></a>          <span class="at">data =</span> data)</span>
-<span id="cb61-4" class="hljs-ln-code"><a href="#cb61-4"></a>ols</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb63-1" class="hljs-ln-code"><a href="#cb63-1"></a><span class="co">#simple linear regression</span></span>
+<span id="cb63-2" class="hljs-ln-code"><a href="#cb63-2"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> lifeExp <span class="sc">~</span> gdpPercap <span class="sc">+</span> continent,</span>
+<span id="cb63-3" class="hljs-ln-code"><a href="#cb63-3"></a>          <span class="at">data =</span> data)</span>
+<span id="cb63-4" class="hljs-ln-code"><a href="#cb63-4"></a>ols</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="linear-regression-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Linear regression</h2>
 <p><br></p>
 <p>Checking the result</p>
-<div class="sourceCode" id="cb62" data-code-line-numbers="5-26"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb62-1" class="hljs-ln-code"><a href="#cb62-1"></a><span class="co">#simple linear regression</span></span>
-<span id="cb62-2" class="hljs-ln-code"><a href="#cb62-2"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> lifeExp <span class="sc">~</span> gdpPercap <span class="sc">+</span> continent,</span>
-<span id="cb62-3" class="hljs-ln-code"><a href="#cb62-3"></a>          <span class="at">data =</span> data)</span>
-<span id="cb62-4" class="hljs-ln-code"><a href="#cb62-4"></a>ols</span>
-<span id="cb62-5" class="hljs-ln-code"><a href="#cb62-5"></a><span class="fu">summary</span>(ols)</span>
-<span id="cb62-6" class="hljs-ln-code"><a href="#cb62-6"></a><span class="st">"Call:</span></span>
-<span id="cb62-7" class="hljs-ln-code"><a href="#cb62-7"></a><span class="st">lm(formula = lifeExp ~ gdpPercap + continent, data = data)</span></span>
-<span id="cb62-8" class="hljs-ln-code"><a href="#cb62-8"></a></span>
-<span id="cb62-9" class="hljs-ln-code"><a href="#cb62-9"></a><span class="st">Residuals:</span></span>
-<span id="cb62-10" class="hljs-ln-code"><a href="#cb62-10"></a><span class="st">    Min      1Q  Median      3Q     Max </span></span>
-<span id="cb62-11" class="hljs-ln-code"><a href="#cb62-11"></a><span class="st">-49.241  -4.479   0.347   5.105  25.138 </span></span>
-<span id="cb62-12" class="hljs-ln-code"><a href="#cb62-12"></a></span>
-<span id="cb62-13" class="hljs-ln-code"><a href="#cb62-13"></a><span class="st">Coefficients:</span></span>
-<span id="cb62-14" class="hljs-ln-code"><a href="#cb62-14"></a><span class="st">                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb62-15" class="hljs-ln-code"><a href="#cb62-15"></a><span class="st">(Intercept)       4.789e+01  3.398e-01  140.93   &lt;2e-16 ***</span></span>
-<span id="cb62-16" class="hljs-ln-code"><a href="#cb62-16"></a><span class="st">gdpPercap         4.453e-04  2.350e-05   18.95   &lt;2e-16 ***</span></span>
-<span id="cb62-17" class="hljs-ln-code"><a href="#cb62-17"></a><span class="st">continentAmericas 1.359e+01  6.008e-01   22.62   &lt;2e-16 ***</span></span>
-<span id="cb62-18" class="hljs-ln-code"><a href="#cb62-18"></a><span class="st">continentAsia     8.658e+00  5.555e-01   15.59   &lt;2e-16 ***</span></span>
-<span id="cb62-19" class="hljs-ln-code"><a href="#cb62-19"></a><span class="st">continentEurope   1.757e+01  6.257e-01   28.08   &lt;2e-16 ***</span></span>
-<span id="cb62-20" class="hljs-ln-code"><a href="#cb62-20"></a><span class="st">continentOceania  1.815e+01  1.787e+00   10.15   &lt;2e-16 ***</span></span>
-<span id="cb62-21" class="hljs-ln-code"><a href="#cb62-21"></a><span class="st">---</span></span>
-<span id="cb62-22" class="hljs-ln-code"><a href="#cb62-22"></a><span class="st">Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
-<span id="cb62-23" class="hljs-ln-code"><a href="#cb62-23"></a></span>
-<span id="cb62-24" class="hljs-ln-code"><a href="#cb62-24"></a><span class="st">Residual standard error: 8.39 on 1698 degrees of freedom</span></span>
-<span id="cb62-25" class="hljs-ln-code"><a href="#cb62-25"></a><span class="st">Multiple R-squared:  0.5793,    Adjusted R-squared:  0.5781 </span></span>
-<span id="cb62-26" class="hljs-ln-code"><a href="#cb62-26"></a><span class="st">F-statistic: 467.7 on 5 and 1698 DF,  p-value: &lt; 2.2e-16"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb64" data-code-line-numbers="5-26"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb64-1" class="hljs-ln-code"><a href="#cb64-1"></a><span class="co">#simple linear regression</span></span>
+<span id="cb64-2" class="hljs-ln-code"><a href="#cb64-2"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> lifeExp <span class="sc">~</span> gdpPercap <span class="sc">+</span> continent,</span>
+<span id="cb64-3" class="hljs-ln-code"><a href="#cb64-3"></a>          <span class="at">data =</span> data)</span>
+<span id="cb64-4" class="hljs-ln-code"><a href="#cb64-4"></a>ols</span>
+<span id="cb64-5" class="hljs-ln-code"><a href="#cb64-5"></a><span class="fu">summary</span>(ols)</span>
+<span id="cb64-6" class="hljs-ln-code"><a href="#cb64-6"></a><span class="st">"Call:</span></span>
+<span id="cb64-7" class="hljs-ln-code"><a href="#cb64-7"></a><span class="st">lm(formula = lifeExp ~ gdpPercap + continent, data = data)</span></span>
+<span id="cb64-8" class="hljs-ln-code"><a href="#cb64-8"></a></span>
+<span id="cb64-9" class="hljs-ln-code"><a href="#cb64-9"></a><span class="st">Residuals:</span></span>
+<span id="cb64-10" class="hljs-ln-code"><a href="#cb64-10"></a><span class="st">    Min      1Q  Median      3Q     Max </span></span>
+<span id="cb64-11" class="hljs-ln-code"><a href="#cb64-11"></a><span class="st">-49.241  -4.479   0.347   5.105  25.138 </span></span>
+<span id="cb64-12" class="hljs-ln-code"><a href="#cb64-12"></a></span>
+<span id="cb64-13" class="hljs-ln-code"><a href="#cb64-13"></a><span class="st">Coefficients:</span></span>
+<span id="cb64-14" class="hljs-ln-code"><a href="#cb64-14"></a><span class="st">                   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb64-15" class="hljs-ln-code"><a href="#cb64-15"></a><span class="st">(Intercept)       4.789e+01  3.398e-01  140.93   &lt;2e-16 ***</span></span>
+<span id="cb64-16" class="hljs-ln-code"><a href="#cb64-16"></a><span class="st">gdpPercap         4.453e-04  2.350e-05   18.95   &lt;2e-16 ***</span></span>
+<span id="cb64-17" class="hljs-ln-code"><a href="#cb64-17"></a><span class="st">continentAmericas 1.359e+01  6.008e-01   22.62   &lt;2e-16 ***</span></span>
+<span id="cb64-18" class="hljs-ln-code"><a href="#cb64-18"></a><span class="st">continentAsia     8.658e+00  5.555e-01   15.59   &lt;2e-16 ***</span></span>
+<span id="cb64-19" class="hljs-ln-code"><a href="#cb64-19"></a><span class="st">continentEurope   1.757e+01  6.257e-01   28.08   &lt;2e-16 ***</span></span>
+<span id="cb64-20" class="hljs-ln-code"><a href="#cb64-20"></a><span class="st">continentOceania  1.815e+01  1.787e+00   10.15   &lt;2e-16 ***</span></span>
+<span id="cb64-21" class="hljs-ln-code"><a href="#cb64-21"></a><span class="st">---</span></span>
+<span id="cb64-22" class="hljs-ln-code"><a href="#cb64-22"></a><span class="st">Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
+<span id="cb64-23" class="hljs-ln-code"><a href="#cb64-23"></a></span>
+<span id="cb64-24" class="hljs-ln-code"><a href="#cb64-24"></a><span class="st">Residual standard error: 8.39 on 1698 degrees of freedom</span></span>
+<span id="cb64-25" class="hljs-ln-code"><a href="#cb64-25"></a><span class="st">Multiple R-squared:  0.5793,    Adjusted R-squared:  0.5781 </span></span>
+<span id="cb64-26" class="hljs-ln-code"><a href="#cb64-26"></a><span class="st">F-statistic: 467.7 on 5 and 1698 DF,  p-value: &lt; 2.2e-16"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="linear-regression-2" class="slide level2">
 <h2>Linear regression</h2>
 <p><br></p>
 <p>Checking the regression result in detail</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="co">#ols result!</span></span>
-<span id="cb63-2"><a href="#cb63-2"></a>ols_result <span class="ot">&lt;-</span> <span class="fu">summary</span>(ols)</span>
-<span id="cb63-3"><a href="#cb63-3"></a></span>
-<span id="cb63-4"><a href="#cb63-4"></a><span class="co">#checking the coefficients</span></span>
-<span id="cb63-5"><a href="#cb63-5"></a>ols_result<span class="sc">$</span>coefficients</span>
-<span id="cb63-6"><a href="#cb63-6"></a><span class="st">"                      Estimate   Std. Error   t value      Pr(&gt;|t|)</span></span>
-<span id="cb63-7"><a href="#cb63-7"></a><span class="st">(Intercept)       4.788852e+01 3.398053e-01 140.92927  0.000000e+00</span></span>
-<span id="cb63-8"><a href="#cb63-8"></a><span class="st">gdpPercap         4.452704e-04 2.349795e-05  18.94933  8.552893e-73</span></span>
-<span id="cb63-9"><a href="#cb63-9"></a><span class="st">continentAmericas 1.359272e+01 6.007856e-01  22.62491  2.822476e-99</span></span>
-<span id="cb63-10"><a href="#cb63-10"></a><span class="st">continentAsia     8.657793e+00 5.554859e-01  15.58598  2.719424e-51</span></span>
-<span id="cb63-11"><a href="#cb63-11"></a><span class="st">continentEurope   1.757234e+01 6.257430e-01  28.08236 7.595526e-143</span></span>
-<span id="cb63-12"><a href="#cb63-12"></a><span class="st">continentOceania  1.814604e+01 1.787426e+00  10.15205  1.502557e-23"</span></span>
-<span id="cb63-13"><a href="#cb63-13"></a><span class="fu">class</span>(ols_result<span class="sc">$</span>coefficients)</span>
-<span id="cb63-14"><a href="#cb63-14"></a><span class="st">'"matrix" "array"'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="co">#ols result!</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>ols_result <span class="ot">&lt;-</span> <span class="fu">summary</span>(ols)</span>
+<span id="cb65-3"><a href="#cb65-3"></a></span>
+<span id="cb65-4"><a href="#cb65-4"></a><span class="co">#checking the coefficients</span></span>
+<span id="cb65-5"><a href="#cb65-5"></a>ols_result<span class="sc">$</span>coefficients</span>
+<span id="cb65-6"><a href="#cb65-6"></a><span class="st">"                      Estimate   Std. Error   t value      Pr(&gt;|t|)</span></span>
+<span id="cb65-7"><a href="#cb65-7"></a><span class="st">(Intercept)       4.788852e+01 3.398053e-01 140.92927  0.000000e+00</span></span>
+<span id="cb65-8"><a href="#cb65-8"></a><span class="st">gdpPercap         4.452704e-04 2.349795e-05  18.94933  8.552893e-73</span></span>
+<span id="cb65-9"><a href="#cb65-9"></a><span class="st">continentAmericas 1.359272e+01 6.007856e-01  22.62491  2.822476e-99</span></span>
+<span id="cb65-10"><a href="#cb65-10"></a><span class="st">continentAsia     8.657793e+00 5.554859e-01  15.58598  2.719424e-51</span></span>
+<span id="cb65-11"><a href="#cb65-11"></a><span class="st">continentEurope   1.757234e+01 6.257430e-01  28.08236 7.595526e-143</span></span>
+<span id="cb65-12"><a href="#cb65-12"></a><span class="st">continentOceania  1.814604e+01 1.787426e+00  10.15205  1.502557e-23"</span></span>
+<span id="cb65-13"><a href="#cb65-13"></a><span class="fu">class</span>(ols_result<span class="sc">$</span>coefficients)</span>
+<span id="cb65-14"><a href="#cb65-14"></a><span class="st">'"matrix" "array"'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="linear-regression-3" class="slide level2">
@@ -1838,39 +1938,39 @@ Jongoh Kim
 <p><br></p>
 <p>Dealing with scientific notations(e)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="co">#scientific notation</span></span>
-<span id="cb64-2"><a href="#cb64-2"></a>ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>]</span>
-<span id="cb64-3"><a href="#cb64-3"></a><span class="st">"     (Intercept)         gdpPercap continentAmericas     continentAsia </span></span>
-<span id="cb64-4"><a href="#cb64-4"></a><span class="st">     4.788852e+01      4.452704e-04      1.359272e+01      8.657793e+00 </span></span>
-<span id="cb64-5"><a href="#cb64-5"></a><span class="st">  continentEurope  continentOceania </span></span>
-<span id="cb64-6"><a href="#cb64-6"></a><span class="st">     1.757234e+01      1.814604e+01"</span></span>
-<span id="cb64-7"><a href="#cb64-7"></a><span class="fu">format</span>(ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>], <span class="at">scientific =</span> F)</span>
-<span id="cb64-8"><a href="#cb64-8"></a><span class="st">'     (Intercept)         gdpPercap continentAmericas     continentAsia </span></span>
-<span id="cb64-9"><a href="#cb64-9"></a><span class="st">  "47.8885161789"   " 0.0004452704"   "13.5927218705"   " 8.6577934769" </span></span>
-<span id="cb64-10"><a href="#cb64-10"></a><span class="st">  continentEurope  continentOceania </span></span>
-<span id="cb64-11"><a href="#cb64-11"></a><span class="st">  "17.5723409668"   "18.1460410154" '</span></span>
-<span id="cb64-12"><a href="#cb64-12"></a><span class="co">#NOTE THAT the numbers are characters now!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">#scientific notation</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a>ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>]</span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="st">"     (Intercept)         gdpPercap continentAmericas     continentAsia </span></span>
+<span id="cb66-4"><a href="#cb66-4"></a><span class="st">     4.788852e+01      4.452704e-04      1.359272e+01      8.657793e+00 </span></span>
+<span id="cb66-5"><a href="#cb66-5"></a><span class="st">  continentEurope  continentOceania </span></span>
+<span id="cb66-6"><a href="#cb66-6"></a><span class="st">     1.757234e+01      1.814604e+01"</span></span>
+<span id="cb66-7"><a href="#cb66-7"></a><span class="fu">format</span>(ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>], <span class="at">scientific =</span> F)</span>
+<span id="cb66-8"><a href="#cb66-8"></a><span class="st">'     (Intercept)         gdpPercap continentAmericas     continentAsia </span></span>
+<span id="cb66-9"><a href="#cb66-9"></a><span class="st">  "47.8885161789"   " 0.0004452704"   "13.5927218705"   " 8.6577934769" </span></span>
+<span id="cb66-10"><a href="#cb66-10"></a><span class="st">  continentEurope  continentOceania </span></span>
+<span id="cb66-11"><a href="#cb66-11"></a><span class="st">  "17.5723409668"   "18.1460410154" '</span></span>
+<span id="cb66-12"><a href="#cb66-12"></a><span class="co">#NOTE THAT the numbers are characters now!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="linear-regression-4" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Linear regression</h2>
-<div class="sourceCode" id="cb65" data-code-line-numbers="13-17"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb65-1" class="hljs-ln-code"><a href="#cb65-1"></a><span class="co">#scientific notation</span></span>
-<span id="cb65-2" class="hljs-ln-code"><a href="#cb65-2"></a>ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>]</span>
-<span id="cb65-3" class="hljs-ln-code"><a href="#cb65-3"></a><span class="st">"(Intercept)         gdpPercap continentAmericas     continentAsia </span></span>
-<span id="cb65-4" class="hljs-ln-code"><a href="#cb65-4"></a><span class="st">     4.788852e+01      4.452704e-04      1.359272e+01      8.657793e+00 </span></span>
-<span id="cb65-5" class="hljs-ln-code"><a href="#cb65-5"></a><span class="st">  continentEurope  continentOceania </span></span>
-<span id="cb65-6" class="hljs-ln-code"><a href="#cb65-6"></a><span class="st">     1.757234e+01      1.814604e+01"</span></span>
-<span id="cb65-7" class="hljs-ln-code"><a href="#cb65-7"></a><span class="fu">format</span>(ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>], <span class="at">scientific =</span> F)</span>
-<span id="cb65-8" class="hljs-ln-code"><a href="#cb65-8"></a><span class="st">' (Intercept)         gdpPercap continentAmericas     continentAsia </span></span>
-<span id="cb65-9" class="hljs-ln-code"><a href="#cb65-9"></a><span class="st">  "47.8885161789"   " 0.0004452704"   "13.5927218705"   " 8.6577934769" </span></span>
-<span id="cb65-10" class="hljs-ln-code"><a href="#cb65-10"></a><span class="st">  continentEurope  continentOceania </span></span>
-<span id="cb65-11" class="hljs-ln-code"><a href="#cb65-11"></a><span class="st">  "17.5723409668"   "18.1460410154" '</span></span>
-<span id="cb65-12" class="hljs-ln-code"><a href="#cb65-12"></a><span class="co">#NOTE THAT the numbers are characters now!</span></span>
-<span id="cb65-13" class="hljs-ln-code"><a href="#cb65-13"></a></span>
-<span id="cb65-14" class="hljs-ln-code"><a href="#cb65-14"></a><span class="co">#try round() function</span></span>
-<span id="cb65-15" class="hljs-ln-code"><a href="#cb65-15"></a><span class="fu">round</span>(ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>],<span class="dv">4</span>) <span class="co">#rounding up at the fourth decimal point</span></span>
-<span id="cb65-16" class="hljs-ln-code"><a href="#cb65-16"></a><span class="st">'      (Intercept)         gdpPercap continentAmericas     continentAsia   continentEurope  continentOceania </span></span>
-<span id="cb65-17" class="hljs-ln-code"><a href="#cb65-17"></a><span class="st">          47.8885            0.0004           13.5927            8.6578           17.5723           18.1460'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb67" data-code-line-numbers="13-17"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb67-1" class="hljs-ln-code"><a href="#cb67-1"></a><span class="co">#scientific notation</span></span>
+<span id="cb67-2" class="hljs-ln-code"><a href="#cb67-2"></a>ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>]</span>
+<span id="cb67-3" class="hljs-ln-code"><a href="#cb67-3"></a><span class="st">"(Intercept)         gdpPercap continentAmericas     continentAsia </span></span>
+<span id="cb67-4" class="hljs-ln-code"><a href="#cb67-4"></a><span class="st">     4.788852e+01      4.452704e-04      1.359272e+01      8.657793e+00 </span></span>
+<span id="cb67-5" class="hljs-ln-code"><a href="#cb67-5"></a><span class="st">  continentEurope  continentOceania </span></span>
+<span id="cb67-6" class="hljs-ln-code"><a href="#cb67-6"></a><span class="st">     1.757234e+01      1.814604e+01"</span></span>
+<span id="cb67-7" class="hljs-ln-code"><a href="#cb67-7"></a><span class="fu">format</span>(ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>], <span class="at">scientific =</span> F)</span>
+<span id="cb67-8" class="hljs-ln-code"><a href="#cb67-8"></a><span class="st">' (Intercept)         gdpPercap continentAmericas     continentAsia </span></span>
+<span id="cb67-9" class="hljs-ln-code"><a href="#cb67-9"></a><span class="st">  "47.8885161789"   " 0.0004452704"   "13.5927218705"   " 8.6577934769" </span></span>
+<span id="cb67-10" class="hljs-ln-code"><a href="#cb67-10"></a><span class="st">  continentEurope  continentOceania </span></span>
+<span id="cb67-11" class="hljs-ln-code"><a href="#cb67-11"></a><span class="st">  "17.5723409668"   "18.1460410154" '</span></span>
+<span id="cb67-12" class="hljs-ln-code"><a href="#cb67-12"></a><span class="co">#NOTE THAT the numbers are characters now!</span></span>
+<span id="cb67-13" class="hljs-ln-code"><a href="#cb67-13"></a></span>
+<span id="cb67-14" class="hljs-ln-code"><a href="#cb67-14"></a><span class="co">#try round() function</span></span>
+<span id="cb67-15" class="hljs-ln-code"><a href="#cb67-15"></a><span class="fu">round</span>(ols_result<span class="sc">$</span>coefficients[,<span class="dv">1</span>],<span class="dv">4</span>) <span class="co">#rounding up at the fourth decimal point</span></span>
+<span id="cb67-16" class="hljs-ln-code"><a href="#cb67-16"></a><span class="st">'      (Intercept)         gdpPercap continentAmericas     continentAsia   continentEurope  continentOceania </span></span>
+<span id="cb67-17" class="hljs-ln-code"><a href="#cb67-17"></a><span class="st">          47.8885            0.0004           13.5927            8.6578           17.5723           18.1460'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="other-econometric-methods" class="slide level2">
 <h2>Other econometric methods</h2>
@@ -1900,19 +2000,19 @@ Jongoh Kim
 <section id="lets-clean-the-r-environemnt-first" class="slide level2">
 <h2>Let’s clean the R environemnt first!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co"># Clear plots</span></span>
-<span id="cb66-2"><a href="#cb66-2"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">dev.list</span>())) <span class="fu">dev.off</span>()</span>
-<span id="cb66-3"><a href="#cb66-3"></a><span class="co"># Clear console</span></span>
-<span id="cb66-4"><a href="#cb66-4"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\014</span><span class="st">"</span>) </span>
-<span id="cb66-5"><a href="#cb66-5"></a><span class="co"># Clean workspace</span></span>
-<span id="cb66-6"><a href="#cb66-6"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb66-7"><a href="#cb66-7"></a></span>
-<span id="cb66-8"><a href="#cb66-8"></a><span class="co">#restart R</span></span>
-<span id="cb66-9"><a href="#cb66-9"></a>rstudioapi<span class="sc">::</span><span class="fu">restartSession</span>()</span>
-<span id="cb66-10"><a href="#cb66-10"></a></span>
-<span id="cb66-11"><a href="#cb66-11"></a><span class="co">#calling necessary packages</span></span>
-<span id="cb66-12"><a href="#cb66-12"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"stringr"</span>, <span class="st">"stringi"</span>)</span>
-<span id="cb66-13"><a href="#cb66-13"></a><span class="fu">lapply</span>(packages, require, <span class="at">character.only=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="co"># Clear plots</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">dev.list</span>())) <span class="fu">dev.off</span>()</span>
+<span id="cb68-3"><a href="#cb68-3"></a><span class="co"># Clear console</span></span>
+<span id="cb68-4"><a href="#cb68-4"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\014</span><span class="st">"</span>) </span>
+<span id="cb68-5"><a href="#cb68-5"></a><span class="co"># Clean workspace</span></span>
+<span id="cb68-6"><a href="#cb68-6"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb68-7"><a href="#cb68-7"></a></span>
+<span id="cb68-8"><a href="#cb68-8"></a><span class="co">#restart R</span></span>
+<span id="cb68-9"><a href="#cb68-9"></a>rstudioapi<span class="sc">::</span><span class="fu">restartSession</span>()</span>
+<span id="cb68-10"><a href="#cb68-10"></a></span>
+<span id="cb68-11"><a href="#cb68-11"></a><span class="co">#calling necessary packages</span></span>
+<span id="cb68-12"><a href="#cb68-12"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"stringr"</span>, <span class="st">"stringi"</span>)</span>
+<span id="cb68-13"><a href="#cb68-13"></a><span class="fu">lapply</span>(packages, require, <span class="at">character.only=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="basic-dot-plot" class="slide level2">
@@ -1920,14 +2020,14 @@ Jongoh Kim
 <p><br></p>
 <p>Let’s start with a basic plot</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="co">#reading in data again</span></span>
-<span id="cb67-2"><a href="#cb67-2"></a>data <span class="ot">&lt;-</span> gapminder<span class="sc">::</span>gapminder</span>
-<span id="cb67-3"><a href="#cb67-3"></a></span>
-<span id="cb67-4"><a href="#cb67-4"></a><span class="co">#simple dot graph for Italy</span></span>
-<span id="cb67-5"><a href="#cb67-5"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb67-6"><a href="#cb67-6"></a>  <span class="fu">filter</span>(country<span class="sc">==</span><span class="st">"Italy"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb67-7"><a href="#cb67-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb67-8"><a href="#cb67-8"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co">#reading in data again</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a>data <span class="ot">&lt;-</span> gapminder<span class="sc">::</span>gapminder</span>
+<span id="cb69-3"><a href="#cb69-3"></a></span>
+<span id="cb69-4"><a href="#cb69-4"></a><span class="co">#simple dot graph for Italy</span></span>
+<span id="cb69-5"><a href="#cb69-5"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb69-6"><a href="#cb69-6"></a>  <span class="fu">filter</span>(country<span class="sc">==</span><span class="st">"Italy"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb69-7"><a href="#cb69-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb69-8"><a href="#cb69-8"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="usual-graph-types" class="slide level2">
@@ -1949,14 +2049,14 @@ Jongoh Kim
 <p>Multiple countries!</p>
 <p><br> Impossible to differentiate which point belongs to which country</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="co">#reading in data again</span></span>
-<span id="cb68-2"><a href="#cb68-2"></a>data <span class="ot">&lt;-</span> gapminder<span class="sc">::</span>gapminder</span>
-<span id="cb68-3"><a href="#cb68-3"></a></span>
-<span id="cb68-4"><a href="#cb68-4"></a><span class="co">#simple dot graph for some European countries</span></span>
-<span id="cb68-5"><a href="#cb68-5"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb68-6"><a href="#cb68-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb68-7"><a href="#cb68-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb68-8"><a href="#cb68-8"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co">#reading in data again</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>data <span class="ot">&lt;-</span> gapminder<span class="sc">::</span>gapminder</span>
+<span id="cb70-3"><a href="#cb70-3"></a></span>
+<span id="cb70-4"><a href="#cb70-4"></a><span class="co">#simple dot graph for some European countries</span></span>
+<span id="cb70-5"><a href="#cb70-5"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb70-7"><a href="#cb70-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb70-8"><a href="#cb70-8"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adding-colors" class="slide level2">
@@ -1964,12 +2064,12 @@ Jongoh Kim
 <p><br></p>
 <p>Let’s add some colors according to a country!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co">#simple dot graph for some European countries</span></span>
-<span id="cb69-2"><a href="#cb69-2"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb69-3"><a href="#cb69-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb69-4"><a href="#cb69-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb69-5"><a href="#cb69-5"></a>  <span class="co">#note that it is important to put color = country inside of aes()</span></span>
-<span id="cb69-6"><a href="#cb69-6"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co">#simple dot graph for some European countries</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb71-3"><a href="#cb71-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb71-4"><a href="#cb71-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb71-5"><a href="#cb71-5"></a>  <span class="co">#note that it is important to put color = country inside of aes()</span></span>
+<span id="cb71-6"><a href="#cb71-6"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adding-colors-1" class="slide level2">
@@ -1977,57 +2077,32 @@ Jongoh Kim
 <p><br></p>
 <p>Let’s add some colors according to a country!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co">#simple bar(column) graph for some European countries</span></span>
-<span id="cb70-2"><a href="#cb70-2"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb70-3"><a href="#cb70-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb70-4"><a href="#cb70-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb70-5"><a href="#cb70-5"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) </span>
-<span id="cb70-6"><a href="#cb70-6"></a></span>
-<span id="cb70-7"><a href="#cb70-7"></a><span class="co">#for bar graphs you should use fill!</span></span>
-<span id="cb70-8"><a href="#cb70-8"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb70-9"><a href="#cb70-9"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb70-10"><a href="#cb70-10"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb70-11"><a href="#cb70-11"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">fill =</span> country)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="co">#simple bar(column) graph for some European countries</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb72-3"><a href="#cb72-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb72-4"><a href="#cb72-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb72-5"><a href="#cb72-5"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) </span>
+<span id="cb72-6"><a href="#cb72-6"></a></span>
+<span id="cb72-7"><a href="#cb72-7"></a><span class="co">#for bar graphs you should use fill!</span></span>
+<span id="cb72-8"><a href="#cb72-8"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb72-9"><a href="#cb72-9"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb72-10"><a href="#cb72-10"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb72-11"><a href="#cb72-11"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">fill =</span> country)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="changing-axis-labels" class="slide level2">
 <h2>Changing axis labels</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co">#simple line graph for some European countries</span></span>
-<span id="cb71-2"><a href="#cb71-2"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb71-3"><a href="#cb71-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb71-4"><a href="#cb71-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb71-5"><a href="#cb71-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb71-6"><a href="#cb71-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>) <span class="co">#changing the axis label</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="setting-the-plot-title" class="slide level2">
-<h2>Setting the plot title</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="co">#simple line graph for some European countries</span></span>
-<span id="cb72-2"><a href="#cb72-2"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb72-3"><a href="#cb72-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb72-4"><a href="#cb72-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb72-5"><a href="#cb72-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb72-6"><a href="#cb72-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb72-7"><a href="#cb72-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="changing-legend-position" class="slide level2">
-<h2>Changing legend position</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="co">#simple line graph for some European countries</span></span>
 <span id="cb73-2"><a href="#cb73-2"></a>data <span class="sc">%&gt;%</span></span>
 <span id="cb73-3"><a href="#cb73-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb73-4"><a href="#cb73-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb73-5"><a href="#cb73-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb73-6"><a href="#cb73-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb73-7"><a href="#cb73-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
-<span id="cb73-8"><a href="#cb73-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb73-6"><a href="#cb73-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>) <span class="co">#changing the axis label</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="changing-titlelegendaxis-text-size" class="slide level2">
-<h2>Changing title/legend/axis text size</h2>
+<section id="setting-the-plot-title" class="slide level2">
+<h2>Setting the plot title</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="co">#simple line graph for some European countries</span></span>
 <span id="cb74-2"><a href="#cb74-2"></a>data <span class="sc">%&gt;%</span></span>
@@ -2035,63 +2110,47 @@ Jongoh Kim
 <span id="cb74-4"><a href="#cb74-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb74-5"><a href="#cb74-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
 <span id="cb74-6"><a href="#cb74-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb74-7"><a href="#cb74-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
-<span id="cb74-8"><a href="#cb74-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb74-9"><a href="#cb74-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
-<span id="cb74-10"><a href="#cb74-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
-<span id="cb74-11"><a href="#cb74-11"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
-<span id="cb74-12"><a href="#cb74-12"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing axis title size</span></span>
-<span id="cb74-13"><a href="#cb74-13"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
-<span id="cb74-14"><a href="#cb74-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing axis title size</span></span>
-<span id="cb74-15"><a href="#cb74-15"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="co">#changing title size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb74-7"><a href="#cb74-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="changing-legend-position" class="slide level2">
+<h2>Changing legend position</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="co">#simple line graph for some European countries</span></span>
+<span id="cb75-2"><a href="#cb75-2"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb75-3"><a href="#cb75-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb75-4"><a href="#cb75-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb75-5"><a href="#cb75-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb75-6"><a href="#cb75-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
+<span id="cb75-7"><a href="#cb75-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb75-8"><a href="#cb75-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="changing-titlelegendaxis-text-size" class="slide level2">
+<h2>Changing title/legend/axis text size</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="co">#simple line graph for some European countries</span></span>
+<span id="cb76-2"><a href="#cb76-2"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb76-3"><a href="#cb76-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb76-4"><a href="#cb76-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb76-5"><a href="#cb76-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb76-6"><a href="#cb76-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
+<span id="cb76-7"><a href="#cb76-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb76-8"><a href="#cb76-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb76-9"><a href="#cb76-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
+<span id="cb76-10"><a href="#cb76-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
+<span id="cb76-11"><a href="#cb76-11"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
+<span id="cb76-12"><a href="#cb76-12"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing axis title size</span></span>
+<span id="cb76-13"><a href="#cb76-13"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
+<span id="cb76-14"><a href="#cb76-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing axis title size</span></span>
+<span id="cb76-15"><a href="#cb76-15"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="co">#changing title size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="changing-legend-box-size" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Changing legend box size</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb75-1" class="hljs-ln-code"><a href="#cb75-1"></a><span class="co">#simple line graph for some European countries</span></span>
-<span id="cb75-2" class="hljs-ln-code"><a href="#cb75-2"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb75-3" class="hljs-ln-code"><a href="#cb75-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb75-4" class="hljs-ln-code"><a href="#cb75-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb75-5" class="hljs-ln-code"><a href="#cb75-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb75-6" class="hljs-ln-code"><a href="#cb75-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb75-7" class="hljs-ln-code"><a href="#cb75-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
-<span id="cb75-8" class="hljs-ln-code"><a href="#cb75-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb75-9" class="hljs-ln-code"><a href="#cb75-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
-<span id="cb75-10" class="hljs-ln-code"><a href="#cb75-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
-<span id="cb75-11" class="hljs-ln-code"><a href="#cb75-11"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
-<span id="cb75-12" class="hljs-ln-code"><a href="#cb75-12"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing axis title size</span></span>
-<span id="cb75-13" class="hljs-ln-code"><a href="#cb75-13"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
-<span id="cb75-14" class="hljs-ln-code"><a href="#cb75-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),  <span class="co">#changing axis title size</span></span>
-<span id="cb75-15" class="hljs-ln-code"><a href="#cb75-15"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing title size</span></span>
-<span id="cb75-16" class="hljs-ln-code"><a href="#cb75-16"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">'cm'</span>)) <span class="co">#changing legend color box size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="changing-legend-title" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Changing legend title</h2>
-<div class="sourceCode" id="cb76" data-code-line-numbers="17-17"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb76-1" class="hljs-ln-code"><a href="#cb76-1"></a><span class="co">#simple line graph for some European countries</span></span>
-<span id="cb76-2" class="hljs-ln-code"><a href="#cb76-2"></a>base_plot <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb76-3" class="hljs-ln-code"><a href="#cb76-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb76-4" class="hljs-ln-code"><a href="#cb76-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb76-5" class="hljs-ln-code"><a href="#cb76-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb76-6" class="hljs-ln-code"><a href="#cb76-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb76-7" class="hljs-ln-code"><a href="#cb76-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
-<span id="cb76-8" class="hljs-ln-code"><a href="#cb76-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb76-9" class="hljs-ln-code"><a href="#cb76-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
-<span id="cb76-10" class="hljs-ln-code"><a href="#cb76-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
-<span id="cb76-11" class="hljs-ln-code"><a href="#cb76-11"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
-<span id="cb76-12" class="hljs-ln-code"><a href="#cb76-12"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing axis title size</span></span>
-<span id="cb76-13" class="hljs-ln-code"><a href="#cb76-13"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
-<span id="cb76-14" class="hljs-ln-code"><a href="#cb76-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),  <span class="co">#changing axis title size</span></span>
-<span id="cb76-15" class="hljs-ln-code"><a href="#cb76-15"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing title size</span></span>
-<span id="cb76-16" class="hljs-ln-code"><a href="#cb76-16"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">'cm'</span>)) <span class="sc">+</span> <span class="co">#changing legend color box size</span></span>
-<span id="cb76-17" class="hljs-ln-code"><a href="#cb76-17"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Country"</span>) <span class="co">#changing legend title</span></span>
-<span id="cb76-18" class="hljs-ln-code"><a href="#cb76-18"></a>base_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="formatting-axis-tick" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Formatting axis tick</h2>
-<div class="sourceCode" id="cb77" data-code-line-numbers="18-18"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb77-1" class="hljs-ln-code"><a href="#cb77-1"></a><span class="co">#simple line graph for some European countries</span></span>
-<span id="cb77-2" class="hljs-ln-code"><a href="#cb77-2"></a>base_plot <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb77-1" class="hljs-ln-code"><a href="#cb77-1"></a><span class="co">#simple line graph for some European countries</span></span>
+<span id="cb77-2" class="hljs-ln-code"><a href="#cb77-2"></a>data <span class="sc">%&gt;%</span></span>
 <span id="cb77-3" class="hljs-ln-code"><a href="#cb77-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb77-4" class="hljs-ln-code"><a href="#cb77-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb77-5" class="hljs-ln-code"><a href="#cb77-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
@@ -2105,10 +2164,51 @@ Jongoh Kim
 <span id="cb77-13" class="hljs-ln-code"><a href="#cb77-13"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
 <span id="cb77-14" class="hljs-ln-code"><a href="#cb77-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),  <span class="co">#changing axis title size</span></span>
 <span id="cb77-15" class="hljs-ln-code"><a href="#cb77-15"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing title size</span></span>
-<span id="cb77-16" class="hljs-ln-code"><a href="#cb77-16"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">'cm'</span>)) <span class="sc">+</span> <span class="co">#changing legend color box size</span></span>
-<span id="cb77-17" class="hljs-ln-code"><a href="#cb77-17"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Country"</span>) <span class="sc">+</span><span class="co">#changing legend title</span></span>
-<span id="cb77-18" class="hljs-ln-code"><a href="#cb77-18"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span> scales<span class="sc">::</span>comma) <span class="co">#formatting the y axis tick</span></span>
-<span id="cb77-19" class="hljs-ln-code"><a href="#cb77-19"></a>base_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb77-16" class="hljs-ln-code"><a href="#cb77-16"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">'cm'</span>)) <span class="co">#changing legend color box size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="changing-legend-title" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Changing legend title</h2>
+<div class="sourceCode" id="cb78" data-code-line-numbers="17-17"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb78-1" class="hljs-ln-code"><a href="#cb78-1"></a><span class="co">#simple line graph for some European countries</span></span>
+<span id="cb78-2" class="hljs-ln-code"><a href="#cb78-2"></a>base_plot <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb78-3" class="hljs-ln-code"><a href="#cb78-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb78-4" class="hljs-ln-code"><a href="#cb78-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb78-5" class="hljs-ln-code"><a href="#cb78-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb78-6" class="hljs-ln-code"><a href="#cb78-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
+<span id="cb78-7" class="hljs-ln-code"><a href="#cb78-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb78-8" class="hljs-ln-code"><a href="#cb78-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb78-9" class="hljs-ln-code"><a href="#cb78-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
+<span id="cb78-10" class="hljs-ln-code"><a href="#cb78-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
+<span id="cb78-11" class="hljs-ln-code"><a href="#cb78-11"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
+<span id="cb78-12" class="hljs-ln-code"><a href="#cb78-12"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing axis title size</span></span>
+<span id="cb78-13" class="hljs-ln-code"><a href="#cb78-13"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
+<span id="cb78-14" class="hljs-ln-code"><a href="#cb78-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),  <span class="co">#changing axis title size</span></span>
+<span id="cb78-15" class="hljs-ln-code"><a href="#cb78-15"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing title size</span></span>
+<span id="cb78-16" class="hljs-ln-code"><a href="#cb78-16"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">'cm'</span>)) <span class="sc">+</span> <span class="co">#changing legend color box size</span></span>
+<span id="cb78-17" class="hljs-ln-code"><a href="#cb78-17"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Country"</span>) <span class="co">#changing legend title</span></span>
+<span id="cb78-18" class="hljs-ln-code"><a href="#cb78-18"></a>base_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="formatting-axis-tick" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Formatting axis tick</h2>
+<div class="sourceCode" id="cb79" data-code-line-numbers="18-18"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb79-1" class="hljs-ln-code"><a href="#cb79-1"></a><span class="co">#simple line graph for some European countries</span></span>
+<span id="cb79-2" class="hljs-ln-code"><a href="#cb79-2"></a>base_plot <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb79-3" class="hljs-ln-code"><a href="#cb79-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb79-4" class="hljs-ln-code"><a href="#cb79-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb79-5" class="hljs-ln-code"><a href="#cb79-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb79-6" class="hljs-ln-code"><a href="#cb79-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
+<span id="cb79-7" class="hljs-ln-code"><a href="#cb79-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb79-8" class="hljs-ln-code"><a href="#cb79-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb79-9" class="hljs-ln-code"><a href="#cb79-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
+<span id="cb79-10" class="hljs-ln-code"><a href="#cb79-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
+<span id="cb79-11" class="hljs-ln-code"><a href="#cb79-11"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
+<span id="cb79-12" class="hljs-ln-code"><a href="#cb79-12"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing axis title size</span></span>
+<span id="cb79-13" class="hljs-ln-code"><a href="#cb79-13"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), <span class="co">#changing axis text size</span></span>
+<span id="cb79-14" class="hljs-ln-code"><a href="#cb79-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),  <span class="co">#changing axis title size</span></span>
+<span id="cb79-15" class="hljs-ln-code"><a href="#cb79-15"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing title size</span></span>
+<span id="cb79-16" class="hljs-ln-code"><a href="#cb79-16"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">'cm'</span>)) <span class="sc">+</span> <span class="co">#changing legend color box size</span></span>
+<span id="cb79-17" class="hljs-ln-code"><a href="#cb79-17"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Country"</span>) <span class="sc">+</span><span class="co">#changing legend title</span></span>
+<span id="cb79-18" class="hljs-ln-code"><a href="#cb79-18"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span> scales<span class="sc">::</span>comma) <span class="co">#formatting the y axis tick</span></span>
+<span id="cb79-19" class="hljs-ln-code"><a href="#cb79-19"></a>base_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="adding-gdp-text-labels-on-the-graph" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Adding GDP text labels on the graph</h2>
@@ -2116,13 +2216,13 @@ Jongoh Kim
 <p>First, let’s create a separate data frame for the GDP text labels.</p>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb78-1" class="hljs-ln-code"><a href="#cb78-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
-<span id="cb78-2" class="hljs-ln-code"><a href="#cb78-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
-<span id="cb78-3" class="hljs-ln-code"><a href="#cb78-3"></a></span>
-<span id="cb78-4" class="hljs-ln-code"><a href="#cb78-4"></a><span class="co">#creating the GDP text data frame</span></span>
-<span id="cb78-5" class="hljs-ln-code"><a href="#cb78-5"></a>gdp_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb78-6" class="hljs-ln-code"><a href="#cb78-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Italy"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb78-7" class="hljs-ln-code"><a href="#cb78-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1952</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb80-1" class="hljs-ln-code"><a href="#cb80-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
+<span id="cb80-2" class="hljs-ln-code"><a href="#cb80-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
+<span id="cb80-3" class="hljs-ln-code"><a href="#cb80-3"></a></span>
+<span id="cb80-4" class="hljs-ln-code"><a href="#cb80-4"></a><span class="co">#creating the GDP text data frame</span></span>
+<span id="cb80-5" class="hljs-ln-code"><a href="#cb80-5"></a>gdp_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb80-6" class="hljs-ln-code"><a href="#cb80-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Italy"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb80-7" class="hljs-ln-code"><a href="#cb80-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1952</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adding-gdp-text-labels-on-the-graph-1" class="slide level2" data-auto-animate="true">
@@ -2130,63 +2230,22 @@ Jongoh Kim
 <p><br></p>
 <p>Second, let’s add another layer!</p>
 <p><br></p>
-<div class="sourceCode" id="cb79" data-code-line-numbers="8-13"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb79-1" class="hljs-ln-code"><a href="#cb79-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
-<span id="cb79-2" class="hljs-ln-code"><a href="#cb79-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
-<span id="cb79-3" class="hljs-ln-code"><a href="#cb79-3"></a></span>
-<span id="cb79-4" class="hljs-ln-code"><a href="#cb79-4"></a><span class="co">#creating the GDP text data frame</span></span>
-<span id="cb79-5" class="hljs-ln-code"><a href="#cb79-5"></a>gdp_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb79-6" class="hljs-ln-code"><a href="#cb79-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Italy"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb79-7" class="hljs-ln-code"><a href="#cb79-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1952</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span>
-<span id="cb79-8" class="hljs-ln-code"><a href="#cb79-8"></a></span>
-<span id="cb79-9" class="hljs-ln-code"><a href="#cb79-9"></a><span class="co">#adding the text layer</span></span>
-<span id="cb79-10" class="hljs-ln-code"><a href="#cb79-10"></a>mid_plot <span class="ot">&lt;-</span> base_plot <span class="sc">+</span> </span>
-<span id="cb79-11" class="hljs-ln-code"><a href="#cb79-11"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> gdp_text.df,</span>
-<span id="cb79-12" class="hljs-ln-code"><a href="#cb79-12"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">label =</span> gdpPercap))</span>
-<span id="cb79-13" class="hljs-ln-code"><a href="#cb79-13"></a>mid_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb81" data-code-line-numbers="8-13"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb81-1" class="hljs-ln-code"><a href="#cb81-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
+<span id="cb81-2" class="hljs-ln-code"><a href="#cb81-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
+<span id="cb81-3" class="hljs-ln-code"><a href="#cb81-3"></a></span>
+<span id="cb81-4" class="hljs-ln-code"><a href="#cb81-4"></a><span class="co">#creating the GDP text data frame</span></span>
+<span id="cb81-5" class="hljs-ln-code"><a href="#cb81-5"></a>gdp_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb81-6" class="hljs-ln-code"><a href="#cb81-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Italy"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb81-7" class="hljs-ln-code"><a href="#cb81-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1952</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span>
+<span id="cb81-8" class="hljs-ln-code"><a href="#cb81-8"></a></span>
+<span id="cb81-9" class="hljs-ln-code"><a href="#cb81-9"></a><span class="co">#adding the text layer</span></span>
+<span id="cb81-10" class="hljs-ln-code"><a href="#cb81-10"></a>mid_plot <span class="ot">&lt;-</span> base_plot <span class="sc">+</span> </span>
+<span id="cb81-11" class="hljs-ln-code"><a href="#cb81-11"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> gdp_text.df,</span>
+<span id="cb81-12" class="hljs-ln-code"><a href="#cb81-12"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">label =</span> gdpPercap))</span>
+<span id="cb81-13" class="hljs-ln-code"><a href="#cb81-13"></a>mid_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="adjusting-the-text-sizeposition" class="slide level2">
 <h2>Adjusting the text size/position</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
-<span id="cb80-2"><a href="#cb80-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
-<span id="cb80-3"><a href="#cb80-3"></a></span>
-<span id="cb80-4"><a href="#cb80-4"></a><span class="co">#creating the GDP text data frame</span></span>
-<span id="cb80-5"><a href="#cb80-5"></a>gdp_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb80-6"><a href="#cb80-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Italy"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb80-7"><a href="#cb80-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1952</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span>
-<span id="cb80-8"><a href="#cb80-8"></a></span>
-<span id="cb80-9"><a href="#cb80-9"></a><span class="co">#adding the text layer</span></span>
-<span id="cb80-10"><a href="#cb80-10"></a>mid_plot <span class="ot">&lt;-</span> base_plot <span class="sc">+</span> </span>
-<span id="cb80-11"><a href="#cb80-11"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> gdp_text.df,</span>
-<span id="cb80-12"><a href="#cb80-12"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">label =</span> gdpPercap),</span>
-<span id="cb80-13"><a href="#cb80-13"></a>            <span class="at">size =</span> <span class="dv">7</span>, <span class="co">#size adjustment</span></span>
-<span id="cb80-14"><a href="#cb80-14"></a>            <span class="at">vjust =</span> <span class="fl">0.7</span>) <span class="co">#vertical position adjustment</span></span>
-<span id="cb80-15"><a href="#cb80-15"></a>mid_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="formatting-the-gdp-neatly" class="slide level2">
-<h2>Formatting the GDP neatly</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
-<span id="cb81-2"><a href="#cb81-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
-<span id="cb81-3"><a href="#cb81-3"></a></span>
-<span id="cb81-4"><a href="#cb81-4"></a><span class="co">#creating the GDP text data frame</span></span>
-<span id="cb81-5"><a href="#cb81-5"></a>gdp_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb81-6"><a href="#cb81-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Italy"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb81-7"><a href="#cb81-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1952</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span>
-<span id="cb81-8"><a href="#cb81-8"></a></span>
-<span id="cb81-9"><a href="#cb81-9"></a><span class="co">#adding the text layer</span></span>
-<span id="cb81-10"><a href="#cb81-10"></a>mid_plot <span class="ot">&lt;-</span> base_plot <span class="sc">+</span> </span>
-<span id="cb81-11"><a href="#cb81-11"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> gdp_text.df,</span>
-<span id="cb81-12"><a href="#cb81-12"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, </span>
-<span id="cb81-13"><a href="#cb81-13"></a>                <span class="at">label =</span> <span class="fu">round</span>(gdpPercap)), <span class="co">#rounding up the GDP!</span></span>
-<span id="cb81-14"><a href="#cb81-14"></a>            <span class="at">size =</span> <span class="dv">7</span>, <span class="co">#size adjustment</span></span>
-<span id="cb81-15"><a href="#cb81-15"></a>            <span class="at">vjust =</span> <span class="fl">0.7</span>) <span class="co">#position adjustment</span></span>
-<span id="cb81-16"><a href="#cb81-16"></a>mid_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="formatting-the-gdp-neatly-1" class="slide level2">
-<h2>Formatting the GDP neatly</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
 <span id="cb82-2"><a href="#cb82-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
@@ -2199,12 +2258,53 @@ Jongoh Kim
 <span id="cb82-9"><a href="#cb82-9"></a><span class="co">#adding the text layer</span></span>
 <span id="cb82-10"><a href="#cb82-10"></a>mid_plot <span class="ot">&lt;-</span> base_plot <span class="sc">+</span> </span>
 <span id="cb82-11"><a href="#cb82-11"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> gdp_text.df,</span>
-<span id="cb82-12"><a href="#cb82-12"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, </span>
-<span id="cb82-13"><a href="#cb82-13"></a>                <span class="co">#rounding up the GDP and adding a comma!!</span></span>
-<span id="cb82-14"><a href="#cb82-14"></a>                <span class="at">label =</span> <span class="fu">format</span>(<span class="fu">round</span>(gdpPercap), <span class="at">big.mark =</span> <span class="st">","</span>, <span class="at">big.interval =</span> 3L)), </span>
-<span id="cb82-15"><a href="#cb82-15"></a>            <span class="at">size =</span> <span class="dv">7</span>, <span class="co">#size adjustment</span></span>
-<span id="cb82-16"><a href="#cb82-16"></a>            <span class="at">vjust =</span> <span class="fl">0.7</span>) <span class="co">#position adjustment</span></span>
-<span id="cb82-17"><a href="#cb82-17"></a>mid_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb82-12"><a href="#cb82-12"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">label =</span> gdpPercap),</span>
+<span id="cb82-13"><a href="#cb82-13"></a>            <span class="at">size =</span> <span class="dv">7</span>, <span class="co">#size adjustment</span></span>
+<span id="cb82-14"><a href="#cb82-14"></a>            <span class="at">vjust =</span> <span class="fl">0.7</span>) <span class="co">#vertical position adjustment</span></span>
+<span id="cb82-15"><a href="#cb82-15"></a>mid_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="formatting-the-gdp-neatly" class="slide level2">
+<h2>Formatting the GDP neatly</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
+<span id="cb83-2"><a href="#cb83-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
+<span id="cb83-3"><a href="#cb83-3"></a></span>
+<span id="cb83-4"><a href="#cb83-4"></a><span class="co">#creating the GDP text data frame</span></span>
+<span id="cb83-5"><a href="#cb83-5"></a>gdp_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb83-6"><a href="#cb83-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Italy"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb83-7"><a href="#cb83-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1952</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span>
+<span id="cb83-8"><a href="#cb83-8"></a></span>
+<span id="cb83-9"><a href="#cb83-9"></a><span class="co">#adding the text layer</span></span>
+<span id="cb83-10"><a href="#cb83-10"></a>mid_plot <span class="ot">&lt;-</span> base_plot <span class="sc">+</span> </span>
+<span id="cb83-11"><a href="#cb83-11"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> gdp_text.df,</span>
+<span id="cb83-12"><a href="#cb83-12"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, </span>
+<span id="cb83-13"><a href="#cb83-13"></a>                <span class="at">label =</span> <span class="fu">round</span>(gdpPercap)), <span class="co">#rounding up the GDP!</span></span>
+<span id="cb83-14"><a href="#cb83-14"></a>            <span class="at">size =</span> <span class="dv">7</span>, <span class="co">#size adjustment</span></span>
+<span id="cb83-15"><a href="#cb83-15"></a>            <span class="at">vjust =</span> <span class="fl">0.7</span>) <span class="co">#position adjustment</span></span>
+<span id="cb83-16"><a href="#cb83-16"></a>mid_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="formatting-the-gdp-neatly-1" class="slide level2">
+<h2>Formatting the GDP neatly</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="co">#print(sort(unique(data$year)))</span></span>
+<span id="cb84-2"><a href="#cb84-2"></a><span class="st">"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"</span></span>
+<span id="cb84-3"><a href="#cb84-3"></a></span>
+<span id="cb84-4"><a href="#cb84-4"></a><span class="co">#creating the GDP text data frame</span></span>
+<span id="cb84-5"><a href="#cb84-5"></a>gdp_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb84-6"><a href="#cb84-6"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Italy"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb84-7"><a href="#cb84-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1952</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span>
+<span id="cb84-8"><a href="#cb84-8"></a></span>
+<span id="cb84-9"><a href="#cb84-9"></a><span class="co">#adding the text layer</span></span>
+<span id="cb84-10"><a href="#cb84-10"></a>mid_plot <span class="ot">&lt;-</span> base_plot <span class="sc">+</span> </span>
+<span id="cb84-11"><a href="#cb84-11"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> gdp_text.df,</span>
+<span id="cb84-12"><a href="#cb84-12"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, </span>
+<span id="cb84-13"><a href="#cb84-13"></a>                <span class="co">#rounding up the GDP and adding a comma!!</span></span>
+<span id="cb84-14"><a href="#cb84-14"></a>                <span class="at">label =</span> <span class="fu">format</span>(<span class="fu">round</span>(gdpPercap), <span class="at">big.mark =</span> <span class="st">","</span>, <span class="at">big.interval =</span> 3L)), </span>
+<span id="cb84-15"><a href="#cb84-15"></a>            <span class="at">size =</span> <span class="dv">7</span>, <span class="co">#size adjustment</span></span>
+<span id="cb84-16"><a href="#cb84-16"></a>            <span class="at">vjust =</span> <span class="fl">0.7</span>) <span class="co">#position adjustment</span></span>
+<span id="cb84-17"><a href="#cb84-17"></a>mid_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adding-country-text-labels-on-the-graph" class="slide level2" data-auto-animate="true">
@@ -2213,10 +2313,10 @@ Jongoh Kim
 <p>Let’s create a separate data frame for the country text labels.</p>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb83-1" class="hljs-ln-code"><a href="#cb83-1"></a><span class="co">#creating the country text data frame</span></span>
-<span id="cb83-2" class="hljs-ln-code"><a href="#cb83-2"></a>country_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb83-3" class="hljs-ln-code"><a href="#cb83-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb83-4" class="hljs-ln-code"><a href="#cb83-4"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2002</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb85-1" class="hljs-ln-code"><a href="#cb85-1"></a><span class="co">#creating the country text data frame</span></span>
+<span id="cb85-2" class="hljs-ln-code"><a href="#cb85-2"></a>country_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb85-3" class="hljs-ln-code"><a href="#cb85-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb85-4" class="hljs-ln-code"><a href="#cb85-4"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2002</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adding-country-text-labels-on-the-graph-1" class="slide level2" data-auto-animate="true">
@@ -2224,19 +2324,19 @@ Jongoh Kim
 <p><br></p>
 <p>Second, let’s add another layer!</p>
 <p><br></p>
-<div class="sourceCode" id="cb84" data-code-line-numbers="5-13"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb84-1" class="hljs-ln-code"><a href="#cb84-1"></a><span class="co">#creating the country text data frame</span></span>
-<span id="cb84-2" class="hljs-ln-code"><a href="#cb84-2"></a>country_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb84-3" class="hljs-ln-code"><a href="#cb84-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb84-4" class="hljs-ln-code"><a href="#cb84-4"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2002</span>)</span>
-<span id="cb84-5" class="hljs-ln-code"><a href="#cb84-5"></a></span>
-<span id="cb84-6" class="hljs-ln-code"><a href="#cb84-6"></a><span class="co">#adding the text layer</span></span>
-<span id="cb84-7" class="hljs-ln-code"><a href="#cb84-7"></a>final_plot <span class="ot">&lt;-</span> mid_plot <span class="sc">+</span> </span>
-<span id="cb84-8" class="hljs-ln-code"><a href="#cb84-8"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> country_text.df,</span>
-<span id="cb84-9" class="hljs-ln-code"><a href="#cb84-9"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">label =</span> country, <span class="at">color =</span> country),</span>
-<span id="cb84-10" class="hljs-ln-code"><a href="#cb84-10"></a>            <span class="at">size =</span> <span class="dv">7</span>,</span>
-<span id="cb84-11" class="hljs-ln-code"><a href="#cb84-11"></a>            <span class="at">vjust =</span> <span class="fl">0.7</span>,</span>
-<span id="cb84-12" class="hljs-ln-code"><a href="#cb84-12"></a>            <span class="at">show.legend =</span> F) <span class="co">#not showing the legend</span></span>
-<span id="cb84-13" class="hljs-ln-code"><a href="#cb84-13"></a>final_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb86" data-code-line-numbers="5-13"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb86-1" class="hljs-ln-code"><a href="#cb86-1"></a><span class="co">#creating the country text data frame</span></span>
+<span id="cb86-2" class="hljs-ln-code"><a href="#cb86-2"></a>country_text.df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb86-3" class="hljs-ln-code"><a href="#cb86-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United Kingdom"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>, <span class="st">"Italy"</span>, <span class="st">"Spain"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb86-4" class="hljs-ln-code"><a href="#cb86-4"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2002</span>)</span>
+<span id="cb86-5" class="hljs-ln-code"><a href="#cb86-5"></a></span>
+<span id="cb86-6" class="hljs-ln-code"><a href="#cb86-6"></a><span class="co">#adding the text layer</span></span>
+<span id="cb86-7" class="hljs-ln-code"><a href="#cb86-7"></a>final_plot <span class="ot">&lt;-</span> mid_plot <span class="sc">+</span> </span>
+<span id="cb86-8" class="hljs-ln-code"><a href="#cb86-8"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> country_text.df,</span>
+<span id="cb86-9" class="hljs-ln-code"><a href="#cb86-9"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">label =</span> country, <span class="at">color =</span> country),</span>
+<span id="cb86-10" class="hljs-ln-code"><a href="#cb86-10"></a>            <span class="at">size =</span> <span class="dv">7</span>,</span>
+<span id="cb86-11" class="hljs-ln-code"><a href="#cb86-11"></a>            <span class="at">vjust =</span> <span class="fl">0.7</span>,</span>
+<span id="cb86-12" class="hljs-ln-code"><a href="#cb86-12"></a>            <span class="at">show.legend =</span> F) <span class="co">#not showing the legend</span></span>
+<span id="cb86-13" class="hljs-ln-code"><a href="#cb86-13"></a>final_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="saving-the-graph" class="slide level2">
 <h2>Saving the graph</h2>
@@ -2244,13 +2344,13 @@ Jongoh Kim
 <p>Let’s save the final_plot</p>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a><span class="co">#saving the final plot</span></span>
-<span id="cb85-2"><a href="#cb85-2"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> final_plot,</span>
-<span id="cb85-3"><a href="#cb85-3"></a>       <span class="at">filename =</span> <span class="st">"img/output.jpg"</span>, </span>
-<span id="cb85-4"><a href="#cb85-4"></a>       <span class="co">#make sure you have created an 'img' folder in your project directory</span></span>
-<span id="cb85-5"><a href="#cb85-5"></a>       <span class="at">width =</span> <span class="dv">40</span>,</span>
-<span id="cb85-6"><a href="#cb85-6"></a>       <span class="at">height =</span> <span class="dv">30</span>,</span>
-<span id="cb85-7"><a href="#cb85-7"></a>       <span class="at">units =</span> <span class="st">"cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a><span class="co">#saving the final plot</span></span>
+<span id="cb87-2"><a href="#cb87-2"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> final_plot,</span>
+<span id="cb87-3"><a href="#cb87-3"></a>       <span class="at">filename =</span> <span class="st">"img/output.jpg"</span>, </span>
+<span id="cb87-4"><a href="#cb87-4"></a>       <span class="co">#make sure you have created an 'img' folder in your project directory</span></span>
+<span id="cb87-5"><a href="#cb87-5"></a>       <span class="at">width =</span> <span class="dv">40</span>,</span>
+<span id="cb87-6"><a href="#cb87-6"></a>       <span class="at">height =</span> <span class="dv">30</span>,</span>
+<span id="cb87-7"><a href="#cb87-7"></a>       <span class="at">units =</span> <span class="st">"cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -2266,26 +2366,24 @@ Jongoh Kim
 <p>-&gt; Think as a latex file combined with R!</p>
 <p><br></p>
 <p>Check these links:</p>
-<div>
 <ul>
-<li class="fragment"><a href="https://rmarkdown.rstudio.com/lesson-1.html">R Markdown website from Rstudio</a></li>
-<li class="fragment"><a href="https://yihui.org/knitr/">knitr package website</a></li>
-<li class="fragment"><a href="https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf">R Markdown cheat sheet</a></li>
+<li><a href="https://rmarkdown.rstudio.com/lesson-1.html">R Markdown website from Rstudio</a></li>
+<li><a href="https://yihui.org/knitr/">knitr package website</a></li>
+<li><a href="https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf">R Markdown cheat sheet</a></li>
 </ul>
-</div>
 </section>
 <section id="lets-clean-the-r-environemnt-first-1" class="slide level2">
 <h2>Let’s clean the R environemnt first!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="co"># Clear plots</span></span>
-<span id="cb86-2"><a href="#cb86-2"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">dev.list</span>())) <span class="fu">dev.off</span>()</span>
-<span id="cb86-3"><a href="#cb86-3"></a><span class="co"># Clear console</span></span>
-<span id="cb86-4"><a href="#cb86-4"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\014</span><span class="st">"</span>) </span>
-<span id="cb86-5"><a href="#cb86-5"></a><span class="co"># Clean workspace</span></span>
-<span id="cb86-6"><a href="#cb86-6"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb86-7"><a href="#cb86-7"></a></span>
-<span id="cb86-8"><a href="#cb86-8"></a><span class="co">#restart R</span></span>
-<span id="cb86-9"><a href="#cb86-9"></a>rstudioapi<span class="sc">::</span><span class="fu">restartSession</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="co"># Clear plots</span></span>
+<span id="cb88-2"><a href="#cb88-2"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">dev.list</span>())) <span class="fu">dev.off</span>()</span>
+<span id="cb88-3"><a href="#cb88-3"></a><span class="co"># Clear console</span></span>
+<span id="cb88-4"><a href="#cb88-4"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\014</span><span class="st">"</span>) </span>
+<span id="cb88-5"><a href="#cb88-5"></a><span class="co"># Clean workspace</span></span>
+<span id="cb88-6"><a href="#cb88-6"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb88-7"><a href="#cb88-7"></a></span>
+<span id="cb88-8"><a href="#cb88-8"></a><span class="co">#restart R</span></span>
+<span id="cb88-9"><a href="#cb88-9"></a>rstudioapi<span class="sc">::</span><span class="fu">restartSession</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="installing-necessary-packages" class="slide level2">
@@ -2294,8 +2392,8 @@ Jongoh Kim
 <p>rmarkdown, markdown, knitr package are essential packages for</p>
 <p>any R Markdown file</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a><span class="co">#type this in the console</span></span>
-<span id="cb87-2"><a href="#cb87-2"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"rmarkdown"</span>, <span class="st">"markdown"</span>, <span class="st">"knitr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a><span class="co">#type this in the console</span></span>
+<span id="cb89-2"><a href="#cb89-2"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"rmarkdown"</span>, <span class="st">"markdown"</span>, <span class="st">"knitr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="creating-a-new-r-markdown-file" class="slide level2">
@@ -2313,29 +2411,27 @@ Jongoh Kim
 <p><br></p>
 <p>If you are more interested in html format, please check out:</p>
 <p><br></p>
-<div>
 <ul>
-<li class="fragment"><a href="https://quarto.org/">Quarto</a></li>
-<li class="fragment"><a href="https://shiny.rstudio.com/">R Shiny</a></li>
+<li><a href="https://quarto.org/">Quarto</a></li>
+<li><a href="https://shiny.rstudio.com/">R Shiny</a></li>
 </ul>
-</div>
 </section>
 <section id="setting-the-yaml-header" class="slide level2">
 <h2>Setting the yaml header</h2>
 <p>yaml header is the first part of an R markdown file.</p>
 <p>It decides many important aspects of your output.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="sc">---</span></span>
-<span id="cb88-2"><a href="#cb88-2"></a>title<span class="sc">:</span> <span class="st">"R markdown guide"</span></span>
-<span id="cb88-3"><a href="#cb88-3"></a>author<span class="sc">:</span> <span class="st">"Jongoh Kim"</span></span>
-<span id="cb88-4"><a href="#cb88-4"></a>date<span class="sc">:</span> <span class="st">"`r format(Sys.time(), '%d %B, %Y')`"</span> <span class="co">#setting the date by dd month, yyyy</span></span>
-<span id="cb88-5"><a href="#cb88-5"></a>output<span class="sc">:</span> </span>
-<span id="cb88-6"><a href="#cb88-6"></a>  pdf_document<span class="sc">:</span></span>
-<span id="cb88-7"><a href="#cb88-7"></a>    toc<span class="sc">:</span> true <span class="co">#add a table of contents a the start of a document</span></span>
-<span id="cb88-8"><a href="#cb88-8"></a>    toc_depth<span class="sc">:</span> <span class="dv">3</span> <span class="co">#The lowest level of headings to add to table of contents (e.g. 2, 3)</span></span>
-<span id="cb88-9"><a href="#cb88-9"></a>    number_sections<span class="sc">:</span> true <span class="co">#numbering the sections</span></span>
-<span id="cb88-10"><a href="#cb88-10"></a>urlcolor<span class="sc">:</span> blue <span class="co">#setting the hyperlink color to blue</span></span>
-<span id="cb88-11"><a href="#cb88-11"></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="sc">---</span></span>
+<span id="cb90-2"><a href="#cb90-2"></a>title<span class="sc">:</span> <span class="st">"R markdown guide"</span></span>
+<span id="cb90-3"><a href="#cb90-3"></a>author<span class="sc">:</span> <span class="st">"Jongoh Kim"</span></span>
+<span id="cb90-4"><a href="#cb90-4"></a>date<span class="sc">:</span> <span class="st">"`r format(Sys.time(), '%d %B, %Y')`"</span> <span class="co">#setting the date by dd month, yyyy</span></span>
+<span id="cb90-5"><a href="#cb90-5"></a>output<span class="sc">:</span> </span>
+<span id="cb90-6"><a href="#cb90-6"></a>  pdf_document<span class="sc">:</span></span>
+<span id="cb90-7"><a href="#cb90-7"></a>    toc<span class="sc">:</span> true <span class="co">#add a table of contents a the start of a document</span></span>
+<span id="cb90-8"><a href="#cb90-8"></a>    toc_depth<span class="sc">:</span> <span class="dv">3</span> <span class="co">#The lowest level of headings to add to table of contents (e.g. 2, 3)</span></span>
+<span id="cb90-9"><a href="#cb90-9"></a>    number_sections<span class="sc">:</span> true <span class="co">#numbering the sections</span></span>
+<span id="cb90-10"><a href="#cb90-10"></a>urlcolor<span class="sc">:</span> blue <span class="co">#setting the hyperlink color to blue</span></span>
+<span id="cb90-11"><a href="#cb90-11"></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="jumping-right-into-the-r-markdown" class="slide level2">

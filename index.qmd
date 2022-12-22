@@ -106,7 +106,8 @@ rm(list=ls())
 
 "OR the best way for R studio users
 to really initialize the R environment"
-#restart R
+#install.packages("rstudioapi")
+##restart R
 rstudioapi::restartSession()
 ```
 
@@ -159,9 +160,45 @@ Pipeline tools
 
 ## What is a Pipeline tool?
 
-## My personal decision tree for R packages
+Check out this [website](https://books.ropensci.org/targets/) for more
+details.
 
-![]()
+The website states that:
+
+With targets, you can maintain a reproducible workflow without repeating
+yourself.
+
+-   targets learns how your pipeline fits together,
+-   skips costly runtime for tasks that are already up to date,
+-   runs only the necessary computation,
+-   supports implicit parallel computing,
+-   abstracts files as R objects,
+-   and shows tangible evidence that the results match the underlying
+    code and data.
+
+## Summary
+
+-   targets
+    -   optional but much better know if your work involves a lot of
+        coding
+-   ggplot2
+    -   essential!
+    -   personally I believe this package is the best for graphing
+        results(better than matplotlib from Python)
+-   rmarkdown packages
+    -   optional
+    -   you can stick to Latex or word
+
+## Summary
+
+-   dplyr
+    -   essential!
+    -   %\>%(piping), merging, sampling methods from dplyr are much more
+        intuitive and easier to understand
+-   data.table
+    -   essentail if you are dealing with a data set that is larger than
+        30GB in CSV file format
+    -   it has a steep learning curve
 
 ## Installing packages
 
@@ -236,8 +273,14 @@ lapply(packages, require, character.only=T)
 
 <br>
 
-3.  or manual type the function name in the search bar of the Help
+3.  or manually type the function name in the search bar of the Help
     panel, that is located on the bottom right.
+
+## Checking the description of the function
+
+<br>
+
+![](img/help.png)
 
 ## Setting working directory
 
@@ -348,7 +391,7 @@ data.table::fwrite(data, "data/gapminder.csv",
 ```{r}
 #basic way
 ?read.csv
-#let's assume gapminder.csv file is stored in the data folder
+#let's read the gapminder.csv file stored in the data folder
 ## decimal points = "."
 data <- read.csv("data/gapminder.csv")
 ## decimal points = ","
@@ -1339,7 +1382,7 @@ merged.df
 
 <br>
 
-You can change the suffix setting if ".x" & ".y" does not help you have
+You can change the suffix setting if ".x" & ".y" does not help you to have
 a full picture of the merging process
 
 ```{r}
@@ -1574,6 +1617,63 @@ life_sum.df
 3 Asia          60.1   11.9 
 4 Europe        71.9    5.43
 5 Oceania       74.3    3.80"
+```
+
+## Checking average of a variable(Advanced)
+
+<br>
+
+Let's group the data by multiple variables
+
+```{r}
+sum.df <- data %>%
+  group_by(continent, year) %>%
+  summarise(life_avg = mean(lifeExp),
+            gdp_avg = mean(gdpPercap),
+            .groups = "keep") %>% #keeping the group variables
+  ungroup()
+sum.df
+"# A tibble: 60 × 4
+   continent  year life_avg gdp_avg
+   <fct>     <int>    <dbl>   <dbl>
+ 1 Africa     1952     39.1   1253.
+ 2 Africa     1957     41.3   1385.
+ 3 Africa     1962     43.3   1598.
+ 4 Africa     1967     45.3   2050.
+ 5 Africa     1972     47.5   2340.
+ 6 Africa     1977     49.6   2586.
+ 7 Africa     1982     51.6   2482.
+ 8 Africa     1987     53.3   2283.
+ 9 Africa     1992     53.6   2282.
+10 Africa     1997     53.6   2379.
+# … with 50 more rows
+# ℹ Use `print(n = ...)` to see more rows"
+```
+
+## Sorting the data set
+
+<br>
+
+Let's check which continent has the highest average life expectancy in each year by descending order
+
+```{r}
+sum.df %>%
+  arrange(-year, -life_avg)
+"# A tibble: 60 × 4
+   continent  year life_avg gdp_avg
+   <fct>     <int>    <dbl>   <dbl>
+ 1 Oceania    2007     80.7  29810.
+ 2 Europe     2007     77.6  25054.
+ 3 Americas   2007     73.6  11003.
+ 4 Asia       2007     70.7  12473.
+ 5 Africa     2007     54.8   3089.
+ 6 Oceania    2002     79.7  26939.
+ 7 Europe     2002     76.7  21712.
+ 8 Americas   2002     72.4   9288.
+ 9 Asia       2002     69.2  10174.
+10 Africa     2002     53.3   2599.
+# … with 50 more rows
+# ℹ Use `print(n = ...)` to see more rows"
 ```
 
 ## Linear regression {auto-animate="true"}
@@ -2136,13 +2236,11 @@ What is an R Markdown?
 
 Check these links:
 
-::: incremental
 -   [R Markdown website from
     Rstudio](https://rmarkdown.rstudio.com/lesson-1.html)
 -   [knitr package website](https://yihui.org/knitr/)
 -   [R Markdown cheat
     sheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf)
-:::
 
 ## Let's clean the R environemnt first!
 
@@ -2162,7 +2260,7 @@ rstudioapi::restartSession()
 
 <br>
 
-rmarkdown, markdown, knitr package are essential packages for 
+rmarkdown, markdown, knitr package are essential packages for
 
 any R Markdown file
 
@@ -2191,10 +2289,8 @@ If you are more interested in html format, please check out:
 
 <br>
 
-::: incremental
 -   [Quarto](https://quarto.org/)
 -   [R Shiny](https://shiny.rstudio.com/)
-:::
 
 ## Setting the yaml header
 
@@ -2218,11 +2314,12 @@ urlcolor: blue #setting the hyperlink color to blue
 
 ## Jumping right into the R markdown
 
-Check out the 'markdown_example.Rmd' file and 
+Check out the 'markdown_example.Rmd' file and
 
-its output(markdown_example.pdf) from 
+its output(markdown_example.pdf) from
 
-[the github page](https://github.com/jongohkim91/R-A-Z/blob/master/markdown)
+[the github
+page](https://github.com/jongohkim91/R-A-Z/blob/master/markdown)
 
 # Thanks!
 

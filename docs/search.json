@@ -4,7 +4,7 @@
     "href": "index.html#lets-clean-up-the-r-environment",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Let’s clean up the R environment!",
-    "text": "Let’s clean up the R environment!\n\nLet’s set the environment for our R-coding.\nI strongly suggest you put these lines of code at the start of your code file\nYou will use them a lot.\n\n# Clear plots\nif(!is.null(dev.list())) dev.off()\n# Clear console\ncat(\"\\014\") \n# Clean workspace\nrm(list=ls())\n\n\"OR the best way for R studio users\nto really initialize the R environment\"\n#restart R\nrstudioapi::restartSession()"
+    "text": "Let’s clean up the R environment!\n\nLet’s set the environment for our R-coding.\nI strongly suggest you put these lines of code at the start of your code file\nYou will use them a lot.\n\n# Clear plots\nif(!is.null(dev.list())) dev.off()\n# Clear console\ncat(\"\\014\") \n# Clean workspace\nrm(list=ls())\n\n\"OR the best way for R studio users\nto really initialize the R environment\"\n#install.packages(\"rstudioapi\")\n##restart R\nrstudioapi::restartSession()"
   },
   {
     "objectID": "index.html#calling-packages",
@@ -25,7 +25,7 @@
     "href": "index.html#checking-the-description-of-the-function",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Checking the description of the function",
-    "text": "Checking the description of the function\n\n\nYou can type this in console\n\n\n?lapply\n\n\n\nhighlight the function and press f1\n\n\n\nor manual type the function name in the search bar of the Help panel, that is located on the bottom right."
+    "text": "Checking the description of the function\n\n\nYou can type this in console\n\n\n?lapply\n\n\n\nhighlight the function and press f1\n\n\n\nor manually type the function name in the search bar of the Help panel, that is located on the bottom right."
   },
   {
     "objectID": "index.html#setting-working-directory",
@@ -53,7 +53,7 @@
     "href": "index.html#csv---basic",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "CSV - basic",
-    "text": "CSV - basic\n\n\n#basic way\n?read.csv\n#let's assume gapminder.csv file is stored in the data folder\n## decimal points = \".\"\ndata <- read.csv(\"data/gapminder.csv\")\n## decimal points = \",\"\ndata <- read.csv2(\"data/gapminder.csv\")"
+    "text": "CSV - basic\n\n\n#basic way\n?read.csv\n#let's read the gapminder.csv file stored in the data folder\n## decimal points = \".\"\ndata <- read.csv(\"data/gapminder.csv\")\n## decimal points = \",\"\ndata <- read.csv2(\"data/gapminder.csv\")"
   },
   {
     "objectID": "index.html#csv---data.table",
@@ -389,7 +389,7 @@
     "href": "index.html#advanced-merge",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "advanced merge",
-    "text": "advanced merge\n\nYou can change the suffix setting if “.x” & “.y” does not help you have a full picture of the merging process\n\nmerged.df <- left_join(x = x.df, \n                       y = y.df,\n                       by = \"id\", #by which column will you merge\n                       suffix = c(\".population\", \".language\"))\nmerged.df\n\"id country.population capital.population population country.language capital.language language\n1  1             France              Paris   67500000             <NA>             <NA>     <NA>\n2  2            Germany             Berlin   83130000          Germany           Berlin       DE\""
+    "text": "advanced merge\n\nYou can change the suffix setting if “.x” & “.y” does not help you to have a full picture of the merging process\n\nmerged.df <- left_join(x = x.df, \n                       y = y.df,\n                       by = \"id\", #by which column will you merge\n                       suffix = c(\".population\", \".language\"))\nmerged.df\n\"id country.population capital.population population country.language capital.language language\n1  1             France              Paris   67500000             <NA>             <NA>     <NA>\n2  2            Germany             Berlin   83130000          Germany           Berlin       DE\""
   },
   {
     "objectID": "index.html#advanced-merge-1",
@@ -641,7 +641,7 @@
     "href": "index.html#r-markdown",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "R Markdown",
-    "text": "R Markdown\n\nWhat is an R Markdown?\n\n-> Think as a latex file combined with R!\n\nCheck these links:\n\n\nR Markdown website from Rstudio\nknitr package website\nR Markdown cheat sheet"
+    "text": "R Markdown\n\nWhat is an R Markdown?\n\n-> Think as a latex file combined with R!\n\nCheck these links:\n\nR Markdown website from Rstudio\nknitr package website\nR Markdown cheat sheet"
   },
   {
     "objectID": "index.html#installing-knitr-package",
@@ -669,7 +669,7 @@
     "href": "index.html#choosing-the-output-typepdf",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "choosing the output type(pdf)",
-    "text": "choosing the output type(pdf)\n\nThis session only focuses on the pdf format.\n\nIf you are more interested in html format, please check out:\n\n\n\nQuarto\nR Shiny"
+    "text": "choosing the output type(pdf)\n\nThis session only focuses on the pdf format.\n\nIf you are more interested in html format, please check out:\n\n\nQuarto\nR Shiny"
   },
   {
     "objectID": "index.html#setting-the-yaml-header",
@@ -753,7 +753,7 @@
     "href": "index.html#what-is-a-pipeline-tool",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "What is a Pipeline tool?",
-    "text": "What is a Pipeline tool?"
+    "text": "What is a Pipeline tool?\nCheck out this website for more details.\nThe website states that:\nWith targets, you can maintain a reproducible workflow without repeating yourself.\n\ntargets learns how your pipeline fits together,\nskips costly runtime for tasks that are already up to date,\nruns only the necessary computation,\nsupports implicit parallel computing,\nabstracts files as R objects,\nand shows tangible evidence that the results match the underlying code and data."
   },
   {
     "objectID": "index.html#my-personal-decision-tree-for-r-packages",
@@ -957,5 +957,40 @@
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "installing necessary packages",
     "text": "installing necessary packages\n\nrmarkdown, markdown, knitr package are essential packages for\nany R Markdown file\n\n#type this in the console\ninstall.packages(c(\"rmarkdown\", \"markdown\", \"knitr\"))"
+  },
+  {
+    "objectID": "index.html#summary",
+    "href": "index.html#summary",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Summary",
+    "text": "Summary\n\ntargets\n\noptional but much better know if your work involves a lot of coding\n\nggplot2\n\nessential!\npersonally I believe this package is the best for graphing results(better than matplotlib from Python)\n\nrmarkdown packages\n\noptional\nyou can stick to Latex or word"
+  },
+  {
+    "objectID": "index.html#summary-1",
+    "href": "index.html#summary-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Summary",
+    "text": "Summary\n\ndplyr\n\nessential!\n%>%(piping), merging, sampling methods from dplyr are much more intuitive and easier to understand\n\ndata.table\n\nessentail if you are dealing with a data set that is larger than 30GB in CSV file format\nit has a steep learning curve"
+  },
+  {
+    "objectID": "index.html#checking-the-description-of-the-function-1",
+    "href": "index.html#checking-the-description-of-the-function-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking the description of the function",
+    "text": "Checking the description of the function"
+  },
+  {
+    "objectID": "index.html#checking-average-of-a-variableadvanced",
+    "href": "index.html#checking-average-of-a-variableadvanced",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking average of a variable(Advanced)",
+    "text": "Checking average of a variable(Advanced)\n\nLet’s group the data by multiple variables\n\nsum.df <- data %>%\n  group_by(continent, year) %>%\n  summarise(life_avg = mean(lifeExp),\n            gdp_avg = mean(gdpPercap),\n            .groups = \"keep\") %>% #keeping the group variables\n  ungroup()\nsum.df\n\"# A tibble: 60 × 4\n   continent  year life_avg gdp_avg\n   <fct>     <int>    <dbl>   <dbl>\n 1 Africa     1952     39.1   1253.\n 2 Africa     1957     41.3   1385.\n 3 Africa     1962     43.3   1598.\n 4 Africa     1967     45.3   2050.\n 5 Africa     1972     47.5   2340.\n 6 Africa     1977     49.6   2586.\n 7 Africa     1982     51.6   2482.\n 8 Africa     1987     53.3   2283.\n 9 Africa     1992     53.6   2282.\n10 Africa     1997     53.6   2379.\n# … with 50 more rows\n# ℹ Use `print(n = ...)` to see more rows\""
+  },
+  {
+    "objectID": "index.html#sorting-the-data-set",
+    "href": "index.html#sorting-the-data-set",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Sorting the data set",
+    "text": "Sorting the data set\n\nLet’s check which continent has the highest average life expectancy in each year by descending order\n\nsum.df %>%\n  arrange(-year, -life_avg)\n\"# A tibble: 60 × 4\n   continent  year life_avg gdp_avg\n   <fct>     <int>    <dbl>   <dbl>\n 1 Oceania    2007     80.7  29810.\n 2 Europe     2007     77.6  25054.\n 3 Americas   2007     73.6  11003.\n 4 Asia       2007     70.7  12473.\n 5 Africa     2007     54.8   3089.\n 6 Oceania    2002     79.7  26939.\n 7 Europe     2002     76.7  21712.\n 8 Americas   2002     72.4   9288.\n 9 Asia       2002     69.2  10174.\n10 Africa     2002     53.3   2599.\n# … with 50 more rows\n# ℹ Use `print(n = ...)` to see more rows\""
   }
 ]
