@@ -963,14 +963,14 @@
     "href": "index.html#summary",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Summary",
-    "text": "Summary\n\ntargets\n\noptional but much better know if your work involves a lot of coding\n\nggplot2\n\nessential!\npersonally I believe this package is the best for graphing results(better than matplotlib from Python)\n\nrmarkdown packages\n\noptional\nyou can stick to Latex or word"
+    "text": "Summary\n\ntargets\n\noptional but much better to know if your work involves a lot of coding\n\nggplot2\n\nessential!\npersonally I believe this package is the best for graphing results(better than matplotlib from Python)\n\nrmarkdown packages\n\noptional\nyou can stick to Latex or word"
   },
   {
     "objectID": "index.html#summary-1",
     "href": "index.html#summary-1",
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Summary",
-    "text": "Summary\n\ndplyr\n\nessential!\n%>%(piping), merging, sampling methods from dplyr are much more intuitive and easier to understand\n\ndata.table\n\nessentail if you are dealing with a data set that is larger than 30GB in CSV file format\nit has a steep learning curve"
+    "text": "Summary\n\ndplyr\n\nessential!\n%>%(piping), merging, sampling methods from dplyr are much more intuitive and easier to understand\n\ndata.table\n\nessential if you are dealing with a data set that is larger than 30GB in CSV file format\nit has a steep learning curve"
   },
   {
     "objectID": "index.html#checking-the-description-of-the-function-1",

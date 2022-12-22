@@ -179,7 +179,7 @@ yourself.
 ## Summary
 
 -   targets
-    -   optional but much better know if your work involves a lot of
+    -   optional but much better to know if your work involves a lot of
         coding
 -   ggplot2
     -   essential!
@@ -196,7 +196,7 @@ yourself.
     -   %\>%(piping), merging, sampling methods from dplyr are much more
         intuitive and easier to understand
 -   data.table
-    -   essentail if you are dealing with a data set that is larger than
+    -   essential if you are dealing with a data set that is larger than
         30GB in CSV file format
     -   it has a steep learning curve
 
