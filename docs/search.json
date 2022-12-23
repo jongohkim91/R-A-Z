@@ -992,5 +992,26 @@
     "title": "Data analysis with Tidyverse(dplyr)",
     "section": "Sorting the data set",
     "text": "Sorting the data set\n\nLet’s check which continent has the highest average life expectancy in each year by descending order\n\nsum.df %>%\n  arrange(-year, -life_avg)\n\"# A tibble: 60 × 4\n   continent  year life_avg gdp_avg\n   <fct>     <int>    <dbl>   <dbl>\n 1 Oceania    2007     80.7  29810.\n 2 Europe     2007     77.6  25054.\n 3 Americas   2007     73.6  11003.\n 4 Asia       2007     70.7  12473.\n 5 Africa     2007     54.8   3089.\n 6 Oceania    2002     79.7  26939.\n 7 Europe     2002     76.7  21712.\n 8 Americas   2002     72.4   9288.\n 9 Asia       2002     69.2  10174.\n10 Africa     2002     53.3   2599.\n# … with 50 more rows\n# ℹ Use `print(n = ...)` to see more rows\""
+  },
+  {
+    "objectID": "index.html#writingexporting-data-1",
+    "href": "index.html#writingexporting-data-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Writing/exporting Data",
+    "text": "Writing/exporting Data\n\nLet’s initially focus on CSV files only!\nFirst let’s read in the gapminder table from the gapminder package\n\nlibrary(gapminder)\n#assigning the gapminder table to data\ndata <- gapminder\n\n\"OR\"\n\n#assigning the gapminder table to data\ndata <- gapminder::gapminder"
+  },
+  {
+    "objectID": "index.html#writingexporting-data-2",
+    "href": "index.html#writingexporting-data-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Writing/exporting Data",
+    "text": "Writing/exporting Data\n\nLet’s export this table to a CSV file\nunder the data folder in the project directory\nDon’t forget to create the data folder before running the code!\nor you will get an error\n\n#writing the CSV file\n## decimal points = \".\"\nwrite.csv(data, \"data/gapminder.csv\")\n\n## decimal points = comma\nwrite.csv2(data, \"data/gapminder.csv\")"
+  },
+  {
+    "objectID": "index.html#writingexporting-data-3",
+    "href": "index.html#writingexporting-data-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Writing/exporting Data",
+    "text": "Writing/exporting Data\n\nIt is faster to export a data if you use the data.table package\n\n#you should have installed the data.table package first\n## install.packages(\"data.table\")\n\n##write as a CSV file!\ndata.table::fwrite(data, \"data/gapminder.csv\",\n                   dec = \".\", #decimal points(\".\" is the default)\n                   sep = \",\") #separator(comma is the default)"
   }
 ]

@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Jongoh Kim">
-  <meta name="dcterms.date" content="2022-12-22">
+  <meta name="dcterms.date" content="2022-12-23">
   <title>Data analysis with Tidyverse(dplyr)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -403,7 +403,7 @@ Jongoh Kim
     </div>
 </div>
 
-  <p class="date">December 22, 2022</p>
+  <p class="date">December 23, 2022</p>
 </section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
@@ -668,12 +668,12 @@ Jongoh Kim
 <p>Follow the section 6 of this <a href="https://bookdown.org/daniel_dauber_io/r4np_book/starting-your-r-projects.html">webpage.</a></p>
 </section></section>
 <section>
-<section id="writingexproting-data" class="title-slide slide level1 center">
-<h1>Writing/exproting Data</h1>
+<section id="writingexporting-data" class="title-slide slide level1 center">
+<h1>Writing/exporting Data</h1>
 
 </section>
-<section id="writingexproting-data-1" class="slide level2">
-<h2>Writing/exproting Data</h2>
+<section id="writingexporting-data-1" class="slide level2">
+<h2>Writing/exporting Data</h2>
 <p><br></p>
 <p>Let’s initially focus on CSV files only!</p>
 <p>First let’s read in the gapminder table from the gapminder package</p>
@@ -688,8 +688,8 @@ Jongoh Kim
 <span id="cb8-8"><a href="#cb8-8"></a>data <span class="ot">&lt;-</span> gapminder<span class="sc">::</span>gapminder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="writingexproting-data-2" class="slide level2">
-<h2>Writing/exproting Data</h2>
+<section id="writingexporting-data-2" class="slide level2">
+<h2>Writing/exporting Data</h2>
 <p><br></p>
 <p>Let’s export this table to a CSV file</p>
 <p>under the data folder in the project directory</p>
@@ -704,8 +704,8 @@ Jongoh Kim
 <span id="cb9-6"><a href="#cb9-6"></a><span class="fu">write.csv2</span>(data, <span class="st">"data/gapminder.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="writingexproting-data-3" class="slide level2">
-<h2>Writing/exproting Data</h2>
+<section id="writingexporting-data-3" class="slide level2">
+<h2>Writing/exporting Data</h2>
 <p><br></p>
 <p>It is faster to export a data if you use the data.table package</p>
 <div class="cell">

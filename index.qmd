@@ -323,9 +323,9 @@ Let's create a "training" project at our desktop.
 Follow the section 6 of this
 [webpage.](https://bookdown.org/daniel_dauber_io/r4np_book/starting-your-r-projects.html)
 
-# Writing/exproting Data
+# Writing/exporting Data
 
-## Writing/exproting Data
+## Writing/exporting Data
 
 <br>
 
@@ -345,7 +345,7 @@ data <- gapminder::gapminder
 
 ```
 
-## Writing/exproting Data
+## Writing/exporting Data
 
 <br>
 
@@ -366,7 +366,7 @@ write.csv(data, "data/gapminder.csv")
 write.csv2(data, "data/gapminder.csv")
 ```
 
-## Writing/exproting Data
+## Writing/exporting Data
 
 <br>
 
