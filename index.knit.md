@@ -2,7 +2,7 @@
 title: "Data analysis with Tidyverse(dplyr)"
 subtitle: "from reading data to graphing results"
 author: "Jongoh Kim"
-date: "`r Sys.Date()`"
+date: "2023-01-11"
 date-format: long
 institute: "LISER"
 format: 
@@ -23,6 +23,7 @@ editor:
   markdown: 
     wrap: 72
 ---
+
 
 <!-- Print to PDF -->
 
@@ -96,7 +97,10 @@ file
 
 You will use them a lot.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # Clear plots
 if(!is.null(dev.list())) dev.off()
 # Clear console
@@ -110,6 +114,8 @@ to really initialize the R environment"
 ##restart R
 rstudioapi::restartSession()
 ```
+:::
+
 
 ## Packages
 
@@ -209,9 +215,14 @@ Let's install a package called 'gapminder'
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 install.packages("gapminder")
 ```
+:::
+
 
 ## Installing packages
 
@@ -222,13 +233,18 @@ package
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #installing multiple packages at one-go
 install.packages(c("dplyr", "stringr", "ggplot2"))
 
 #you can also install the whole packages from the tidyverse bundle by
 install.packages('tidyverse')
 ```
+:::
+
 
 ## Calling packages
 
@@ -238,12 +254,17 @@ Intuitive way
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 library(dplyr)
 library(ggplot2)
 library(stringr)
 library(stringi)
 ```
+:::
+
 
 ## Calling packages
 
@@ -253,10 +274,15 @@ Elegant way
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 packages <- c("dplyr", "ggplot2", "stringr", "stringi")
 lapply(packages, require, character.only=T)
 ```
+:::
+
 
 ## Checking the description of the function
 
@@ -264,9 +290,14 @@ lapply(packages, require, character.only=T)
 
 1.  You can type this in console
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 ?lapply
 ```
+:::
+
 
 <br>
 
@@ -287,13 +318,18 @@ lapply(packages, require, character.only=T)
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #checking your current working directory
 getwd()
 
 #setting your working directory
 setwd("Here_you_type_the_directory_path")
 ```
+:::
+
 
 # Project
 
@@ -334,7 +370,10 @@ Let's initially focus on CSV files only!
 
 First let's read in the gapminder table from the gapminder package
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 library(gapminder)
 #assigning the gapminder table to data
 data <- gapminder
@@ -343,8 +382,9 @@ data <- gapminder
 
 #assigning the gapminder table to data
 data <- gapminder::gapminder
-
 ```
+:::
+
 
 ## Writing/exporting Data
 
@@ -358,7 +398,10 @@ under the data folder in the project directory
 
 or you will get an error
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #writing the CSV file
 ## decimal points = "."
 write.csv(data, "data/gapminder.csv")
@@ -366,6 +409,8 @@ write.csv(data, "data/gapminder.csv")
 ## decimal points = comma
 write.csv2(data, "data/gapminder.csv")
 ```
+:::
+
 
 ## Writing/exporting Data
 
@@ -373,7 +418,10 @@ write.csv2(data, "data/gapminder.csv")
 
 It is faster to export a data if you use the data.table package
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #you should have installed the data.table package first
 ## install.packages("data.table")
 
@@ -382,6 +430,8 @@ data.table::fwrite(data, "data/gapminder.csv",
                    dec = ".", #decimal points("." is the default)
                    sep = ",") #separator(comma is the default)
 ```
+:::
+
 
 # Reading in Data
 
@@ -389,7 +439,10 @@ data.table::fwrite(data, "data/gapminder.csv",
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #basic way
 ?read.csv
 #let's read the gapminder.csv file stored in the data folder
@@ -398,6 +451,8 @@ data <- read.csv("data/gapminder.csv")
 ## decimal points = ","
 data <- read.csv2("data/gapminder.csv")
 ```
+:::
+
 
 ## CSV - data.table
 
@@ -413,7 +468,10 @@ It is fast!([link](https://jozef.io/r917-fread-comparisons/))
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #data table way
 library(data.table)
 
@@ -426,12 +484,17 @@ data <- data.table::fread("data/gapminder.csv",
                           nrows = 10, #choose how many rows
                           select = c("country", "continent")) #choose which columns
 ```
+:::
+
 
 ## STATA, SAS, and SPSS
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #we need haven package!
 install.packages("haven")
 library(haven)
@@ -443,6 +506,8 @@ data <- read_sas("sas.sas")
 #SPSS
 data <- read_spss("spss.spss")
 ```
+:::
+
 
 ## other tables(tab delimited and etc.)
 
@@ -452,7 +517,10 @@ In general, Google/Stack Overflow is your friend.
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 ?read.table
 
 #tab delimited
@@ -467,6 +535,8 @@ read.table(file = "data/gapminder.csv",
            sep = ",",
            dec = ".")
 ```
+:::
+
 
 ## Calculating time to read a data file
 
@@ -479,12 +549,17 @@ Especially, if the file is large.
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 ct <- Sys.time()
 data <- read.csv2("data/gapminder.csv")
 print(Sys.time()-ct)
 "Time difference of 0.01645303 secs"
 ```
+:::
+
 
 # Checking/Cleaning the data
 
@@ -511,7 +586,10 @@ For instance,
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 data <- gapminder::gapminder
 str(data)
 'tibble [1,704 × 6] (S3: tbl_df/tbl/data.frame)
@@ -522,6 +600,8 @@ str(data)
  $ pop      : int [1:1704] 8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
  $ gdpPercap: num [1:1704] 779 821 853 836 740 ...'
 ```
+:::
+
 
 ## first and the last of the data
 
@@ -531,7 +611,10 @@ Maybe you simply want to check the top N rows or the last N rows
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #checking the first 6 rows
 head(data)
 #checking the last 6 rows
@@ -542,6 +625,8 @@ head(data, 10)
 #checking the last 10 rows
 tail(data, 10)
 ```
+:::
+
 
 ## Checking unique values
 
@@ -551,18 +636,26 @@ Maybe you simply want to check unique values of a column
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #checking unique values of the continent column
 unique(data$continent)
 "[1] Asia     Europe   Africa   Americas Oceania 
  Levels: Africa Americas Asia Europe Oceania"
 ```
+:::
+
 
 ## Checking variable type
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 typeof(data$continent)
 '[1] "integer"'
 class(data$continent)
@@ -575,12 +668,17 @@ print(as.factor(c("a", "b", "c")))
 "[1] a b c
  Levels: a b c"
 ```
+:::
+
 
 ## Changing variable types
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #changing variable types
 data$continent[1]
 "[1] Asia
@@ -595,12 +693,17 @@ as.integer(data$continent[1])
 # as.factor()
 # as.data.frame()
 ```
+:::
+
 
 ## list and vectors
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #vector can only have one data type!
 c(1,2,3)
 "[1] 1 2 3"
@@ -616,10 +719,15 @@ temp
 [[2]]
 [1] 1'
 ```
+:::
+
 
 ## list and vectors
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # changing the list into a vector again
 temp <- unlist(temp)
 temp
@@ -638,6 +746,8 @@ $capital
 $population
 [1] 67500000 83130000'
 ```
+:::
+
 
 ## list and vectors {auto-animate="true"}
 
@@ -645,7 +755,10 @@ $population
 
 You should be careful when you want to extract a value from a list
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #list
 temp[1]
 '$country
@@ -661,6 +774,8 @@ temp$country #think $ a sign to use to access a sub-structure(sub-list)
 class(temp[[1]])
 '[1] "character"'
 ```
+:::
+
 
 ## list and vectors {auto-animate="true"}
 
@@ -702,7 +817,10 @@ First, let's create an example data.frame(table in R)
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 df <- data.frame(country = c("France", "Germany", "Luxembourg"),
              capital = c("Paris", "Berlin", NA),
              population = c(67500000, 83130000, 639000))
@@ -712,6 +830,8 @@ df
 2    Germany  Berlin   83130000
 3 Luxembourg    <NA>     639000"
 ```
+:::
+
 
 ## Cleaning missing values
 
@@ -727,7 +847,10 @@ A special operator from the dplyr package!
 
 Think it as "then" in English.
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 df %>% # call df
   filter(!is.na(capital))
 #then filter observations that do not have a missing value(NA) in the capital column
@@ -739,6 +862,8 @@ df %>% # call df
 #the equivalent is
 filter(df, !is.na(capital))
 ```
+:::
+
 
 ## Cleaning missing values
 
@@ -747,7 +872,10 @@ For instance,
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #basic way
 lux <- filter(df, country=="Luxembourg") #getting Luxembourg observation
 lux <- mutate(lux, capital = "Luxembourg City") #changing the capital value for Luxembourg
@@ -762,6 +890,8 @@ lux
 "    country         capital population
 1 Luxembourg Luxembourg City     639000"
 ```
+:::
+
 
 ## Cleaning missing values
 
@@ -771,7 +901,10 @@ Let's say you have odd values for missing values e.g. -999
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 df <- data.frame(country = c("France", "Germany", "Luxembourg"),
              capital = c("Paris", "Berlin", -999),
              population = c(67500000, 83130000, "Non_existent"))
@@ -783,12 +916,17 @@ df %>%
 df %>% 
   filter(population=="Non_existent")
 ```
+:::
+
 
 ## Cleaning missing values
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #retrieve an observation that has the value "-999" in the capital columns
 df %>% 
   filter(capital=="-999")
@@ -807,6 +945,8 @@ df %>%
   mutate(capital="Luxembourg City",
          population = 639000)
 ```
+:::
+
 
 ## Cleaning missing values
 
@@ -816,7 +956,10 @@ Don't forget to assign the changed values to the original data frame!
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 df <- df %>% 
   filter(capital=="-999") %>%
   mutate(capital="Luxembourg City",
@@ -827,6 +970,8 @@ df
 #I WANTED TO CHANGE THE VALUES AND STORE THEM!
 #I DON'T WANT TO ONLY GET CLEAN LUX ROW!
 ```
+:::
+
 
 ## Cleaning missing values
 
@@ -836,7 +981,10 @@ Actually you need to use ifelse() function to get all observations
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #re-creating the data frame
 df <- data.frame(country = c("France", "Germany", "Luxembourg"),
              capital = c("Paris", "Berlin", -999),
@@ -851,6 +999,8 @@ df %>%
 2    Germany    FALSE     83130000
 3 Luxembourg Lux City Non_existent"
 ```
+:::
+
 
 ## Cleaning missing values
 
@@ -860,7 +1010,10 @@ Actually you need to use ifelse() function to get all observations
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #keeping the other values
 df <- df %>% 
   mutate(capital=ifelse(capital=="-999",
@@ -879,6 +1032,8 @@ df
 2    Germany          Berlin   83130000
 3 Luxembourg Luxembourg City     639000"
 ```
+:::
+
 
 ## Custom function
 
@@ -891,7 +1046,10 @@ For instance,
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 check_miss <- function(column, bool=F){
   if(bool==F){#if one don't want T/F values for the result
     fin_value <- is.na(column) | stringi::stri_isempty(column)
@@ -903,6 +1061,8 @@ check_miss <- function(column, bool=F){
   }
 }
 ```
+:::
+
 
 ## Custom function
 
@@ -912,13 +1072,18 @@ Let's test the function
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 check_miss(c(NA, "Luxembourg" ,""))
 "[1] 1 3"
 
 check_miss(c(NA, "Luxembourg" ,""), bool = T)
 "[1]  TRUE FALSE  TRUE"
 ```
+:::
+
 
 # Creating/deleting columns
 
@@ -930,7 +1095,10 @@ It is simple! Just use mutate() function to create a new column
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 df <- df %>%
   mutate(total_pop = sum(population))
 df
@@ -939,6 +1107,8 @@ df
 2    Germany          Berlin   83130000 151269000
 3 Luxembourg Luxembourg City     639000 151269000"
 ```
+:::
+
 
 ## Creating columns based on condition
 
@@ -948,7 +1118,10 @@ There are two ways!
 
 1.The intuitive way
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #saving the value
 temp_pop <- df %>%
   filter(country %in% c("France", "Luxembourg")) %>%
@@ -966,6 +1139,8 @@ df
 2    Germany          Berlin   83130000 151269000   68139000
 3 Luxembourg Luxembourg City     639000 151269000   68139000"
 ```
+:::
+
 
 ## Creating columns based on condition
 
@@ -973,7 +1148,10 @@ df
 
 2.The complex way
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 df <- df %>%
   #creating a column that indicates whether a country speaks french
   mutate(french = ifelse(country %in% c("France", "Luxembourg"),
@@ -993,6 +1171,8 @@ df
 2 Germany    Berlin            83130000 151269000         NA FALSE 
 3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE "
 ```
+:::
+
 
 ## Creating columns based on condition {auto-animate="true"}
 
@@ -1000,7 +1180,10 @@ df
 
 If you forget to ungroup...
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 df <- df %>%
   mutate(french = ifelse(country %in% c("France", "Luxembourg"),
                              T,
@@ -1018,6 +1201,8 @@ df %>%
 2 Germany    Berlin            83130000 151269000         NA FALSE  83130000
 3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE   68139000"
 ```
+:::
+
 
 ## Creating columns based on condition {auto-animate="true"}
 
@@ -1051,7 +1236,10 @@ is.grouped_df(df)
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #choose the columns you want to exclude
 df %>%
   select(-french_pop, -french)
@@ -1071,6 +1259,8 @@ df %>%
 2 Germany    Berlin            83130000 151269000
 3 Luxembourg Luxembourg City     639000 151269000"
 ```
+:::
+
 
 ## Deleting columns {auto-animate="true"}
 
@@ -1111,7 +1301,10 @@ df %>%
 
 Let's try an advanced example!
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #advanced
 df <- data.frame(country = "France",
                  capital = "Paris",
@@ -1123,6 +1316,8 @@ df
 " country capital population Y1950_population Y1960_population Y1970_population
 1  France   Paris   67500000               NA                              -999"
 ```
+:::
+
 
 ## Deleting columns {auto-animate="true"}
 
@@ -1295,9 +1490,14 @@ We would like the merge the two.
 
 Help page is accessible by typing
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 ?left_join
 ```
+:::
+
 
 it shows simple explanation of each join.
 
@@ -1310,7 +1510,10 @@ page](https://github.com/gadenbuie/tidyexplain)
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #setting the data sets
 x.df <- data.frame(id = c(1,2),
                    country = c("France", "Germany"),
@@ -1322,12 +1525,17 @@ y.df <- data.frame(id = c(2,3),
                    capital = c( "Berlin", "Luxembourg City"),
                    language = c( "DE",  "FR"))
 ```
+:::
+
 
 ## left_join example
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 merged.df <- left_join(x = x.df, 
                        y = y.df,
                        by = "id") #by which column will you merge
@@ -1336,12 +1544,17 @@ merged.df
 1  1    France     Paris   67500000      <NA>      <NA>     <NA>
 2  2   Germany    Berlin   83130000   Germany    Berlin       DE"
 ```
+:::
+
 
 ## right_join example
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 merged.df <- right_join(x = x.df, 
                         y = y.df,
                         by = "id") #by which column will you merge
@@ -1350,12 +1563,17 @@ merged.df
 1  2   Germany    Berlin   83130000    Germany          Berlin       DE
 2  3      <NA>      <NA>         NA Luxembourg Luxembourg City       FR"
 ```
+:::
+
 
 ## inner_join example
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 merged.df <- inner_join(x = x.df, 
                         y = y.df,
                         by = "id") #by which column will you merge
@@ -1363,12 +1581,17 @@ merged.df
 " id country.x capital.x population country.y capital.y language
 1  2   Germany    Berlin   83130000   Germany    Berlin       DE"
 ```
+:::
+
 
 ## full_join example
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 merged.df <- full_join(x = x.df, 
                        y = y.df,
                        by = "id") #by which column will you merge
@@ -1378,6 +1601,8 @@ merged.df
 2  2   Germany    Berlin   83130000    Germany          Berlin       DE
 3  3      <NA>      <NA>         NA Luxembourg Luxembourg City       FR"
 ```
+:::
+
 
 ## advanced merge {auto-animate="true"}
 
@@ -1386,7 +1611,10 @@ merged.df
 You can change the suffix setting if ".x" & ".y" does not help you to
 have a full picture of the merging process
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 merged.df <- left_join(x = x.df, 
                        y = y.df,
                        by = "id", #by which column will you merge
@@ -1396,6 +1624,8 @@ merged.df
 1  1             France              Paris   67500000             <NA>             <NA>     <NA>
 2  2            Germany             Berlin   83130000          Germany           Berlin       DE"
 ```
+:::
+
 
 ## advanced merge {auto-animate="true"}
 
@@ -1525,7 +1755,10 @@ merged.df
 
 Let's read in a gapminder data set
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 library(gapminder)
 #reading in the data
 data <- gapminder
@@ -1540,6 +1773,8 @@ head(data)
 5 Afghanistan Asia       1972    36.1 13079460      740.
 6 Afghanistan Asia       1977    38.4 14880372      786.'
 ```
+:::
+
 
 ## Checking average of a variable
 
@@ -1549,11 +1784,16 @@ Simple version
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 summary(data$lifeExp)
 " Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   23.60   48.20   60.71   59.47   70.85   82.60 "
 ```
+:::
+
 
 ## Checking average of a variable
 
@@ -1563,7 +1803,10 @@ Calculating the average of Europe
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 data %>%
   filter(continent=="Europe") %>%
   summarise(life_avg_eu = mean(lifeExp))
@@ -1571,6 +1814,8 @@ data %>%
         <dbl>
 1        71.9"
 ```
+:::
+
 
 ## Checking average of a variable
 
@@ -1581,7 +1826,10 @@ continent
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 data %>%
   group_by(continent) %>%
   summarise(life_avg = mean(lifeExp),
@@ -1595,6 +1843,8 @@ data %>%
 4 Europe        71.9    5.43
 5 Oceania       74.3    3.80"
 ```
+:::
+
 
 ## Checking average of a variable
 
@@ -1604,7 +1854,10 @@ If you want to save the resulted table, don't forget to save it!
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 life_sum.df <- data %>%
   group_by(continent) %>%
   summarise(life_avg = mean(lifeExp),
@@ -1619,6 +1872,8 @@ life_sum.df
 4 Europe        71.9    5.43
 5 Oceania       74.3    3.80"
 ```
+:::
+
 
 ## Checking average of a variable(Advanced)
 
@@ -1626,7 +1881,10 @@ life_sum.df
 
 Let's group the data by multiple variables
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 sum.df <- data %>%
   group_by(continent, year) %>%
   summarise(life_avg = mean(lifeExp),
@@ -1650,6 +1908,8 @@ sum.df
 # … with 50 more rows
 # ℹ Use `print(n = ...)` to see more rows"
 ```
+:::
+
 
 ## Sorting the data set
 
@@ -1658,7 +1918,10 @@ sum.df
 Let's check which continent has the highest average life expectancy in
 each year by descending order
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 sum.df %>%
   arrange(-year, -life_avg)
 "# A tibble: 60 × 4
@@ -1677,6 +1940,8 @@ sum.df %>%
 # … with 50 more rows
 # ℹ Use `print(n = ...)` to see more rows"
 ```
+:::
+
 
 ## Linear regression {auto-animate="true"}
 
@@ -1686,12 +1951,17 @@ Simple linear regression
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #simple linear regression
 ols <- lm(formula = lifeExp ~ gdpPercap + continent,
           data = data)
 ols
 ```
+:::
+
 
 ## Linear regression {auto-animate="true"}
 
@@ -1734,7 +2004,10 @@ F-statistic: 467.7 on 5 and 1698 DF,  p-value: < 2.2e-16"
 
 Checking the regression result in detail
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #ols result!
 ols_result <- summary(ols)
 
@@ -1750,6 +2023,8 @@ continentOceania  1.814604e+01 1.787426e+00  10.15205  1.502557e-23"
 class(ols_result$coefficients)
 '"matrix" "array"'
 ```
+:::
+
 
 ## Linear regression
 
@@ -1757,7 +2032,10 @@ class(ols_result$coefficients)
 
 Dealing with scientific notations(e)
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #scientific notation
 ols_result$coefficients[,1]
 "     (Intercept)         gdpPercap continentAmericas     continentAsia 
@@ -1771,6 +2049,8 @@ format(ols_result$coefficients[,1], scientific = F)
   "17.5723409668"   "18.1460410154" '
 #NOTE THAT the numbers are characters now!
 ```
+:::
+
 
 ## Linear regression {auto-animate="true"}
 
@@ -1832,7 +2112,10 @@ Our goal is to draw a graph like this
 
 ## Let's clean the R environemnt first!
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # Clear plots
 if(!is.null(dev.list())) dev.off()
 # Clear console
@@ -1847,6 +2130,8 @@ rstudioapi::restartSession()
 packages <- c("dplyr", "ggplot2", "stringr", "stringi")
 lapply(packages, require, character.only=T)
 ```
+:::
+
 
 ## basic dot plot
 
@@ -1854,7 +2139,10 @@ lapply(packages, require, character.only=T)
 
 Let's start with a basic plot
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #reading in data again
 data <- gapminder::gapminder
 
@@ -1864,6 +2152,8 @@ data %>%
   ggplot() + 
   geom_point(aes(x = year, y = gdpPercap))
 ```
+:::
+
 
 ## usual graph types
 
@@ -1889,7 +2179,10 @@ Multiple countries!
 
 <br> Impossible to differentiate which point belongs to which country
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #reading in data again
 data <- gapminder::gapminder
 
@@ -1899,6 +2192,8 @@ data %>%
   ggplot() + 
   geom_point(aes(x = year, y = gdpPercap))
 ```
+:::
+
 
 ## Adding colors
 
@@ -1906,7 +2201,10 @@ data %>%
 
 Let's add some colors according to a country!
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #simple dot graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -1914,6 +2212,8 @@ data %>%
   #note that it is important to put color = country inside of aes()
   geom_point(aes(x = year, y = gdpPercap, color = country)) 
 ```
+:::
+
 
 ## Adding colors
 
@@ -1921,7 +2221,10 @@ data %>%
 
 Let's add some colors according to a country!
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #simple bar(column) graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -1933,12 +2236,16 @@ data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
   ggplot() + 
   geom_col(aes(x = year, y = gdpPercap, fill = country)) 
-
 ```
+:::
+
 
 ## Changing axis labels
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #simple line graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -1946,10 +2253,15 @@ data %>%
   geom_line(aes(x = year, y = gdpPercap, color = country)) +
   labs(x="Year", y="Real GDP per capita in USD") #changing the axis label
 ```
+:::
+
 
 ## Setting the plot title
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #simple line graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -1958,10 +2270,15 @@ data %>%
   labs(x="Year", y="Real GDP per capita in USD",
        title = "Plotting GDP per Capita of Five European Countries over Time")
 ```
+:::
+
 
 ## Changing legend position
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #simple line graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -1971,10 +2288,15 @@ data %>%
        title = "Plotting GDP per Capita of Five European Countries over Time") + 
   theme(legend.position = "bottom")
 ```
+:::
+
 
 ## Changing title/legend/axis text size
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #simple line graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -1991,10 +2313,15 @@ data %>%
         axis.title.y = element_text(size = 20), #changing axis title size
         title = element_text(size = 20)) #changing title size
 ```
+:::
+
 
 ## Changing legend box size {auto-animate="true"}
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #simple line graph for some European countries
 data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain")) %>%
@@ -2012,6 +2339,8 @@ data %>%
         title = element_text(size = 20), #changing title size
         legend.key.size = unit(1.5, 'cm')) #changing legend color box size
 ```
+:::
+
 
 ## Changing legend title {auto-animate="true"}
 
@@ -2068,7 +2397,10 @@ First, let's create a separate data frame for the GDP text labels.
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #print(sort(unique(data$year)))
 "[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"
 
@@ -2077,6 +2409,8 @@ gdp_text.df <- data %>%
   filter(country %in% c("United Kingdom", "Italy")) %>%
   filter(year==1952 | year==2007)
 ```
+:::
+
 
 ## Adding GDP text labels on the graph {auto-animate="true"}
 
@@ -2104,7 +2438,10 @@ mid_plot
 
 ## Adjusting the text size/position
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #print(sort(unique(data$year)))
 "[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"
 
@@ -2121,10 +2458,15 @@ mid_plot <- base_plot +
             vjust = 0.7) #vertical position adjustment
 mid_plot
 ```
+:::
+
 
 ## Formatting the GDP neatly
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #print(sort(unique(data$year)))
 "[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"
 
@@ -2142,10 +2484,15 @@ mid_plot <- base_plot +
             vjust = 0.7) #position adjustment
 mid_plot
 ```
+:::
+
 
 ## Formatting the GDP neatly
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #print(sort(unique(data$year)))
 "[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007"
 
@@ -2164,6 +2511,8 @@ mid_plot <- base_plot +
             vjust = 0.7) #position adjustment
 mid_plot
 ```
+:::
+
 
 ## Adding Country text labels on the graph {auto-animate="true"}
 
@@ -2173,12 +2522,17 @@ Let's create a separate data frame for the country text labels.
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #creating the country text data frame
 country_text.df <- data %>%
   filter(country %in% c("United Kingdom", "Germany", "France", "Italy", "Spain"))%>%
   filter(year==2002)
 ```
+:::
+
 
 ## Adding country text labels on the graph {auto-animate="true"}
 
@@ -2212,7 +2566,10 @@ Let's save the final_plot
 
 <br>
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #saving the final plot
 ggsave(plot = final_plot,
        filename = "img/output.jpg", 
@@ -2221,6 +2578,8 @@ ggsave(plot = final_plot,
        height = 30,
        units = "cm")
 ```
+:::
+
 
 # Writing a report
 
@@ -2246,7 +2605,10 @@ Check these links:
 
 ## Let's clean the R environemnt first!
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 # Clear plots
 if(!is.null(dev.list())) dev.off()
 # Clear console
@@ -2257,6 +2619,8 @@ rm(list=ls())
 #restart R
 rstudioapi::restartSession()
 ```
+:::
+
 
 ## installing necessary packages
 
@@ -2266,10 +2630,15 @@ rmarkdown, markdown, knitr package are essential packages for
 
 any R Markdown file
 
-```{r}
+
+::: {.cell}
+
+```{.r .cell-code}
 #type this in the console
 install.packages(c("rmarkdown", "markdown", "knitr"))
 ```
+:::
+
 
 ## creating a new R Markdown file
 
@@ -2300,7 +2669,10 @@ yaml header is the first part of an R markdown file.
 
 It decides many important aspects of your output.
 
-```{r, eval=FALSE}
+
+::: {.cell}
+
+```{.r .cell-code}
 ---
 title: "R markdown guide"
 author: "Jongoh Kim"
@@ -2313,6 +2685,8 @@ output:
 urlcolor: blue #setting the hyperlink color to blue
 ---
 ```
+:::
+
 
 ## Jumping right into the R markdown
 
@@ -2360,3 +2734,4 @@ Garrett Grolemund:
 
 [https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/){.external
 target="_blank"}
+

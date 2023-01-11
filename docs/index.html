@@ -1375,14 +1375,14 @@ Jongoh Kim
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb42-1" class="hljs-ln-code"><a href="#cb42-1"></a><span class="co">#advanced</span></span>
 <span id="cb42-2" class="hljs-ln-code"><a href="#cb42-2"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">country =</span> <span class="st">"France"</span>,</span>
-<span id="cb42-3" class="hljs-ln-code"><a href="#cb42-3"></a>                 <span class="at">capital =</span> <span class="st">"Pairs"</span>,</span>
+<span id="cb42-3" class="hljs-ln-code"><a href="#cb42-3"></a>                 <span class="at">capital =</span> <span class="st">"Paris"</span>,</span>
 <span id="cb42-4" class="hljs-ln-code"><a href="#cb42-4"></a>                 <span class="at">population =</span> <span class="dv">67500000</span>, </span>
 <span id="cb42-5" class="hljs-ln-code"><a href="#cb42-5"></a>                 <span class="at">Y1950_population =</span> <span class="cn">NA</span>,</span>
 <span id="cb42-6" class="hljs-ln-code"><a href="#cb42-6"></a>                 <span class="at">Y1960_population =</span> <span class="st">""</span>,</span>
 <span id="cb42-7" class="hljs-ln-code"><a href="#cb42-7"></a>                 <span class="at">Y1970_population =</span> <span class="sc">-</span><span class="dv">999</span>)</span>
 <span id="cb42-8" class="hljs-ln-code"><a href="#cb42-8"></a>df</span>
 <span id="cb42-9" class="hljs-ln-code"><a href="#cb42-9"></a><span class="st">" country capital population Y1950_population Y1960_population Y1970_population</span></span>
-<span id="cb42-10" class="hljs-ln-code"><a href="#cb42-10"></a><span class="st">1  France   Pairs   67500000               NA                              -999"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-10" class="hljs-ln-code"><a href="#cb42-10"></a><span class="st">1  France   Paris   67500000               NA                              -999"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="deleting-columns-3" class="slide level2" data-auto-animate="true">
@@ -1391,7 +1391,7 @@ Jongoh Kim
 <p>Find columns that you want to erase!</p>
 <div class="sourceCode" id="cb43" data-code-line-numbers="10-18"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb43-1" class="hljs-ln-code"><a href="#cb43-1"></a><span class="co">#advanced</span></span>
 <span id="cb43-2" class="hljs-ln-code"><a href="#cb43-2"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">country =</span> <span class="st">"France"</span>,</span>
-<span id="cb43-3" class="hljs-ln-code"><a href="#cb43-3"></a>                 <span class="at">capital =</span> <span class="st">"Pairs"</span>,</span>
+<span id="cb43-3" class="hljs-ln-code"><a href="#cb43-3"></a>                 <span class="at">capital =</span> <span class="st">"Paris"</span>,</span>
 <span id="cb43-4" class="hljs-ln-code"><a href="#cb43-4"></a>                 <span class="at">population =</span> <span class="dv">67500000</span>, </span>
 <span id="cb43-5" class="hljs-ln-code"><a href="#cb43-5"></a>                 <span class="at">Y1950_population =</span> <span class="cn">NA</span>,</span>
 <span id="cb43-6" class="hljs-ln-code"><a href="#cb43-6"></a>                 <span class="at">Y1960_population =</span> <span class="st">""</span>,</span>
@@ -1414,7 +1414,7 @@ Jongoh Kim
 <p>Declare the columns you want to erase!</p>
 <div class="sourceCode" id="cb44" data-code-line-numbers="20-23"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb44-1" class="hljs-ln-code"><a href="#cb44-1"></a><span class="co">#advanced</span></span>
 <span id="cb44-2" class="hljs-ln-code"><a href="#cb44-2"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">country =</span> <span class="st">"France"</span>,</span>
-<span id="cb44-3" class="hljs-ln-code"><a href="#cb44-3"></a>                 <span class="at">capital =</span> <span class="st">"Pairs"</span>,</span>
+<span id="cb44-3" class="hljs-ln-code"><a href="#cb44-3"></a>                 <span class="at">capital =</span> <span class="st">"Paris"</span>,</span>
 <span id="cb44-4" class="hljs-ln-code"><a href="#cb44-4"></a>                 <span class="at">population =</span> <span class="dv">67500000</span>, </span>
 <span id="cb44-5" class="hljs-ln-code"><a href="#cb44-5"></a>                 <span class="at">Y1950_population =</span> <span class="cn">NA</span>,</span>
 <span id="cb44-6" class="hljs-ln-code"><a href="#cb44-6"></a>                 <span class="at">Y1960_population =</span> <span class="st">""</span>,</span>
@@ -1442,7 +1442,7 @@ Jongoh Kim
 <p>Remove the columns from the data frame!</p>
 <div class="sourceCode" id="cb45" data-code-line-numbers="25-30"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb45-1" class="hljs-ln-code"><a href="#cb45-1"></a><span class="co">#advanced</span></span>
 <span id="cb45-2" class="hljs-ln-code"><a href="#cb45-2"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">country =</span> <span class="st">"France"</span>,</span>
-<span id="cb45-3" class="hljs-ln-code"><a href="#cb45-3"></a>                 <span class="at">capital =</span> <span class="st">"Pairs"</span>,</span>
+<span id="cb45-3" class="hljs-ln-code"><a href="#cb45-3"></a>                 <span class="at">capital =</span> <span class="st">"Paris"</span>,</span>
 <span id="cb45-4" class="hljs-ln-code"><a href="#cb45-4"></a>                 <span class="at">population =</span> <span class="dv">67500000</span>, </span>
 <span id="cb45-5" class="hljs-ln-code"><a href="#cb45-5"></a>                 <span class="at">Y1950_population =</span> <span class="cn">NA</span>,</span>
 <span id="cb45-6" class="hljs-ln-code"><a href="#cb45-6"></a>                 <span class="at">Y1960_population =</span> <span class="st">""</span>,</span>
@@ -1469,7 +1469,7 @@ Jongoh Kim
 <span id="cb45-27" class="hljs-ln-code"><a href="#cb45-27"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">all_of</span>(del_cols))</span>
 <span id="cb45-28" class="hljs-ln-code"><a href="#cb45-28"></a>df</span>
 <span id="cb45-29" class="hljs-ln-code"><a href="#cb45-29"></a><span class="st">"  country capital population</span></span>
-<span id="cb45-30" class="hljs-ln-code"><a href="#cb45-30"></a><span class="st">1  France   Pairs   67500000"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-30" class="hljs-ln-code"><a href="#cb45-30"></a><span class="st">1  France   Paris   67500000"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="deleting-columns-6" class="slide level2">
 <h2>Deleting columns</h2>
@@ -2113,7 +2113,7 @@ Jongoh Kim
 <span id="cb74-4"><a href="#cb74-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb74-5"><a href="#cb74-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
 <span id="cb74-6"><a href="#cb74-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb74-7"><a href="#cb74-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb74-7"><a href="#cb74-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countries over Time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="changing-legend-position" class="slide level2">
@@ -2125,7 +2125,7 @@ Jongoh Kim
 <span id="cb75-4"><a href="#cb75-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb75-5"><a href="#cb75-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
 <span id="cb75-6"><a href="#cb75-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb75-7"><a href="#cb75-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb75-7"><a href="#cb75-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countries over Time"</span>) <span class="sc">+</span> </span>
 <span id="cb75-8"><a href="#cb75-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -2138,7 +2138,7 @@ Jongoh Kim
 <span id="cb76-4"><a href="#cb76-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb76-5"><a href="#cb76-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
 <span id="cb76-6"><a href="#cb76-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb76-7"><a href="#cb76-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb76-7"><a href="#cb76-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countries over Time"</span>) <span class="sc">+</span> </span>
 <span id="cb76-8"><a href="#cb76-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
 <span id="cb76-9"><a href="#cb76-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
 <span id="cb76-10"><a href="#cb76-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
@@ -2158,7 +2158,7 @@ Jongoh Kim
 <span id="cb77-4" class="hljs-ln-code"><a href="#cb77-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb77-5" class="hljs-ln-code"><a href="#cb77-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
 <span id="cb77-6" class="hljs-ln-code"><a href="#cb77-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb77-7" class="hljs-ln-code"><a href="#cb77-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb77-7" class="hljs-ln-code"><a href="#cb77-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countries over Time"</span>) <span class="sc">+</span> </span>
 <span id="cb77-8" class="hljs-ln-code"><a href="#cb77-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
 <span id="cb77-9" class="hljs-ln-code"><a href="#cb77-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
 <span id="cb77-10" class="hljs-ln-code"><a href="#cb77-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
@@ -2178,7 +2178,7 @@ Jongoh Kim
 <span id="cb78-4" class="hljs-ln-code"><a href="#cb78-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb78-5" class="hljs-ln-code"><a href="#cb78-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
 <span id="cb78-6" class="hljs-ln-code"><a href="#cb78-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb78-7" class="hljs-ln-code"><a href="#cb78-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb78-7" class="hljs-ln-code"><a href="#cb78-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countries over Time"</span>) <span class="sc">+</span> </span>
 <span id="cb78-8" class="hljs-ln-code"><a href="#cb78-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
 <span id="cb78-9" class="hljs-ln-code"><a href="#cb78-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
 <span id="cb78-10" class="hljs-ln-code"><a href="#cb78-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
@@ -2199,7 +2199,7 @@ Jongoh Kim
 <span id="cb79-4" class="hljs-ln-code"><a href="#cb79-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb79-5" class="hljs-ln-code"><a href="#cb79-5"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span></span>
 <span id="cb79-6" class="hljs-ln-code"><a href="#cb79-6"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Real GDP per capita in USD"</span>,</span>
-<span id="cb79-7" class="hljs-ln-code"><a href="#cb79-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countires over Time"</span>) <span class="sc">+</span> </span>
+<span id="cb79-7" class="hljs-ln-code"><a href="#cb79-7"></a>       <span class="at">title =</span> <span class="st">"Plotting GDP per Capita of Five European Countries over Time"</span>) <span class="sc">+</span> </span>
 <span id="cb79-8" class="hljs-ln-code"><a href="#cb79-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
 <span id="cb79-9" class="hljs-ln-code"><a href="#cb79-9"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend title size</span></span>
 <span id="cb79-10" class="hljs-ln-code"><a href="#cb79-10"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="co">#changing legend text size</span></span>
