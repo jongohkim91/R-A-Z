@@ -125,7 +125,9 @@ and use to make your life(coding) easier!
 
 The most famous package bundle in the R world!
 
-![](img/tidyverse.png){fig.align="center"} \## My personal choice for R
+![](img/tidyverse.png){fig.align="center"}
+
+## My personal choice for R
 packages
 
 <br>
