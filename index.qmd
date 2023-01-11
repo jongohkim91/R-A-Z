@@ -127,8 +127,7 @@ The most famous package bundle in the R world!
 
 ![](img/tidyverse.png){fig.align="center"}
 
-## My personal choice for R
-packages
+## My personal choice for R packages
 
 <br>
 
