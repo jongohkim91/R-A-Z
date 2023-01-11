@@ -1383,8 +1383,8 @@ merged.df
 
 <br>
 
-You can change the suffix setting if ".x" & ".y" does not help you to have
-a full picture of the merging process
+You can change the suffix setting if ".x" & ".y" does not help you to
+have a full picture of the merging process
 
 ```{r}
 merged.df <- left_join(x = x.df, 
@@ -1655,7 +1655,8 @@ sum.df
 
 <br>
 
-Let's check which continent has the highest average life expectancy in each year by descending order
+Let's check which continent has the highest average life expectancy in
+each year by descending order
 
 ```{r}
 sum.df %>%

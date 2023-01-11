@@ -1,0 +1,856 @@
+[
+  {
+    "objectID": "index.html#prerequisite",
+    "href": "index.html#prerequisite",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Prerequisite",
+    "text": "Prerequisite\n\n\n\n\nThis training is for people who have basic knowledge of programming!\nThe basic knowledge includes:\n\ndata type\nif,else statement\nfor, while loop\nbasic concept of a user-defined function"
+  },
+  {
+    "objectID": "index.html#prerequisite-1",
+    "href": "index.html#prerequisite-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Prerequisite",
+    "text": "Prerequisite\n\nThis training assumes you are using R Studio for coding your R script so\nif you have not installed the program, please do by clicking this link."
+  },
+  {
+    "objectID": "index.html#lets-clean-up-the-r-environment",
+    "href": "index.html#lets-clean-up-the-r-environment",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Let’s clean up the R environment!",
+    "text": "Let’s clean up the R environment!\n\nLet’s set the environment for our R-coding.\nI strongly suggest you put these lines of code at the start of your code file\nYou will use them a lot.\n\n# Clear plots\nif(!is.null(dev.list())) dev.off()\n# Clear console\ncat(\"\\014\") \n# Clean workspace\nrm(list=ls())\n\n\"OR the best way for R studio users\nto really initialize the R environment\"\n#install.packages(\"rstudioapi\")\n##restart R\nrstudioapi::restartSession()"
+  },
+  {
+    "objectID": "index.html#packages",
+    "href": "index.html#packages",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Packages",
+    "text": "Packages\n\nPackages are a toolbox that you can get(install)\nand use to make your life(coding) easier!"
+  },
+  {
+    "objectID": "index.html#tidyverse",
+    "href": "index.html#tidyverse",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Tidyverse",
+    "text": "Tidyverse\n\nThe most famous package bundle in the R world!"
+  },
+  {
+    "objectID": "index.html#my-personal-choice-for-r-packages",
+    "href": "index.html#my-personal-choice-for-r-packages",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "My personal choice for R packages",
+    "text": "My personal choice for R packages\n\nString Manipulation\n\nstringr, stringi\n\nData Analysis\n\ndplyr and/or data.table"
+  },
+  {
+    "objectID": "index.html#my-personal-choice-for-r-packages-1",
+    "href": "index.html#my-personal-choice-for-r-packages-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "My personal choice for R packages",
+    "text": "My personal choice for R packages\n\nGraph\n\nggplot2\n\nReport\n\nrmarkdown, markdown, knitr"
+  },
+  {
+    "objectID": "index.html#my-personal-choice-for-r-packages-2",
+    "href": "index.html#my-personal-choice-for-r-packages-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "My personal choice for R packages",
+    "text": "My personal choice for R packages\n\nPipeline tools\n\ntargets(snakemake for Python users)"
+  },
+  {
+    "objectID": "index.html#what-is-a-pipeline-tool",
+    "href": "index.html#what-is-a-pipeline-tool",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "What is a Pipeline tool?",
+    "text": "What is a Pipeline tool?\nCheck out this website for more details.\nThe website states that:\nWith targets, you can maintain a reproducible workflow without repeating yourself.\n\ntargets learns how your pipeline fits together,\nskips costly runtime for tasks that are already up to date,\nruns only the necessary computation,\nsupports implicit parallel computing,\nabstracts files as R objects,\nand shows tangible evidence that the results match the underlying code and data."
+  },
+  {
+    "objectID": "index.html#summary",
+    "href": "index.html#summary",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Summary",
+    "text": "Summary\n\ntargets\n\noptional but much better to know if your work involves a lot of coding\n\nggplot2\n\nessential!\npersonally I believe this package is the best for graphing results(better than matplotlib from Python)\n\nrmarkdown packages\n\noptional\nyou can stick to Latex or word"
+  },
+  {
+    "objectID": "index.html#summary-1",
+    "href": "index.html#summary-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Summary",
+    "text": "Summary\n\ndplyr\n\nessential!\n%>%(piping), merging, sampling methods from dplyr are much more intuitive and easier to understand\n\ndata.table\n\nessential if you are dealing with a data set that is larger than 30GB in CSV file format\nit has a steep learning curve"
+  },
+  {
+    "objectID": "index.html#installing-packages",
+    "href": "index.html#installing-packages",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Installing packages",
+    "text": "Installing packages\n\nLet’s install a package called ‘gapminder’\n\n\ninstall.packages(\"gapminder\")"
+  },
+  {
+    "objectID": "index.html#installing-packages-1",
+    "href": "index.html#installing-packages-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Installing packages",
+    "text": "Installing packages\n\nLet’s install the ‘dplyr’ package, ‘stringr’ package, and ‘ggplot2’ package\n\n\n#installing multiple packages at one-go\ninstall.packages(c(\"dplyr\", \"stringr\", \"ggplot2\"))\n\n#you can also install the whole packages from the tidyverse bundle by\ninstall.packages('tidyverse')"
+  },
+  {
+    "objectID": "index.html#calling-packages",
+    "href": "index.html#calling-packages",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Calling packages",
+    "text": "Calling packages\n\nIntuitive way\n\n\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(stringr)\nlibrary(stringi)"
+  },
+  {
+    "objectID": "index.html#calling-packages-1",
+    "href": "index.html#calling-packages-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Calling packages",
+    "text": "Calling packages\n\nElegant way\n\n\npackages <- c(\"dplyr\", \"ggplot2\", \"stringr\", \"stringi\")\nlapply(packages, require, character.only=T)"
+  },
+  {
+    "objectID": "index.html#checking-the-description-of-the-function",
+    "href": "index.html#checking-the-description-of-the-function",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking the description of the function",
+    "text": "Checking the description of the function\n\n\nYou can type this in console\n\n\n?lapply\n\n\n\nhighlight the function and press f1\n\n\n\nor manually type the function name in the search bar of the Help panel, that is located on the bottom right."
+  },
+  {
+    "objectID": "index.html#checking-the-description-of-the-function-1",
+    "href": "index.html#checking-the-description-of-the-function-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking the description of the function",
+    "text": "Checking the description of the function"
+  },
+  {
+    "objectID": "index.html#setting-working-directory",
+    "href": "index.html#setting-working-directory",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Setting working directory",
+    "text": "Setting working directory\n\n\n#checking your current working directory\ngetwd()\n\n#setting your working directory\nsetwd(\"Here_you_type_the_directory_path\")"
+  },
+  {
+    "objectID": "index.html#project-1",
+    "href": "index.html#project-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Project",
+    "text": "Project\n\nThe better way to do data analysis with R is by creating a project!!\n\nProject allows you:\n\n\nto keep the R studio interface as it was before you closed it\nnot to type in the working directory every time\nto manage your files more easily"
+  },
+  {
+    "objectID": "index.html#lets-try-it-out",
+    "href": "index.html#lets-try-it-out",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Let’s try it out",
+    "text": "Let’s try it out\n\nLet’s create a “training” project at our desktop.\n\nFollow the section 6 of this webpage."
+  },
+  {
+    "objectID": "index.html#writingexporting-data-1",
+    "href": "index.html#writingexporting-data-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Writing/exporting Data",
+    "text": "Writing/exporting Data\n\nLet’s initially focus on CSV files only!\nFirst let’s read in the gapminder table from the gapminder package\n\nlibrary(gapminder)\n#assigning the gapminder table to data\ndata <- gapminder\n\n\"OR\"\n\n#assigning the gapminder table to data\ndata <- gapminder::gapminder"
+  },
+  {
+    "objectID": "index.html#writingexporting-data-2",
+    "href": "index.html#writingexporting-data-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Writing/exporting Data",
+    "text": "Writing/exporting Data\n\nLet’s export this table to a CSV file\nunder the data folder in the project directory\nDon’t forget to create the data folder before running the code!\nor you will get an error\n\n#writing the CSV file\n## decimal points = \".\"\nwrite.csv(data, \"data/gapminder.csv\")\n\n## decimal points = comma\nwrite.csv2(data, \"data/gapminder.csv\")"
+  },
+  {
+    "objectID": "index.html#writingexporting-data-3",
+    "href": "index.html#writingexporting-data-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Writing/exporting Data",
+    "text": "Writing/exporting Data\n\nIt is faster to export a data if you use the data.table package\n\n#you should have installed the data.table package first\n## install.packages(\"data.table\")\n\n##write as a CSV file!\ndata.table::fwrite(data, \"data/gapminder.csv\",\n                   dec = \".\", #decimal points(\".\" is the default)\n                   sep = \",\") #separator(comma is the default)"
+  },
+  {
+    "objectID": "index.html#csv---basic",
+    "href": "index.html#csv---basic",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "CSV - basic",
+    "text": "CSV - basic\n\n\n#basic way\n?read.csv\n#let's read the gapminder.csv file stored in the data folder\n## decimal points = \".\"\ndata <- read.csv(\"data/gapminder.csv\")\n## decimal points = \",\"\ndata <- read.csv2(\"data/gapminder.csv\")"
+  },
+  {
+    "objectID": "index.html#csv---data.table",
+    "href": "index.html#csv---data.table",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "CSV - data.table",
+    "text": "CSV - data.table\n\nIt is fast!(link)"
+  },
+  {
+    "objectID": "index.html#csv---data.table-1",
+    "href": "index.html#csv---data.table-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "CSV - data.table",
+    "text": "CSV - data.table\n\n\n#data table way\nlibrary(data.table)\n\n##install.packages(\"data.table\")\ndata <- fread(\"data/gapminder.csv\")\n\n#advantages of fread\ndata <- data.table::fread(\"data/gapminder.csv\",\n                          encoding = \"UTF-8\", #choose encoding \n                          nrows = 10, #choose how many rows\n                          select = c(\"country\", \"continent\")) #choose which columns"
+  },
+  {
+    "objectID": "index.html#stata-sas-and-spss",
+    "href": "index.html#stata-sas-and-spss",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "STATA, SAS, and SPSS",
+    "text": "STATA, SAS, and SPSS\n\n\n#we need haven package!\ninstall.packages(\"haven\")\nlibrary(haven)\n\n#STATA\ndata <- read_dta(\"stata.dta\")\n#SAS\ndata <- read_sas(\"sas.sas\")\n#SPSS\ndata <- read_spss(\"spss.spss\")"
+  },
+  {
+    "objectID": "index.html#other-tablestab-delimited-and-etc.",
+    "href": "index.html#other-tablestab-delimited-and-etc.",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "other tables(tab delimited and etc.)",
+    "text": "other tables(tab delimited and etc.)\n\nIn general, Google/Stack Overflow is your friend.\n\n\n?read.table\n\n#tab delimited\ndata <- read.table(file = \"data_file_path\", \n                   header = T, #if header exists\n                   sep = \"\\t\", #tab\n                   dec = \",\") #using a comma for decimal points\n\n#equivalent to read.csv\nread.table(file = \"data/gapminder.csv\",\n           header = T,\n           sep = \",\",\n           dec = \".\")"
+  },
+  {
+    "objectID": "index.html#calculating-time-to-read-a-data-file",
+    "href": "index.html#calculating-time-to-read-a-data-file",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Calculating time to read a data file",
+    "text": "Calculating time to read a data file\n\nMany times, researchers would like to know how long it takes to read a file.\nEspecially, if the file is large.\n\n\nct <- Sys.time()\ndata <- read.csv2(\"data/gapminder.csv\")\nprint(Sys.time()-ct)\n\"Time difference of 0.01645303 secs\""
+  },
+  {
+    "objectID": "index.html#checking-the-data",
+    "href": "index.html#checking-the-data",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking the data",
+    "text": "Checking the data\n\nThere are two ways to check/see your data\n\n\n\npressing the variable(in our case “data”) button on your right-top panel\nor typing the variable name in the console\ntype str(data)"
+  },
+  {
+    "objectID": "index.html#checking-the-data-1",
+    "href": "index.html#checking-the-data-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking the data",
+    "text": "Checking the data\n\nFor instance,\n\n\ndata <- gapminder::gapminder\nstr(data)\n'tibble [1,704 × 6] (S3: tbl_df/tbl/data.frame)\n $ country  : Factor w/ 142 levels \"Afghanistan\",..: 1 1 1 1 1 1 1 1 1 1 ...\n $ continent: Factor w/ 5 levels \"Africa\",\"Americas\",..: 3 3 3 3 3 3 3 3 3 3 ...\n $ year     : int [1:1704] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...\n $ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...\n $ pop      : int [1:1704] 8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...\n $ gdpPercap: num [1:1704] 779 821 853 836 740 ...'"
+  },
+  {
+    "objectID": "index.html#first-and-the-last-of-the-data",
+    "href": "index.html#first-and-the-last-of-the-data",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "first and the last of the data",
+    "text": "first and the last of the data\n\nMaybe you simply want to check the top N rows or the last N rows\n\n\n#checking the first 6 rows\nhead(data)\n#checking the last 6 rows\ntail(data)\n\n#checking the first 10 rows\nhead(data, 10)\n#checking the last 10 rows\ntail(data, 10)"
+  },
+  {
+    "objectID": "index.html#checking-unique-values",
+    "href": "index.html#checking-unique-values",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking unique values",
+    "text": "Checking unique values\n\nMaybe you simply want to check unique values of a column\n\n\n#checking unique values of the continent column\nunique(data$continent)\n\"[1] Asia     Europe   Africa   Americas Oceania \n Levels: Africa Americas Asia Europe Oceania\""
+  },
+  {
+    "objectID": "index.html#checking-variable-type",
+    "href": "index.html#checking-variable-type",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking variable type",
+    "text": "Checking variable type\n\n\ntypeof(data$continent)\n'[1] \"integer\"'\nclass(data$continent)\n'[1] \"factor\"' #ordered categorical variable\n\n#comparing factor with character\nprint(c(\"a\", \"b\", \"c\"))\n'\"a\" \"b\" \"c\"'\nprint(as.factor(c(\"a\", \"b\", \"c\")))\n\"[1] a b c\n Levels: a b c\""
+  },
+  {
+    "objectID": "index.html#changing-variable-types",
+    "href": "index.html#changing-variable-types",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Changing variable types",
+    "text": "Changing variable types\n\n\n#changing variable types\ndata$continent[1]\n\"[1] Asia\n Levels: Africa Americas Asia Europe Oceania\"\n#character\nas.character(data$continent[1])\n\"Asia\"\n#integer\nas.integer(data$continent[1])\n\"3\"\n# as.numeric()\n# as.factor()\n# as.data.frame()"
+  },
+  {
+    "objectID": "index.html#list-and-vectors",
+    "href": "index.html#list-and-vectors",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "list and vectors",
+    "text": "list and vectors\n\n\n#vector can only have one data type!\nc(1,2,3)\n\"[1] 1 2 3\"\nc(1,\"a\")\n'[1] \"1\" \"a\"' #notice the quotation marks(\")\n\n#list can have different data types and name them!\ntemp <- list(\"a\", 1)\ntemp\n'[[1]]\n[1] \"a\"\n\n[[2]]\n[1] 1'"
+  },
+  {
+    "objectID": "index.html#list-and-vectors-1",
+    "href": "index.html#list-and-vectors-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "list and vectors",
+    "text": "list and vectors\n\n# changing the list into a vector again\ntemp <- unlist(temp)\ntemp\n'[1] \"a\" \"1\"'\n\n# list can have sub-structures\ntemp <- list(country = c(\"France\", \"Germany\"),\n             capital = c(\"Paris\", \"Berlin\"),\n             population = c(67500000, 83130000))\n'$country\n[1] \"France\"  \"Germany\"\n\n$capital\n[1] \"Paris\"  \"Berlin\"\n\n$population\n[1] 67500000 83130000'"
+  },
+  {
+    "objectID": "index.html#list-and-vectors-2",
+    "href": "index.html#list-and-vectors-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "list and vectors",
+    "text": "list and vectors\n\nYou should be careful when you want to extract a value from a list\n\n#list\ntemp[1]\n'$country\n[1] \"France\"  \"Germany\"'\nclass(temp[1])\n'[1] \"list\"'\n\n#vector\ntemp[[1]]\n#or\ntemp$country #think $ a sign to use to access a sub-structure(sub-list)\n'[1] \"France\"  \"Germany\"'\nclass(temp[[1]])\n'[1] \"character\"'"
+  },
+  {
+    "objectID": "index.html#list-and-vectors-3",
+    "href": "index.html#list-and-vectors-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "list and vectors",
+    "text": "list and vectors\n\nYou should be careful when you want to extract a value from a list\n#list\ntemp[1]\n'$country\n[1] \"France\"  \"Germany\"'\nclass(temp[1])\n'[1] \"list\"'\n\n#vector\ntemp[[1]]\n#or\ntemp$country #think $ a sign to use to access a sub-structure(sub-list)\n'[1] \"France\"  \"Germany\"'\nclass(temp[[1]])\n'[1] \"character\"'\n\n#trying to access a value of a sub-list(country)\ntemp[1][1] #wrong\n'$country\n[1] \"France\"  \"Germany\"' #retrieved the whole sub-list(country) instead\ntemp[[1]][1] #right\n#or\ntemp$country[1]\n'[1] \"France\"'"
+  },
+  {
+    "objectID": "index.html#cleaning-missing-values",
+    "href": "index.html#cleaning-missing-values",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Cleaning missing values",
+    "text": "Cleaning missing values\n\nFirst, let’s create an example data.frame(table in R)\n\n\ndf <- data.frame(country = c(\"France\", \"Germany\", \"Luxembourg\"),\n             capital = c(\"Paris\", \"Berlin\", NA),\n             population = c(67500000, 83130000, 639000))\ndf\n\"country capital population\n1     France   Paris   67500000\n2    Germany  Berlin   83130000\n3 Luxembourg    <NA>     639000\""
+  },
+  {
+    "objectID": "index.html#cleaning-missing-values-1",
+    "href": "index.html#cleaning-missing-values-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Cleaning missing values",
+    "text": "Cleaning missing values\n\nPiping!\n%>%\n\nA special operator from the dplyr package!\nThink it as “then” in English.\n\ndf %>% # call df\n  filter(!is.na(capital))\n#then filter observations that do not have a missing value(NA) in the capital column\n# ! means NOT e.g. 1==1 1!=2\n\n\"NA is a special data type in R that indicates a missing value\n(comparable to NaN value in Python)\"\n\n#the equivalent is\nfilter(df, !is.na(capital))"
+  },
+  {
+    "objectID": "index.html#cleaning-missing-values-2",
+    "href": "index.html#cleaning-missing-values-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Cleaning missing values",
+    "text": "Cleaning missing values\nThe advantage of piping is that it allows you to write concise codes. For instance,\n\n\n#basic way\nlux <- filter(df, country==\"Luxembourg\") #getting Luxembourg observation\nlux <- mutate(lux, capital = \"Luxembourg City\") #changing the capital value for Luxembourg\nlux\n\"    country         capital population\n1 Luxembourg Luxembourg City     639000\"\n#piping!\nlux <- df %>%\n  filter(country==\"Luxembourg\") %>%\n  mutate(capital = \"Luxembourg City\")\nlux\n\"    country         capital population\n1 Luxembourg Luxembourg City     639000\""
+  },
+  {
+    "objectID": "index.html#cleaning-missing-values-3",
+    "href": "index.html#cleaning-missing-values-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Cleaning missing values",
+    "text": "Cleaning missing values\n\nLet’s say you have odd values for missing values e.g. -999\n\n\ndf <- data.frame(country = c(\"France\", \"Germany\", \"Luxembourg\"),\n             capital = c(\"Paris\", \"Berlin\", -999),\n             population = c(67500000, 83130000, \"Non_existent\"))\n#retrieving luxembourg in two different ways\n##1\ndf %>% \n  filter(capital==-999)\n##2\ndf %>% \n  filter(population==\"Non_existent\")"
+  },
+  {
+    "objectID": "index.html#cleaning-missing-values-4",
+    "href": "index.html#cleaning-missing-values-4",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Cleaning missing values",
+    "text": "Cleaning missing values\n\n\n#retrieve an observation that has the value \"-999\" in the capital columns\ndf %>% \n  filter(capital==\"-999\")\n#change the capital value \ndf %>% \n  filter(capital==\"-999\") %>%\n  mutate(capital=\"Luxembourg City\")\n#change the population value \ndf %>% \n  filter(capital==\"-999\") %>%\n  mutate(capital=\"Luxembourg City\") %>%\n  mutate(population = 639000)\n#different version\ndf %>% \n  filter(capital==\"-999\") %>%\n  mutate(capital=\"Luxembourg City\",\n         population = 639000)"
+  },
+  {
+    "objectID": "index.html#cleaning-missing-values-5",
+    "href": "index.html#cleaning-missing-values-5",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Cleaning missing values",
+    "text": "Cleaning missing values\n\nDon’t forget to assign the changed values to the original data frame!\n\n\ndf <- df %>% \n  filter(capital==\"-999\") %>%\n  mutate(capital=\"Luxembourg City\",\n         population = 639000)\ndf\n\"     country         capital population\n1  Luxembourg Luxembourg City     639000\"\n#I WANTED TO CHANGE THE VALUES AND STORE THEM!\n#I DON'T WANT TO ONLY GET CLEAN LUX ROW!"
+  },
+  {
+    "objectID": "index.html#cleaning-missing-values-6",
+    "href": "index.html#cleaning-missing-values-6",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Cleaning missing values",
+    "text": "Cleaning missing values\n\nActually you need to use ifelse() function to get all observations\n\n\n#re-creating the data frame\ndf <- data.frame(country = c(\"France\", \"Germany\", \"Luxembourg\"),\n             capital = c(\"Paris\", \"Berlin\", -999),\n             population = c(67500000, 83130000, \"Non_existent\"))\n#changing the capital values!\ndf %>% \n  mutate(capital=ifelse(capital==\"-999\", #condition!\n                        \"Lux City\", #if TRUE\n                        \"FALSE\")) #if FALSE\n\"    country  capital   population\n1     France    FALSE     67500000\n2    Germany    FALSE     83130000\n3 Luxembourg Lux City Non_existent\""
+  },
+  {
+    "objectID": "index.html#cleaning-missing-values-7",
+    "href": "index.html#cleaning-missing-values-7",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Cleaning missing values",
+    "text": "Cleaning missing values\n\nActually you need to use ifelse() function to get all observations\n\n\n#keeping the other values\ndf <- df %>% \n  mutate(capital=ifelse(capital==\"-999\",\n                        \"Luxembourg City\",\n                        capital)) #keeping the rest values\n#changing the population as well\ndf <- df %>% \n  mutate(population=ifelse(population==\"Non_existent\",\n                        639000,\n                        population)) %>%\n  mutate(population = as.integer(population))\n\ndf\n\"    country         capital population\n1     France           Paris   67500000\n2    Germany          Berlin   83130000\n3 Luxembourg Luxembourg City     639000\""
+  },
+  {
+    "objectID": "index.html#custom-function",
+    "href": "index.html#custom-function",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Custom function",
+    "text": "Custom function\n\nSometimes, you need to create your custom function to detect missing values.\nFor instance,\n\n\ncheck_miss <- function(column, bool=F){\n  if(bool==F){#if one don't want T/F values for the result\n    fin_value <- is.na(column) | stringi::stri_isempty(column)\n    fin_value <- grep(T, fin_value) #returning the location where T is located\n    return(fin_value)\n  }else{\n    fin_value <- is.na(column) | stringi::stri_isempty(column) #returning a boolean vector\n    return(fin_value)\n  }\n}"
+  },
+  {
+    "objectID": "index.html#custom-function-1",
+    "href": "index.html#custom-function-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Custom function",
+    "text": "Custom function\n\nLet’s test the function\n\n\ncheck_miss(c(NA, \"Luxembourg\" ,\"\"))\n\"[1] 1 3\"\n\ncheck_miss(c(NA, \"Luxembourg\" ,\"\"), bool = T)\n\"[1]  TRUE FALSE  TRUE\""
+  },
+  {
+    "objectID": "index.html#creating-columns",
+    "href": "index.html#creating-columns",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Creating columns",
+    "text": "Creating columns\n\nIt is simple! Just use mutate() function to create a new column\n\n\ndf <- df %>%\n  mutate(total_pop = sum(population))\ndf\n\"     country         capital population total_pop\n1     France           Paris   67500000 151269000\n2    Germany          Berlin   83130000 151269000\n3 Luxembourg Luxembourg City     639000 151269000\""
+  },
+  {
+    "objectID": "index.html#creating-columns-based-on-condition",
+    "href": "index.html#creating-columns-based-on-condition",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Creating columns based on condition",
+    "text": "Creating columns based on condition\n\nThere are two ways!\n1.The intuitive way\n\n#saving the value\ntemp_pop <- df %>%\n  filter(country %in% c(\"France\", \"Luxembourg\")) %>%\n  summarize(french_pop = sum(population)) %>%\n  unlist()\ntemp_pop\n\"french_pop \n  68139000\"\n#and then creating the column\ndf <- df %>%\n  mutate(french_pop = temp_pop)\ndf\n\"     country         capital population total_pop french_pop\n1     France           Paris   67500000 151269000   68139000\n2    Germany          Berlin   83130000 151269000   68139000\n3 Luxembourg Luxembourg City     639000 151269000   68139000\""
+  },
+  {
+    "objectID": "index.html#creating-columns-based-on-condition-1",
+    "href": "index.html#creating-columns-based-on-condition-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Creating columns based on condition",
+    "text": "Creating columns based on condition\n\n2.The complex way\n\ndf <- df %>%\n  #creating a column that indicates whether a country speaks french\n  mutate(french = ifelse(country %in% c(\"France\", \"Luxembourg\"),\n                             T,\n                             F)) %>%\n  #grouping by french column\n  group_by(french) %>%\n  #creating a new column\n  mutate(french_pop = ifelse(french==T,\n                             sum(population),\n                             NA)) %>%\n  ungroup() #important!\ndf\n\" country    capital         population total_pop french_pop french\n  <chr>      <chr>                <int>     <int>      <int> <lgl> \n1 France     Paris             67500000 151269000   68139000 TRUE  \n2 Germany    Berlin            83130000 151269000         NA FALSE \n3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE \""
+  },
+  {
+    "objectID": "index.html#creating-columns-based-on-condition-2",
+    "href": "index.html#creating-columns-based-on-condition-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Creating columns based on condition",
+    "text": "Creating columns based on condition\n\nIf you forget to ungroup…\n\ndf <- df %>%\n  mutate(french = ifelse(country %in% c(\"France\", \"Luxembourg\"),\n                             T,\n                             F)) %>%\n  group_by(french) %>%\n  mutate(french_pop = ifelse(french==T,\n                             sum(population),\n                             NA))\n#results in grouped sum by french still!\ndf %>%\n  mutate(temp = sum(population))\n\"country    capital         population total_pop french_pop french     temp\n  <chr>      <chr>                <int>     <int>      <int> <lgl>     <int>\n1 France     Paris             67500000 151269000   68139000 TRUE   68139000\n2 Germany    Berlin            83130000 151269000         NA FALSE  83130000\n3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE   68139000\""
+  },
+  {
+    "objectID": "index.html#creating-columns-based-on-condition-3",
+    "href": "index.html#creating-columns-based-on-condition-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Creating columns based on condition",
+    "text": "Creating columns based on condition\n\nIf you forget to ungroup…\ndf <- df %>%\n  mutate(french = ifelse(country %in% c(\"France\", \"Luxembourg\"),\n                             T,\n                             F)) %>%\n  group_by(french) %>%\n  mutate(french_pop = ifelse(french==T,\n                             sum(population),\n                             NA))\n#results in grouped sum by french still!\ndf %>%\n  mutate(temp = sum(population))\n\"country    capital         population total_pop french_pop french     temp\n  <chr>      <chr>                <int>     <int>      <int> <lgl>     <int>\n1 France     Paris             67500000 151269000   68139000 TRUE   68139000\n2 Germany    Berlin            83130000 151269000         NA FALSE  83130000\n3 Luxembourg Luxembourg City     639000 151269000   68139000 TRUE   68139000\"\n#check it\nis.grouped_df(df)\n\"[1] TRUE\""
+  },
+  {
+    "objectID": "index.html#deleting-columns",
+    "href": "index.html#deleting-columns",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Deleting columns",
+    "text": "Deleting columns\n\n\n#choose the columns you want to exclude\ndf %>%\n  select(-french_pop, -french)\n\"# A tibble: 3 × 3\n  country    capital         population\n  <chr>      <chr>                <int>\n1 France     Paris             67500000\n2 Germany    Berlin            83130000\n3 Luxembourg Luxembourg City     639000\"\n#choose the columns you only need\ndf %>%\n  select(country, capital, population, total_pop)\n\"# A tibble: 3 × 4\n  country    capital         population total_pop\n  <chr>      <chr>                <int>     <int>\n1 France     Paris             67500000 151269000\n2 Germany    Berlin            83130000 151269000\n3 Luxembourg Luxembourg City     639000 151269000\""
+  },
+  {
+    "objectID": "index.html#deleting-columns-1",
+    "href": "index.html#deleting-columns-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Deleting columns",
+    "text": "Deleting columns\n#choose the columns you want to exclude\ndf %>%\n  select(-french_pop, -french)\n\"# A tibble: 3 × 3\n  country    capital         population\n  <chr>      <chr>                <int>\n1 France     Paris             67500000\n2 Germany    Berlin            83130000\n3 Luxembourg Luxembourg City     639000\"\n#choose the columns you only need\ndf %>%\n  select(country, capital, population, total_pop)\n\"# A tibble: 3 × 4\n  country    capital         population total_pop\n  <chr>      <chr>                <int>     <int>\n1 France     Paris             67500000 151269000\n2 Germany    Berlin            83130000 151269000\n3 Luxembourg Luxembourg City     639000 151269000\"\n#declare the columns of interest first!\ncols <- c(\"country\", \"capital\", \"population\", \"total_pop\")\ndf %>%\n  select(all_of(cols)) #there is also any_of()\n\"# A tibble: 3 × 4\n  country    capital         population total_pop\n  <chr>      <chr>                <int>     <int>\n1 France     Paris             67500000 151269000\n2 Germany    Berlin            83130000 151269000\n3 Luxembourg Luxembourg City     639000 151269000\""
+  },
+  {
+    "objectID": "index.html#deleting-columns-2",
+    "href": "index.html#deleting-columns-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Deleting columns",
+    "text": "Deleting columns\n\nLet’s try an advanced example!\n\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\" country capital population Y1950_population Y1960_population Y1970_population\n1  France   Pairs   67500000               NA                              -999\""
+  },
+  {
+    "objectID": "index.html#deleting-columns-3",
+    "href": "index.html#deleting-columns-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Deleting columns",
+    "text": "Deleting columns\n\nFind columns that you want to erase!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n'[1] \"country\"          \"capital\"          \"population\"       \"Y1950_population\" \"Y1960_population\" \"Y1970_population\"'\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\n\"[1] 4 5 6\"\ngrepl(\"^Y\", colnames(df))\n\"[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE\""
+  },
+  {
+    "objectID": "index.html#deleting-columns-4",
+    "href": "index.html#deleting-columns-4",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Deleting columns",
+    "text": "Deleting columns\n\nDeclare the columns you want to erase!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n'[1] \"country\"          \"capital\"          \"population\"       \"Y1950_population\" \"Y1960_population\" \"Y1970_population\"'\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\n\"[1] 4 5 6\"\ngrepl(\"^Y\", colnames(df))\n\"[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE\"\n\n#declare the columns you want to erase!\ndel_cols <- colnames(df)[grep(\"^Y\", colnames(df))]\ndel_cols\n'Y1950_population\" \"Y1960_population\" \"Y1970_population\"'"
+  },
+  {
+    "objectID": "index.html#deleting-columns-5",
+    "href": "index.html#deleting-columns-5",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Deleting columns",
+    "text": "Deleting columns\n\nRemove the columns from the data frame!\n#advanced\ndf <- data.frame(country = \"France\",\n                 capital = \"Pairs\",\n                 population = 67500000, \n                 Y1950_population = NA,\n                 Y1960_population = \"\",\n                 Y1970_population = -999)\ndf\n\n#check the column names of df\ncolnames(df)\n'[1] \"country\"          \"capital\"          \"population\"       \"Y1950_population\" \"Y1960_population\" \"Y1970_population\"'\n\n#find the columns you want to delete!\ngrep(\"^Y\", colnames(df))\n\"[1] 4 5 6\"\ngrepl(\"^Y\", colnames(df))\n\"[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE\"\n\n#declare the columns you want to erase!\ndel_cols <- colnames(df)[grep(\"^Y\", colnames(df))]\ndel_cols\n'Y1950_population\" \"Y1960_population\" \"Y1970_population\"'\n\n#exclude the columns!\ndf <- df %>%\n  select(-all_of(del_cols))\ndf\n\"  country capital population\n1  France   Pairs   67500000\""
+  },
+  {
+    "objectID": "index.html#deleting-columns-6",
+    "href": "index.html#deleting-columns-6",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Deleting columns",
+    "text": "Deleting columns\n\n\nFor more information on string matching based on regular expression, please check this website."
+  },
+  {
+    "objectID": "index.html#different-joins",
+    "href": "index.html#different-joins",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Different joins",
+    "text": "Different joins\nIn R programming, people often use the term ‘join’ for merging the data, and many different types of join exist.\n\nleft join\nright join\ninner join\nfull join"
+  },
+  {
+    "objectID": "index.html#data",
+    "href": "index.html#data",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Data",
+    "text": "Data\n\nLet’s say we have two data sets: X and Y."
+  },
+  {
+    "objectID": "index.html#join",
+    "href": "index.html#join",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "join",
+    "text": "join\n\nWe would like the merge the two."
+  },
+  {
+    "objectID": "index.html#inner-join",
+    "href": "index.html#inner-join",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "inner join",
+    "text": "inner join\nAnimation"
+  },
+  {
+    "objectID": "index.html#left-join",
+    "href": "index.html#left-join",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "left join",
+    "text": "left join\nAnimation"
+  },
+  {
+    "objectID": "index.html#right-join",
+    "href": "index.html#right-join",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "right join",
+    "text": "right join\nAnimation"
+  },
+  {
+    "objectID": "index.html#full-join",
+    "href": "index.html#full-join",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "full join",
+    "text": "full join\nAnimation"
+  },
+  {
+    "objectID": "index.html#etc.",
+    "href": "index.html#etc.",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "etc.",
+    "text": "etc.\nHelp page is accessible by typing\n\n?left_join\n\nit shows simple explanation of each join.\n\nFor different joins and animation visit this github page"
+  },
+  {
+    "objectID": "index.html#example",
+    "href": "index.html#example",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Example",
+    "text": "Example\n\n\n#setting the data sets\nx.df <- data.frame(id = c(1,2),\n                   country = c(\"France\", \"Germany\"),\n                   capital = c(\"Paris\", \"Berlin\"),\n                   population = c(67500000, 83130000))\n\ny.df <- data.frame(id = c(2,3),\n                   country = c(\"Germany\", \"Luxembourg\"),\n                   capital = c( \"Berlin\", \"Luxembourg City\"),\n                   language = c( \"DE\",  \"FR\"))"
+  },
+  {
+    "objectID": "index.html#left_join-example",
+    "href": "index.html#left_join-example",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "left_join example",
+    "text": "left_join example\n\n\nmerged.df <- left_join(x = x.df, \n                       y = y.df,\n                       by = \"id\") #by which column will you merge\nmerged.df\n\" id country.x capital.x population country.y capital.y language\n1  1    France     Paris   67500000      <NA>      <NA>     <NA>\n2  2   Germany    Berlin   83130000   Germany    Berlin       DE\""
+  },
+  {
+    "objectID": "index.html#right_join-example",
+    "href": "index.html#right_join-example",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "right_join example",
+    "text": "right_join example\n\n\nmerged.df <- right_join(x = x.df, \n                        y = y.df,\n                        by = \"id\") #by which column will you merge\nmerged.df\n\" id country.x capital.x population  country.y       capital.y language\n1  2   Germany    Berlin   83130000    Germany          Berlin       DE\n2  3      <NA>      <NA>         NA Luxembourg Luxembourg City       FR\""
+  },
+  {
+    "objectID": "index.html#inner_join-example",
+    "href": "index.html#inner_join-example",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "inner_join example",
+    "text": "inner_join example\n\n\nmerged.df <- inner_join(x = x.df, \n                        y = y.df,\n                        by = \"id\") #by which column will you merge\nmerged.df\n\" id country.x capital.x population country.y capital.y language\n1  2   Germany    Berlin   83130000   Germany    Berlin       DE\""
+  },
+  {
+    "objectID": "index.html#full_join-example",
+    "href": "index.html#full_join-example",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "full_join example",
+    "text": "full_join example\n\n\nmerged.df <- full_join(x = x.df, \n                       y = y.df,\n                       by = \"id\") #by which column will you merge\nmerged.df\n\"id country.x capital.x population  country.y       capital.y language\n1  1    France     Paris   67500000       <NA>            <NA>     <NA>\n2  2   Germany    Berlin   83130000    Germany          Berlin       DE\n3  3      <NA>      <NA>         NA Luxembourg Luxembourg City       FR\""
+  },
+  {
+    "objectID": "index.html#advanced-merge",
+    "href": "index.html#advanced-merge",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "advanced merge",
+    "text": "advanced merge\n\nYou can change the suffix setting if “.x” & “.y” does not help you to have a full picture of the merging process\n\nmerged.df <- left_join(x = x.df, \n                       y = y.df,\n                       by = \"id\", #by which column will you merge\n                       suffix = c(\".population\", \".language\"))\nmerged.df\n\"id country.population capital.population population country.language capital.language language\n1  1             France              Paris   67500000             <NA>             <NA>     <NA>\n2  2            Germany             Berlin   83130000          Germany           Berlin       DE\""
+  },
+  {
+    "objectID": "index.html#advanced-merge-1",
+    "href": "index.html#advanced-merge-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "advanced merge",
+    "text": "advanced merge\n\nLet’s remove redundant columns\nmerged.df <- left_join(x = x.df, \n                       y = y.df,\n                       by = \"id\", #by which column will you merge\n                       suffix = c(\".population\", \".language\"))\nmerged.df\n\n#delete redundant columns\n##retrieving column names that has \".language\"\ngrepl(\".language\", colnames(merged.df)) \ndel_cols <- colnames(merged.df)[grepl(\".language\", colnames(merged.df))]\n##remove!\nmerged.df <- merged.df %>%\n  select(-all_of(del_cols))\nmerged.df\n\"id country.population capital.population population language\n1  1             France              Paris   67500000     <NA>\n2  2            Germany             Berlin   83130000       DE\""
+  },
+  {
+    "objectID": "index.html#advanced-merge-2",
+    "href": "index.html#advanced-merge-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "advanced merge",
+    "text": "advanced merge\n\nLet’s rename the columns and fill in the blank language cell!\nmerged.df <- left_join(x = x.df, \n                       y = y.df,\n                       by = \"id\", #by which column will you merge\n                       suffix = c(\".population\", \".language\"))\nmerged.df\n\n#delete redundant columns\n##retrieving column names that has \".language\"\ngrepl(\".language\", colnames(merged.df)) \ndel_cols <- colnames(merged.df)[grepl(\".language\", colnames(merged.df))]\n##remove!\nmerged.df <- merged.df %>%\n  select(-all_of(del_cols))\nmerged.df\n\"id country.population capital.population population language\n1  1             France              Paris   67500000     <NA>\n2  2            Germany             Berlin   83130000       DE\"\n\n#rename column names\n##declaring the column names you want to have\n##removing all the \".population\" part\ncol_names <- stringr::str_replace_all(string = colnames(merged.df),\n                                      pattern = \".population\",\n                                      replacement =  \"\") \ncolnames(merged.df) <- col_names\nprint(colnames(merged.df))\n'[1] \"id\"         \"country\"    \"capital\"    \"population\" \"language\"  '\n\n#filling in the language column for France\nmerged.df <- merged.df %>%\n  mutate(language = ifelse(country==\"France\",\n                           \"FR\",\n                           language))\nmerged.df\n\"  id country capital population language\n1  1  France   Paris   67500000       FR\n2  2 Germany  Berlin   83130000       DE\""
+  },
+  {
+    "objectID": "index.html#advanced-merge-3",
+    "href": "index.html#advanced-merge-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "advanced merge",
+    "text": "advanced merge\n\nLet’s rename the columns and fill in the blank language cell!\nmerged.df <- left_join(x = x.df, \n                       y = y.df,\n                       by = \"id\", #by which column will you merge\n                       suffix = c(\".population\", \".language\"))\nmerged.df\n\n#delete redundant columns\n##retrieving column names that has \".language\"\ngrepl(\".language\", colnames(merged.df)) \ndel_cols <- colnames(merged.df)[grepl(\".language\", colnames(merged.df))]\n##remove!\nmerged.df <- merged.df %>%\n  select(-all_of(del_cols))\nmerged.df\n\"id country.population capital.population population language\n1  1             France              Paris   67500000     <NA>\n2  2            Germany             Berlin   83130000       DE\"\n\n#rename column names\n##declaring the column names you want to have\n##removing all the \".population\" part\ncol_names <- stringr::str_replace_all(string = colnames(merged.df),\n                                      pattern = \".population\",\n                                      replacement =  \"\") \ncolnames(merged.df) <- col_names\nprint(colnames(merged.df))\n'[1] \"id\"         \"country\"    \"capital\"    \"population\" \"language\"  '\n\n#filling in the language column for France\nmerged.df <- merged.df %>%\n  mutate(language = ifelse(country==\"France\",\n                           \"FR\",\n                           language))\nmerged.df\n\"  id country capital population language\n1  1  France   Paris   67500000       FR\n2  2 Germany  Berlin   83130000       DE\""
+  },
+  {
+    "objectID": "index.html#checking-average-of-a-variable",
+    "href": "index.html#checking-average-of-a-variable",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking average of a variable",
+    "text": "Checking average of a variable\n\nLet’s read in a gapminder data set\n\nlibrary(gapminder)\n#reading in the data\ndata <- gapminder\nhead(data)\n'# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  <fct>       <fct>     <int>   <dbl>    <int>     <dbl>\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.'"
+  },
+  {
+    "objectID": "index.html#checking-average-of-a-variable-1",
+    "href": "index.html#checking-average-of-a-variable-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking average of a variable",
+    "text": "Checking average of a variable\n\nSimple version\n\n\nsummary(data$lifeExp)\n\" Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  23.60   48.20   60.71   59.47   70.85   82.60 \""
+  },
+  {
+    "objectID": "index.html#checking-average-of-a-variable-2",
+    "href": "index.html#checking-average-of-a-variable-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking average of a variable",
+    "text": "Checking average of a variable\n\nCalculating the average of Europe\n\n\ndata %>%\n  filter(continent==\"Europe\") %>%\n  summarise(life_avg_eu = mean(lifeExp))\n\" life_avg_eu\n        <dbl>\n1        71.9\""
+  },
+  {
+    "objectID": "index.html#checking-average-of-a-variable-3",
+    "href": "index.html#checking-average-of-a-variable-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking average of a variable",
+    "text": "Checking average of a variable\n\nCalculating the average & standard deviation of the life Expectancy by continent\n\n\ndata %>%\n  group_by(continent) %>%\n  summarise(life_avg = mean(lifeExp),\n            life_sd = sd(lifeExp))\n\"# A tibble: 5 × 3\n  continent life_avg life_sd\n  <fct>        <dbl>   <dbl>\n1 Africa        48.9    9.15\n2 Americas      64.7    9.35\n3 Asia          60.1   11.9 \n4 Europe        71.9    5.43\n5 Oceania       74.3    3.80\""
+  },
+  {
+    "objectID": "index.html#checking-average-of-a-variable-4",
+    "href": "index.html#checking-average-of-a-variable-4",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking average of a variable",
+    "text": "Checking average of a variable\n\nIf you want to save the resulted table, don’t forget to save it!\n\n\nlife_sum.df <- data %>%\n  group_by(continent) %>%\n  summarise(life_avg = mean(lifeExp),\n            life_sd = sd(lifeExp))\nlife_sum.df\n\"# A tibble: 5 × 3\n  continent life_avg life_sd\n  <fct>        <dbl>   <dbl>\n1 Africa        48.9    9.15\n2 Americas      64.7    9.35\n3 Asia          60.1   11.9 \n4 Europe        71.9    5.43\n5 Oceania       74.3    3.80\""
+  },
+  {
+    "objectID": "index.html#checking-average-of-a-variableadvanced",
+    "href": "index.html#checking-average-of-a-variableadvanced",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Checking average of a variable(Advanced)",
+    "text": "Checking average of a variable(Advanced)\n\nLet’s group the data by multiple variables\n\nsum.df <- data %>%\n  group_by(continent, year) %>%\n  summarise(life_avg = mean(lifeExp),\n            gdp_avg = mean(gdpPercap),\n            .groups = \"keep\") %>% #keeping the group variables\n  ungroup()\nsum.df\n\"# A tibble: 60 × 4\n   continent  year life_avg gdp_avg\n   <fct>     <int>    <dbl>   <dbl>\n 1 Africa     1952     39.1   1253.\n 2 Africa     1957     41.3   1385.\n 3 Africa     1962     43.3   1598.\n 4 Africa     1967     45.3   2050.\n 5 Africa     1972     47.5   2340.\n 6 Africa     1977     49.6   2586.\n 7 Africa     1982     51.6   2482.\n 8 Africa     1987     53.3   2283.\n 9 Africa     1992     53.6   2282.\n10 Africa     1997     53.6   2379.\n# … with 50 more rows\n# ℹ Use `print(n = ...)` to see more rows\""
+  },
+  {
+    "objectID": "index.html#sorting-the-data-set",
+    "href": "index.html#sorting-the-data-set",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Sorting the data set",
+    "text": "Sorting the data set\n\nLet’s check which continent has the highest average life expectancy in each year by descending order\n\nsum.df %>%\n  arrange(-year, -life_avg)\n\"# A tibble: 60 × 4\n   continent  year life_avg gdp_avg\n   <fct>     <int>    <dbl>   <dbl>\n 1 Oceania    2007     80.7  29810.\n 2 Europe     2007     77.6  25054.\n 3 Americas   2007     73.6  11003.\n 4 Asia       2007     70.7  12473.\n 5 Africa     2007     54.8   3089.\n 6 Oceania    2002     79.7  26939.\n 7 Europe     2002     76.7  21712.\n 8 Americas   2002     72.4   9288.\n 9 Asia       2002     69.2  10174.\n10 Africa     2002     53.3   2599.\n# … with 50 more rows\n# ℹ Use `print(n = ...)` to see more rows\""
+  },
+  {
+    "objectID": "index.html#linear-regression",
+    "href": "index.html#linear-regression",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Linear regression",
+    "text": "Linear regression\n\nSimple linear regression\n\n\n#simple linear regression\nols <- lm(formula = lifeExp ~ gdpPercap + continent,\n          data = data)\nols"
+  },
+  {
+    "objectID": "index.html#linear-regression-1",
+    "href": "index.html#linear-regression-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Linear regression",
+    "text": "Linear regression\n\nChecking the result\n#simple linear regression\nols <- lm(formula = lifeExp ~ gdpPercap + continent,\n          data = data)\nols\nsummary(ols)\n\"Call:\nlm(formula = lifeExp ~ gdpPercap + continent, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-49.241  -4.479   0.347   5.105  25.138 \n\nCoefficients:\n                   Estimate Std. Error t value Pr(>|t|)    \n(Intercept)       4.789e+01  3.398e-01  140.93   <2e-16 ***\ngdpPercap         4.453e-04  2.350e-05   18.95   <2e-16 ***\ncontinentAmericas 1.359e+01  6.008e-01   22.62   <2e-16 ***\ncontinentAsia     8.658e+00  5.555e-01   15.59   <2e-16 ***\ncontinentEurope   1.757e+01  6.257e-01   28.08   <2e-16 ***\ncontinentOceania  1.815e+01  1.787e+00   10.15   <2e-16 ***\n---\nSignif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n\nResidual standard error: 8.39 on 1698 degrees of freedom\nMultiple R-squared:  0.5793,    Adjusted R-squared:  0.5781 \nF-statistic: 467.7 on 5 and 1698 DF,  p-value: < 2.2e-16\""
+  },
+  {
+    "objectID": "index.html#linear-regression-2",
+    "href": "index.html#linear-regression-2",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Linear regression",
+    "text": "Linear regression\n\nChecking the regression result in detail\n\n#ols result!\nols_result <- summary(ols)\n\n#checking the coefficients\nols_result$coefficients\n\"                      Estimate   Std. Error   t value      Pr(>|t|)\n(Intercept)       4.788852e+01 3.398053e-01 140.92927  0.000000e+00\ngdpPercap         4.452704e-04 2.349795e-05  18.94933  8.552893e-73\ncontinentAmericas 1.359272e+01 6.007856e-01  22.62491  2.822476e-99\ncontinentAsia     8.657793e+00 5.554859e-01  15.58598  2.719424e-51\ncontinentEurope   1.757234e+01 6.257430e-01  28.08236 7.595526e-143\ncontinentOceania  1.814604e+01 1.787426e+00  10.15205  1.502557e-23\"\nclass(ols_result$coefficients)\n'\"matrix\" \"array\"'"
+  },
+  {
+    "objectID": "index.html#linear-regression-3",
+    "href": "index.html#linear-regression-3",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Linear regression",
+    "text": "Linear regression\n\nDealing with scientific notations(e)\n\n#scientific notation\nols_result$coefficients[,1]\n\"     (Intercept)         gdpPercap continentAmericas     continentAsia \n     4.788852e+01      4.452704e-04      1.359272e+01      8.657793e+00 \n  continentEurope  continentOceania \n     1.757234e+01      1.814604e+01\"\nformat(ols_result$coefficients[,1], scientific = F)\n'     (Intercept)         gdpPercap continentAmericas     continentAsia \n  \"47.8885161789\"   \" 0.0004452704\"   \"13.5927218705\"   \" 8.6577934769\" \n  continentEurope  continentOceania \n  \"17.5723409668\"   \"18.1460410154\" '\n#NOTE THAT the numbers are characters now!"
+  },
+  {
+    "objectID": "index.html#linear-regression-4",
+    "href": "index.html#linear-regression-4",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Linear regression",
+    "text": "Linear regression\n#scientific notation\nols_result$coefficients[,1]\n\"(Intercept)         gdpPercap continentAmericas     continentAsia \n     4.788852e+01      4.452704e-04      1.359272e+01      8.657793e+00 \n  continentEurope  continentOceania \n     1.757234e+01      1.814604e+01\"\nformat(ols_result$coefficients[,1], scientific = F)\n' (Intercept)         gdpPercap continentAmericas     continentAsia \n  \"47.8885161789\"   \" 0.0004452704\"   \"13.5927218705\"   \" 8.6577934769\" \n  continentEurope  continentOceania \n  \"17.5723409668\"   \"18.1460410154\" '\n#NOTE THAT the numbers are characters now!\n\n#try round() function\nround(ols_result$coefficients[,1],4) #rounding up at the fourth decimal point\n'      (Intercept)         gdpPercap continentAmericas     continentAsia   continentEurope  continentOceania \n          47.8885            0.0004           13.5927            8.6578           17.5723           18.1460'"
+  },
+  {
+    "objectID": "index.html#other-econometric-methods",
+    "href": "index.html#other-econometric-methods",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Other econometric methods",
+    "text": "Other econometric methods\n\nFor more details of running different regressions, please check this website: Introduction to Econometrics with R."
+  },
+  {
+    "objectID": "index.html#ggplot",
+    "href": "index.html#ggplot",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "ggplot",
+    "text": "ggplot\n\nNow, it is time to plot pretty graphs!\n\nWe will use ggplot2 package for plotting graphs.\n\nPlease check out this link for more information.\n\nDownload the ggplot cheat sheet!"
+  },
+  {
+    "objectID": "index.html#our-goal",
+    "href": "index.html#our-goal",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Our goal",
+    "text": "Our goal\nOur goal is to draw a graph like this"
+  },
+  {
+    "objectID": "index.html#lets-clean-the-r-environemnt-first",
+    "href": "index.html#lets-clean-the-r-environemnt-first",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Let’s clean the R environemnt first!",
+    "text": "Let’s clean the R environemnt first!\n\n# Clear plots\nif(!is.null(dev.list())) dev.off()\n# Clear console\ncat(\"\\014\") \n# Clean workspace\nrm(list=ls())\n\n#restart R\nrstudioapi::restartSession()\n\n#calling necessary packages\npackages <- c(\"dplyr\", \"ggplot2\", \"stringr\", \"stringi\")\nlapply(packages, require, character.only=T)"
+  },
+  {
+    "objectID": "index.html#basic-dot-plot",
+    "href": "index.html#basic-dot-plot",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "basic dot plot",
+    "text": "basic dot plot\n\nLet’s start with a basic plot\n\n#reading in data again\ndata <- gapminder::gapminder\n\n#simple dot graph for Italy\ndata %>%\n  filter(country==\"Italy\") %>%\n  ggplot() + \n  geom_point(aes(x = year, y = gdpPercap))"
+  },
+  {
+    "objectID": "index.html#usual-graph-types",
+    "href": "index.html#usual-graph-types",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "usual graph types",
+    "text": "usual graph types\n\n\n\ndot plot - geom_point()\nline graph - geom_line()\nbar plot - geom_bar(x)\nbar plot - geom_col(x,y)\ndensity graph - geom_density()"
+  },
+  {
+    "objectID": "index.html#with-multiple-countries",
+    "href": "index.html#with-multiple-countries",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "with multiple countries",
+    "text": "with multiple countries\n\nMultiple countries!\n Impossible to differentiate which point belongs to which country\n\n#reading in data again\ndata <- gapminder::gapminder\n\n#simple dot graph for some European countries\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_point(aes(x = year, y = gdpPercap))"
+  },
+  {
+    "objectID": "index.html#adding-colors",
+    "href": "index.html#adding-colors",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Adding colors",
+    "text": "Adding colors\n\nLet’s add some colors according to a country!\n\n#simple dot graph for some European countries\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  #note that it is important to put color = country inside of aes()\n  geom_point(aes(x = year, y = gdpPercap, color = country))"
+  },
+  {
+    "objectID": "index.html#adding-colors-1",
+    "href": "index.html#adding-colors-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Adding colors",
+    "text": "Adding colors\n\nLet’s add some colors according to a country!\n\n#simple bar(column) graph for some European countries\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_col(aes(x = year, y = gdpPercap, color = country)) \n\n#for bar graphs you should use fill!\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_col(aes(x = year, y = gdpPercap, fill = country))"
+  },
+  {
+    "objectID": "index.html#changing-axis-labels",
+    "href": "index.html#changing-axis-labels",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Changing axis labels",
+    "text": "Changing axis labels\n\n#simple line graph for some European countries\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_line(aes(x = year, y = gdpPercap, color = country)) +\n  labs(x=\"Year\", y=\"Real GDP per capita in USD\") #changing the axis label"
+  },
+  {
+    "objectID": "index.html#setting-the-plot-title",
+    "href": "index.html#setting-the-plot-title",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Setting the plot title",
+    "text": "Setting the plot title\n\n#simple line graph for some European countries\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_line(aes(x = year, y = gdpPercap, color = country)) +\n  labs(x=\"Year\", y=\"Real GDP per capita in USD\",\n       title = \"Plotting GDP per Capita of Five European Countires over Time\")"
+  },
+  {
+    "objectID": "index.html#changing-legend-position",
+    "href": "index.html#changing-legend-position",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Changing legend position",
+    "text": "Changing legend position\n\n#simple line graph for some European countries\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_line(aes(x = year, y = gdpPercap, color = country)) +\n  labs(x=\"Year\", y=\"Real GDP per capita in USD\",\n       title = \"Plotting GDP per Capita of Five European Countires over Time\") + \n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "index.html#changing-titlelegendaxis-text-size",
+    "href": "index.html#changing-titlelegendaxis-text-size",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Changing title/legend/axis text size",
+    "text": "Changing title/legend/axis text size\n\n#simple line graph for some European countries\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_line(aes(x = year, y = gdpPercap, color = country)) +\n  labs(x=\"Year\", y=\"Real GDP per capita in USD\",\n       title = \"Plotting GDP per Capita of Five European Countires over Time\") + \n  theme(legend.position = \"bottom\",\n        legend.title = element_text(size = 20), #changing legend title size\n        legend.text = element_text(size = 20), #changing legend text size\n        axis.text.x = element_text(size = 15), #changing axis text size\n        axis.title.x = element_text(size = 20), #changing axis title size\n        axis.text.y = element_text(size = 15), #changing axis text size\n        axis.title.y = element_text(size = 20), #changing axis title size\n        title = element_text(size = 20)) #changing title size"
+  },
+  {
+    "objectID": "index.html#changing-legend-box-size",
+    "href": "index.html#changing-legend-box-size",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Changing legend box size",
+    "text": "Changing legend box size\n\n#simple line graph for some European countries\ndata %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_line(aes(x = year, y = gdpPercap, color = country)) +\n  labs(x=\"Year\", y=\"Real GDP per capita in USD\",\n       title = \"Plotting GDP per Capita of Five European Countires over Time\") + \n  theme(legend.position = \"bottom\",\n        legend.title = element_text(size = 20), #changing legend title size\n        legend.text = element_text(size = 20), #changing legend text size\n        axis.text.x = element_text(size = 15), #changing axis text size\n        axis.title.x = element_text(size = 20), #changing axis title size\n        axis.text.y = element_text(size = 15), #changing axis text size\n        axis.title.y = element_text(size = 20),  #changing axis title size\n        title = element_text(size = 20), #changing title size\n        legend.key.size = unit(1.5, 'cm')) #changing legend color box size"
+  },
+  {
+    "objectID": "index.html#changing-legend-title",
+    "href": "index.html#changing-legend-title",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Changing legend title",
+    "text": "Changing legend title\n#simple line graph for some European countries\nbase_plot <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_line(aes(x = year, y = gdpPercap, color = country)) +\n  labs(x=\"Year\", y=\"Real GDP per capita in USD\",\n       title = \"Plotting GDP per Capita of Five European Countires over Time\") + \n  theme(legend.position = \"bottom\",\n        legend.title = element_text(size = 20), #changing legend title size\n        legend.text = element_text(size = 20), #changing legend text size\n        axis.text.x = element_text(size = 15), #changing axis text size\n        axis.title.x = element_text(size = 20), #changing axis title size\n        axis.text.y = element_text(size = 15), #changing axis text size\n        axis.title.y = element_text(size = 20),  #changing axis title size\n        title = element_text(size = 20), #changing title size\n        legend.key.size = unit(1.5, 'cm')) + #changing legend color box size\n  scale_color_discrete(name = \"Country\") #changing legend title\nbase_plot"
+  },
+  {
+    "objectID": "index.html#formatting-axis-tick",
+    "href": "index.html#formatting-axis-tick",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Formatting axis tick",
+    "text": "Formatting axis tick\n#simple line graph for some European countries\nbase_plot <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\")) %>%\n  ggplot() + \n  geom_line(aes(x = year, y = gdpPercap, color = country)) +\n  labs(x=\"Year\", y=\"Real GDP per capita in USD\",\n       title = \"Plotting GDP per Capita of Five European Countires over Time\") + \n  theme(legend.position = \"bottom\",\n        legend.title = element_text(size = 20), #changing legend title size\n        legend.text = element_text(size = 20), #changing legend text size\n        axis.text.x = element_text(size = 15), #changing axis text size\n        axis.title.x = element_text(size = 20), #changing axis title size\n        axis.text.y = element_text(size = 15), #changing axis text size\n        axis.title.y = element_text(size = 20),  #changing axis title size\n        title = element_text(size = 20), #changing title size\n        legend.key.size = unit(1.5, 'cm')) + #changing legend color box size\n  scale_color_discrete(name = \"Country\") +#changing legend title\n  scale_y_continuous(labels= scales::comma) #formatting the y axis tick\nbase_plot"
+  },
+  {
+    "objectID": "index.html#adding-gdp-text-labels-on-the-graph",
+    "href": "index.html#adding-gdp-text-labels-on-the-graph",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Adding GDP text labels on the graph",
+    "text": "Adding GDP text labels on the graph\n\nFirst, let’s create a separate data frame for the GDP text labels.\n\n\n#print(sort(unique(data$year)))\n\"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007\"\n\n#creating the GDP text data frame\ngdp_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Italy\")) %>%\n  filter(year==1952 | year==2007)"
+  },
+  {
+    "objectID": "index.html#adding-gdp-text-labels-on-the-graph-1",
+    "href": "index.html#adding-gdp-text-labels-on-the-graph-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Adding GDP text labels on the graph",
+    "text": "Adding GDP text labels on the graph\n\nSecond, let’s add another layer!\n\n#print(sort(unique(data$year)))\n\"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007\"\n\n#creating the GDP text data frame\ngdp_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Italy\")) %>%\n  filter(year==1952 | year==2007)\n\n#adding the text layer\nmid_plot <- base_plot + \n  geom_text(data = gdp_text.df,\n            aes(x = year, y = gdpPercap, label = gdpPercap))\nmid_plot"
+  },
+  {
+    "objectID": "index.html#adjusting-the-text-sizeposition",
+    "href": "index.html#adjusting-the-text-sizeposition",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Adjusting the text size/position",
+    "text": "Adjusting the text size/position\n\n#print(sort(unique(data$year)))\n\"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007\"\n\n#creating the GDP text data frame\ngdp_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Italy\")) %>%\n  filter(year==1952 | year==2007)\n\n#adding the text layer\nmid_plot <- base_plot + \n  geom_text(data = gdp_text.df,\n            aes(x = year, y = gdpPercap, label = gdpPercap),\n            size = 7, #size adjustment\n            vjust = 0.7) #vertical position adjustment\nmid_plot"
+  },
+  {
+    "objectID": "index.html#formatting-the-gdp-neatly",
+    "href": "index.html#formatting-the-gdp-neatly",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Formatting the GDP neatly",
+    "text": "Formatting the GDP neatly\n\n#print(sort(unique(data$year)))\n\"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007\"\n\n#creating the GDP text data frame\ngdp_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Italy\")) %>%\n  filter(year==1952 | year==2007)\n\n#adding the text layer\nmid_plot <- base_plot + \n  geom_text(data = gdp_text.df,\n            aes(x = year, y = gdpPercap, \n                label = round(gdpPercap)), #rounding up the GDP!\n            size = 7, #size adjustment\n            vjust = 0.7) #position adjustment\nmid_plot"
+  },
+  {
+    "objectID": "index.html#formatting-the-gdp-neatly-1",
+    "href": "index.html#formatting-the-gdp-neatly-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Formatting the GDP neatly",
+    "text": "Formatting the GDP neatly\n\n#print(sort(unique(data$year)))\n\"[1] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007\"\n\n#creating the GDP text data frame\ngdp_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Italy\")) %>%\n  filter(year==1952 | year==2007)\n\n#adding the text layer\nmid_plot <- base_plot + \n  geom_text(data = gdp_text.df,\n            aes(x = year, y = gdpPercap, \n                #rounding up the GDP and adding a comma!!\n                label = format(round(gdpPercap), big.mark = \",\", big.interval = 3L)), \n            size = 7, #size adjustment\n            vjust = 0.7) #position adjustment\nmid_plot"
+  },
+  {
+    "objectID": "index.html#adding-country-text-labels-on-the-graph",
+    "href": "index.html#adding-country-text-labels-on-the-graph",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Adding Country text labels on the graph",
+    "text": "Adding Country text labels on the graph\n\nLet’s create a separate data frame for the country text labels.\n\n\n#creating the country text data frame\ncountry_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\"))%>%\n  filter(year==2002)"
+  },
+  {
+    "objectID": "index.html#adding-country-text-labels-on-the-graph-1",
+    "href": "index.html#adding-country-text-labels-on-the-graph-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Adding country text labels on the graph",
+    "text": "Adding country text labels on the graph\n\nSecond, let’s add another layer!\n\n#creating the country text data frame\ncountry_text.df <- data %>%\n  filter(country %in% c(\"United Kingdom\", \"Germany\", \"France\", \"Italy\", \"Spain\"))%>%\n  filter(year==2002)\n\n#adding the text layer\nfinal_plot <- mid_plot + \n  geom_text(data = country_text.df,\n            aes(x = year, y = gdpPercap, label = country, color = country),\n            size = 7,\n            vjust = 0.7,\n            show.legend = F) #not showing the legend\nfinal_plot"
+  },
+  {
+    "objectID": "index.html#saving-the-graph",
+    "href": "index.html#saving-the-graph",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Saving the graph",
+    "text": "Saving the graph\n\nLet’s save the final_plot\n\n\n#saving the final plot\nggsave(plot = final_plot,\n       filename = \"img/output.jpg\", \n       #make sure you have created an 'img' folder in your project directory\n       width = 40,\n       height = 30,\n       units = \"cm\")"
+  },
+  {
+    "objectID": "index.html#r-markdown",
+    "href": "index.html#r-markdown",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "R Markdown",
+    "text": "R Markdown\n\nWhat is an R Markdown?\n\n-> Think as a latex file combined with R!\n\nCheck these links:\n\nR Markdown website from Rstudio\nknitr package website\nR Markdown cheat sheet"
+  },
+  {
+    "objectID": "index.html#lets-clean-the-r-environemnt-first-1",
+    "href": "index.html#lets-clean-the-r-environemnt-first-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Let’s clean the R environemnt first!",
+    "text": "Let’s clean the R environemnt first!\n\n# Clear plots\nif(!is.null(dev.list())) dev.off()\n# Clear console\ncat(\"\\014\") \n# Clean workspace\nrm(list=ls())\n\n#restart R\nrstudioapi::restartSession()"
+  },
+  {
+    "objectID": "index.html#installing-necessary-packages",
+    "href": "index.html#installing-necessary-packages",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "installing necessary packages",
+    "text": "installing necessary packages\n\nrmarkdown, markdown, knitr package are essential packages for\nany R Markdown file\n\n#type this in the console\ninstall.packages(c(\"rmarkdown\", \"markdown\", \"knitr\"))"
+  },
+  {
+    "objectID": "index.html#creating-a-new-r-markdown-file",
+    "href": "index.html#creating-a-new-r-markdown-file",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "creating a new R Markdown file",
+    "text": "creating a new R Markdown file"
+  },
+  {
+    "objectID": "index.html#creating-a-new-r-markdown-file-1",
+    "href": "index.html#creating-a-new-r-markdown-file-1",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "creating a new R Markdown file",
+    "text": "creating a new R Markdown file"
+  },
+  {
+    "objectID": "index.html#choosing-the-output-typepdf",
+    "href": "index.html#choosing-the-output-typepdf",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "choosing the output type(pdf)",
+    "text": "choosing the output type(pdf)\n\nThis session only focuses on the pdf format.\n\nIf you are more interested in html format, please check out:\n\n\nQuarto\nR Shiny"
+  },
+  {
+    "objectID": "index.html#setting-the-yaml-header",
+    "href": "index.html#setting-the-yaml-header",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Setting the yaml header",
+    "text": "Setting the yaml header\nyaml header is the first part of an R markdown file.\nIt decides many important aspects of your output.\n\n---\ntitle: \"R markdown guide\"\nauthor: \"Jongoh Kim\"\ndate: \"`r format(Sys.time(), '%d %B, %Y')`\" #setting the date by dd month, yyyy\noutput: \n  pdf_document:\n    toc: true #add a table of contents a the start of a document\n    toc_depth: 3 #The lowest level of headings to add to table of contents (e.g. 2, 3)\n    number_sections: true #numbering the sections\nurlcolor: blue #setting the hyperlink color to blue\n---"
+  },
+  {
+    "objectID": "index.html#jumping-right-into-the-r-markdown",
+    "href": "index.html#jumping-right-into-the-r-markdown",
+    "title": "Data analysis with Tidyverse(dplyr)",
+    "section": "Jumping right into the R markdown",
+    "text": "Jumping right into the R markdown\nCheck out the ‘markdown_example.Rmd’ file and\nits output(markdown_example.pdf) from\nthe github page"
+  }
+]
