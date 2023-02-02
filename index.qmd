@@ -2334,7 +2334,7 @@ his help and slide codes!
 
 Source code for slides:
 
-[https://github.com/jongohkim91/R-A-Z/index.qmd](https://github.com/jongohkim91/R-A-Z/tree/master/markdown){.external
+[https://github.com/jongohkim91/R-A-Z/index.qmd](https://github.com/jongohkim91/R-A-Z/blob/master/index.qmd){.external
 target="_blank"}
 
 <br>
@@ -2360,3 +2360,10 @@ Garrett Grolemund:
 
 [https://bookdown.org/yihui/rmarkdown/](https://bookdown.org/yihui/rmarkdown/){.external
 target="_blank"}
+
+# Good resources
+
+<br>
+
+Communicate Data with R:
+[https://communicate-data-with-r.netlify.app/](https://communicate-data-with-r.netlify.app/)
